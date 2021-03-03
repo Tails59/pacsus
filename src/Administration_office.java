@@ -58,6 +58,7 @@ public class Administration_office extends JFrame implements Observer {
     	this.lnkVehicle_list = veh;
     	this.lnkPermit_list = permits;
     }
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
