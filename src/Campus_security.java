@@ -18,7 +18,7 @@ import javax.swing.JFrame;
  * information up to date (current date, barriers active or not, log of entries through the barriers).
  * @stereotype boundary
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({ "deprecation", "serial" })
 public class Campus_security extends JFrame implements Observer {
     /**
      * Each instance of Campus_security has a navigable association to the vehicle list so that
@@ -42,6 +42,11 @@ public class Campus_security extends JFrame implements Observer {
      * @directed*/
     private System_status lnkSystem_status;
 
+    public Campus_security(System_status status, Vehicle_list veh) {
+    	this.lnkSystem_status = status;
+    	this.lnkVehicle_list = veh;
+    }
+    
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
