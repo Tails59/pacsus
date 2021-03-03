@@ -18,7 +18,7 @@ import javax.swing.JFrame;
  * information up to date (current date, barriers active or not, log of entries through the barriers).
  * @stereotype boundary
  */
-@SuppressWarnings({ "deprecation", "serial" })
+@SuppressWarnings({ "deprecation", "serial", "unused"})
 public class Campus_security extends JFrame implements Observer {
     /**
      * Each instance of Campus_security has a navigable association to the vehicle list so that

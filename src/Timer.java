@@ -14,6 +14,7 @@ import javax.swing.JFrame;
  *
  * @stereotype boundary
  */
+@SuppressWarnings({"serial", "unused"})
 public class Timer extends JFrame {
     /**
      * The Timer has a navigable association to the system status so that it can send the new
@@ -52,4 +53,9 @@ public class Timer extends JFrame {
      * @directed
      */
     private Date today;
+    
+    public Timer(System_status status, Permit_list permits) {
+    	this.lnkSystem_status = status;
+    	this.lnkPermit_list = permits;
+    }
 }

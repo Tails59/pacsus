@@ -18,6 +18,7 @@
  * day of the year). Permits which have a limited period of validity (Day visitor and Regular visitor
  * permits) are automatically cancelled from PACSUS at the start of the day following their last valid day.
  */
+@SuppressWarnings("unused")
 abstract public class Permit {
     /**
      * The name of the permit holder

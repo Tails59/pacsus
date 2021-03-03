@@ -4,6 +4,7 @@
  * For a description of University member permits, follow hyperlink to the Administration
  * use case for issuing a new University member permit.
  */
+@SuppressWarnings("unused")
 public class University_member_permit extends Permit {
     /**
      * The date that this permit was issued. This information is required in case a member

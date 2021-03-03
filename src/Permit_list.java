@@ -8,6 +8,7 @@
  *
  * There will only be one instance of this class.
  */
+@SuppressWarnings("unused")
 public class Permit_list {
     /** The Permit list maintains a collection of the Permits currently issued.
      *

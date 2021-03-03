@@ -4,6 +4,7 @@
  * This is an outline of a main program to build the operational infrastructure of PACSUS.
  * Look at the description and code for the main method.
  */
+@SuppressWarnings({"unused"})
 public class Main {
     /**
      * This main method builds the operational infrastructure of PACSUS as it starts up:

@@ -4,6 +4,7 @@
  * For a description of Regular visitors, follow hyperlink to the Administration use case for
  * issuing a new Regular visitor permit.
  */
+@SuppressWarnings("unused")
 public class Regular_visitor_permit extends Permit {
     /**
      * The name of the University member hosting the visit.

@@ -12,6 +12,7 @@ import java.util.Observable;
  *
  * There will only be one instance of this class.
  */
+@SuppressWarnings({ "unused", "deprecation" })
 public class System_status extends Observable {
     /**
      * This attribute is the central indication of the activity status of the whole barrier

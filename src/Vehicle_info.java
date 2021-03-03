@@ -10,6 +10,7 @@
  * This class must contain at least the registration number, and may have any other attributes
  * that the University may from time to time find useful (such as car make, model, colour...).
  */
+@SuppressWarnings("unused")
 public class Vehicle_info {
     /**
      * The vehicle's registration number.

@@ -20,7 +20,7 @@ import javax.swing.JFrame;
  * The class implements Observer, and observes the system status so that it can keep the displayed current date correct.
  * @stereotype boundary
  */
-@SuppressWarnings({ "deprecation", "serial" })
+@SuppressWarnings({ "deprecation", "serial", "unused"})
 public class Administration_office extends JFrame implements Observer {
     /**
      * Each instance of Administration_office has a navigable association to the permit list so
@@ -30,7 +30,8 @@ public class Administration_office extends JFrame implements Observer {
      * @label Administration functions
      * @directed
      */
-    private Permit_list lnkPermit_list;
+    
+	private Permit_list lnkPermit_list;
 
     /**
      * Each instance of Administration_office has a navigable association to the vehicle list so
@@ -51,7 +52,12 @@ public class Administration_office extends JFrame implements Observer {
      * @directed
      */
     private System_status lnkSystem_status;
-
+    
+    public Administration_office(System_status status, Vehicle_list veh, Permit_list permits) {
+    	this.lnkSystem_status = status;
+    	this.lnkVehicle_list = veh;
+    	this.lnkPermit_list = permits;
+    }
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

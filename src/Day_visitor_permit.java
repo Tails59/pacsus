@@ -4,6 +4,7 @@
  * For a description of Day visitors, follow hyperlink to the Administration use case for
  * issuing a new Day visitor permit.
  */
+@SuppressWarnings("unused")
 public class Day_visitor_permit extends Permit {
     /**
      * The name of the University member hosting the visit.

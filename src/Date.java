@@ -20,6 +20,7 @@
  * Useful services offered by this class would probably be for checking if it's the first day of a new
  * academic year, and comparing dates within the year for equal, before and after.
  */
+@SuppressWarnings({"unused"})
 public class Date {
     /**
      * This operation adds one to the day number, wrapping round to 1 after 365 automatically.

@@ -30,7 +30,7 @@ import javax.swing.JFrame;
  * status up to date.
  * @stereotype boundary
  */
-@SuppressWarnings({ "deprecation", "serial" })
+@SuppressWarnings({ "deprecation", "serial", "unused"})
 public class Barrier extends JFrame implements Observer {
     /**
      * Each instance of Barrier has a navigable association to the permit list so that when a vehicle's
