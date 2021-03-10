@@ -56,7 +56,8 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
      * @clientCardinality 1..*
      * @supplierCardinality 1
      * @label Control/monitor
-     * @directed*/
+     * @directed 
+     */
     private System_status lnkSystem_status;
     
     private JPanel header;
