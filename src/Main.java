@@ -6,6 +6,11 @@
  */
 @SuppressWarnings({"unused"})
 public class Main {
+	
+	private static System_status systemStatus;
+	private static Vehicle_list vehicleList;
+	private static Permit_list permitList;
+
     /**
      * This main method builds the operational infrastructure of PACSUS as it starts up:
      *
@@ -16,13 +21,15 @@ public class Main {
      * They are presumed to put themselves on display, and register as Observers as necessary.
      */
     public static void main(String[] args) {
-        System_status systemStatus = new System_status();
-        Vehicle_list vehicleList = new Vehicle_list();
-        Permit_list permitList = new Permit_list();
+        systemStatus = new System_status();
+        vehicleList = new Vehicle_list();
+        permitList = new Permit_list();
 
         Timer timer = new Timer(systemStatus, permitList);     // Frame, boundary class
 
-        Barrier barrier1 = new Barrier(systemStatus, vehicleList);  // Frame, boundary class
+        Barrier barrier1 = new Barrier(systemStatus, vehicleList, "Barrier 1", 100, 550);  // Frame, boundary class
+        Barrier barrier2 = new Barrier(systemStatus, vehicleList, "Barrier 2", 500, 550); 
+        Barrier barrier3 = new Barrier(systemStatus, vehicleList, "Barrier 3", 900, 550); 
           // Repeat for as many barriers as required
 
         Campus_security campusSecurity1 = new Campus_security(systemStatus, vehicleList);  // Frame, boundary class
@@ -31,4 +38,8 @@ public class Main {
         Administration_office adminOffice1 = new Administration_office(systemStatus, vehicleList, permitList);  // Frame, boundary class
           // Repeat for as many admin office screens as required
     } // main
+    
+    public static Vehicle_list getVehicleList() {
+    	return vehicleList;
+    }
 }

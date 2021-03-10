@@ -10,7 +10,6 @@ import java.util.Hashtable;
  *
  * There will only be one instance of this class.
  */
-@SuppressWarnings({"unused", "rawtypes"})
 public class Permit_list {
     /** The Permit list maintains a collection of the Permits currently issued.
      *
@@ -23,5 +22,22 @@ public class Permit_list {
      * @clientCardinality 1
      * @supplierCardinality 0..*
      * @directed*/
-    private Hashtable lnkPermit;
+    private Hashtable<String, Permit> lnkPermit;
+    
+    /**
+     * Issue a new permit
+     * 
+     * @param permit The new permit to issue
+     * @return The permit holder, used as a unique ID for the hashtable
+     */
+    public String issuePermit(Permit permit) {
+    	lnkPermit.put(permit.getPermitHolder(), permit);
+    	
+    	return permit.getPermitHolder();
+    }
+    
+    public void issuePermit(String permitHolder) {
+    	
+    }
+    
 }
