@@ -11,7 +11,6 @@ import java.util.Hashtable;
  *
  * There will only be one instance of this class.
  */
-@SuppressWarnings({"unused", "rawtypes"})
 public class Vehicle_list {
     /** The Vehicle list maintains a collection of the known Vehicle_infos associated with all permits.
      * This association must be implemented by an attribute holding a collection data structure
@@ -28,5 +27,17 @@ public class Vehicle_list {
      * @clientCardinality 1
      * @supplierCardinality 0..*
      * @directed*/
-    private Hashtable lnkVehicle;
+    private Hashtable<Vehicle_info, Permit> vehicleList;
+    
+    Vehicle_list(){
+    	vehicleList = new Hashtable<Vehicle_info, Permit>();
+    }
+    
+    public Hashtable<Vehicle_info, Permit> getVehicleList() {
+    	return this.vehicleList;
+    }
+    
+    public void addNew(Vehicle_info veh_info, Permit permit) {
+    	vehicleList.put(veh_info, permit);
+    }
 }
