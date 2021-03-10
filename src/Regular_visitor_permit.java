@@ -6,7 +6,7 @@
  */
 @SuppressWarnings("unused")
 public class Regular_visitor_permit extends Permit {
-    /**
+	/**
      * The name of the University member hosting the visit.
      */
     private String hostName;
@@ -19,7 +19,7 @@ public class Regular_visitor_permit extends Permit {
      * @link aggregation
      * @directed
      */
-    private Date lnkDate;
+    private Date issueDate;
 
     /**
      * The date that the visit ends - entry will not be allowed after this date.
@@ -29,5 +29,13 @@ public class Regular_visitor_permit extends Permit {
      * @link aggregation
      * @directed
      */
-    private Date lnkDate1;
+    private Date expiryDate;
+    
+    public Regular_visitor_permit(String permitHolder, String host, Date issue, Date expiry) {
+		super(permitHolder);
+		
+		this.hostName = host;
+		this.issueDate = issue;
+		this.expiryDate = expiry;
+	}
 }
