@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -171,7 +174,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		
         // Display the frame
         setVisible(true);
-        status.addObserver(this);    	
+        //status.addObserver(this);    	
 
     	//
     	lnkSystem_status.addObserver(this);
@@ -204,5 +207,4 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		}
 		
 	} // actionPerformed
-
 }

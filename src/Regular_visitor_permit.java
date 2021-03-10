@@ -4,22 +4,11 @@
  * For a description of Regular visitors, follow hyperlink to the Administration use case for
  * issuing a new Regular visitor permit.
  */
-@SuppressWarnings("unused")
 public class Regular_visitor_permit extends Permit {
 	/**
      * The name of the University member hosting the visit.
      */
     private String hostName;
-
-    /**
-     * The date that the visit starts - entry will not be allowed before this date.
-     * @label Starting on
-     * @clientCardinality 1
-     * @supplierCardinality 1
-     * @link aggregation
-     * @directed
-     */
-    private Date issueDate;
 
     /**
      * The date that the visit ends - entry will not be allowed after this date.
@@ -31,11 +20,22 @@ public class Regular_visitor_permit extends Permit {
      */
     private Date expiryDate;
     
-    public Regular_visitor_permit(String permitHolder, String host, Date issue, Date expiry) {
-		super(permitHolder);
+    public Regular_visitor_permit(String permitHolder, String host, Date issue, Date expiry, Vehicle_list permittedVehicles) {
+		super(permitHolder, issue, permittedVehicles);
 		
 		this.hostName = host;
-		this.issueDate = issue;
 		this.expiryDate = expiry;
 	}
+    
+    public String getHostName() {
+    	return this.hostName;
+    }
+    
+    public Date getExpiryDate() {
+    	return this.expiryDate;
+    }
+    
+    public void setExpiryDate(Date newDate) {
+    	this.expiryDate = newDate;
+    }
 }
