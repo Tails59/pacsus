@@ -32,4 +32,12 @@ public class Vehicle_info {
      * @directed
      */
     private Permit lnkPermit;
+    
+    public Vehicle_info(String reg) {
+    	this.regNo = reg;
+    }
+    
+    public String getRegistration() {
+    	return this.regNo;
+    }
 }

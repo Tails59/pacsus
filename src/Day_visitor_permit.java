@@ -4,9 +4,8 @@
  * For a description of Day visitors, follow hyperlink to the Administration use case for
  * issuing a new Day visitor permit.
  */
-@SuppressWarnings("unused")
 public class Day_visitor_permit extends Permit {
-    /**
+	/**
      * The name of the University member hosting the visit.
      */
     private String hostName;
@@ -19,5 +18,20 @@ public class Day_visitor_permit extends Permit {
      * @link aggregation
      * @directed
      */
-    private Date lnkDate;
+    private Date activeDate;
+    
+    protected Day_visitor_permit(String permitHolder, String hostName, Date activeDate) {
+		super(permitHolder);
+		
+		this.hostName = hostName;
+		this.activeDate = activeDate;
+	}
+    
+    public Date getActiveDate() {
+    	return this.activeDate;
+    }
+    
+    public String getHostname() {
+    	return this.hostName;
+    }
 }
