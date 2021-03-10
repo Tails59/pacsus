@@ -55,6 +55,8 @@ abstract public class Permit {
      * entries in the day are the same vehicle (since exits are not monitored).
      */
 	private boolean enteredToday = false;
+	
+	private Date issueDate;
 
     /**
      * Once a vehicle has entered on this permit on any day, this attribute records the vehicle that
@@ -80,14 +82,15 @@ abstract public class Permit {
      */
     private Vehicle_list permittedVehicles;
     
-    protected Permit(String permitHolder) {
+    protected Permit(String permitHolder, Date issueDate) {
     	this.UNIQUE_ID = uniqueId + 1;
     	uniqueId++;
     	
     	this.permitHolder = permitHolder;
+    	this.issueDate = issueDate;
     }
     
-    void addWarning() {
+    public void addWarning() {
     	this.warnings += 1;
     	
     	if(this.warnings >= MAX_WARNINGS) {
@@ -95,7 +98,7 @@ abstract public class Permit {
     	}
     }
     
-    void removeWarnings(int amount) {
+    public void removeWarnings(int amount) {
     	this.warnings -= amount;
     	
     	if(this.suspended && this.warnings <3) {
@@ -115,11 +118,15 @@ abstract public class Permit {
     	
     }
     
-    String getPermitHolder() {
+    public Date getIssueDate() {
+    	return this.issueDate;
+    }
+    
+    public String getPermitHolder() {
     	return this.permitHolder;
     }
     
-    void setTodaysVehicle(Vehicle_info todaysVehicle) {
+    public void setTodaysVehicle(Vehicle_info todaysVehicle) {
     	Main.getVehicleList().addNew(todaysVehicle, this);
     }
 }

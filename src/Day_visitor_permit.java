@@ -9,27 +9,12 @@ public class Day_visitor_permit extends Permit {
      * The name of the University member hosting the visit.
      */
     private String hostName;
-
-    /**
-     * The date that the visitor is visiting on - entry will be allowed on that date only.
-     * @clientCardinality 1
-     * @supplierCardinality 1
-     * @label Visiting on
-     * @link aggregation
-     * @directed
-     */
-    private Date activeDate;
     
     protected Day_visitor_permit(String permitHolder, String hostName, Date activeDate) {
-		super(permitHolder);
+		super(permitHolder, activeDate);
 		
 		this.hostName = hostName;
-		this.activeDate = activeDate;
 	}
-    
-    public Date getActiveDate() {
-    	return this.activeDate;
-    }
     
     public String getHostname() {
     	return this.hostName;
