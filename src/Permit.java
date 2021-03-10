@@ -20,33 +20,41 @@
  */
 @SuppressWarnings("unused")
 abstract public class Permit {
+	public static final int MAX_WARNINGS = 3;
+	
+	/**
+	 * Temporary unique ID field, switch this to use a permanent file storage in the actual app
+	 */
+	private static int uniqueId = 0;
+	private final int UNIQUE_ID;
+	
     /**
      * The name of the permit holder
      */
-    private String permitHolder;
+	protected String permitHolder;
 
     /**
      * Counts the number of days on which the campus was entered while the access barriers were in operation.
      * Counting starts when the permit is issued, and afresh at the start of each year.
      */
-    private int noOfEntries = 0;
+	protected int noOfEntries = 0;
 
     /**
      * Counts the number of warnings issued to vehicles registered on this permit.
      */
-    private int warnings = 0;
+	protected int warnings = 0;
 
     /**
      * False if the permit has not been suspended, and true if it has (on the third warning).
      */
-    private boolean suspended = false;
+	protected boolean suspended = false;
 
     /**
      * Set to false at the start of each day. Remains false until first entry of a vehicle on this permit,
      * when it is set true, and the vehicle is noted in vehicleUsed. Used for checking that subsequent
      * entries in the day are the same vehicle (since exits are not monitored).
      */
-    private boolean enteredToday = false;
+	private boolean enteredToday = false;
 
     /**
      * Once a vehicle has entered on this permit on any day, this attribute records the vehicle that
@@ -58,7 +66,7 @@ abstract public class Permit {
      * @label Allowed today
      * @supplierCardinality 0..1
      */
-    private Vehicle_info vehicleUsedToday;
+	private Vehicle_info vehicleUsedToday;
 
     /**
      * This holds references to all the Vehicle_info instances for the vehicles registered to this permit.
@@ -70,5 +78,48 @@ abstract public class Permit {
      * @label Controls access of
      * @supplierCardinality 0..*
      */
-    private Vehicle_info permittedVehicles;
+    private Vehicle_list permittedVehicles;
+    
+    protected Permit(String permitHolder) {
+    	this.UNIQUE_ID = uniqueId + 1;
+    	uniqueId++;
+    	
+    	this.permitHolder = permitHolder;
+    }
+    
+    void addWarning() {
+    	this.warnings += 1;
+    	
+    	if(this.warnings >= MAX_WARNINGS) {
+    		this.suspend();
+    	}
+    }
+    
+    void removeWarnings(int amount) {
+    	this.warnings -= amount;
+    	
+    	if(this.suspended && this.warnings <3) {
+    		unsuspend();
+    	}
+    }
+    
+    private void unsuspend() {
+    	this.suspended = false;
+    }
+    
+    private void suspend() {
+    	this.suspended = true;
+    }
+    
+    void cancelPermit() {
+    	
+    }
+    
+    String getPermitHolder() {
+    	return this.permitHolder;
+    }
+    
+    void setTodaysVehicle(Vehicle_info todaysVehicle) {
+    	Main.getVehicleList().addNew(todaysVehicle, this);
+    }
 }
