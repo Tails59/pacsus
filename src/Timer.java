@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -87,6 +86,7 @@ public class Timer extends JFrame implements ActionListener {
     	
     	this.lnkSystem_status = status;
     	this.lnkPermit_list = permits;
+
     	setTitle("Timer");
     	setSize(350,150);
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
