@@ -5,8 +5,8 @@
  * for issuing a new Permanent visitor permit.
  */
 public class Permanent_visitor_permit extends Permit {
-	Permanent_visitor_permit(String permitHolder, Date issueDate){
-		super(permitHolder, issueDate);
+	Permanent_visitor_permit(String permitHolder, Date issueDate, Vehicle_list permittedVehicles){
+		super(permitHolder, issueDate, permittedVehicles);
 	}
 }
 

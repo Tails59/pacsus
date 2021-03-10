@@ -4,9 +4,9 @@
  * For a description of University member permits, follow hyperlink to the Administration
  * use case for issuing a new University member permit.
  */
-public class University_member_permit extends Permit {    
-    public University_member_permit(String permitHolder, Date issueDate) {
-		super(permitHolder, issueDate);
+public class University_member_permit extends Permit {
+    public University_member_permit(String permitHolder, Date issueDate, Vehicle_list permittedVehicles) {
+		super(permitHolder, issueDate, permittedVehicles);
 	}
 
 }

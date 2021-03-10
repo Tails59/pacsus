@@ -20,10 +20,22 @@ public class Regular_visitor_permit extends Permit {
      */
     private Date expiryDate;
     
-    public Regular_visitor_permit(String permitHolder, String host, Date issue, Date expiry) {
-		super(permitHolder, issue);
+    public Regular_visitor_permit(String permitHolder, String host, Date issue, Date expiry, Vehicle_list permittedVehicles) {
+		super(permitHolder, issue, permittedVehicles);
 		
 		this.hostName = host;
 		this.expiryDate = expiry;
 	}
+    
+    public String getHostName() {
+    	return this.hostName;
+    }
+    
+    public Date getExpiryDate() {
+    	return this.expiryDate;
+    }
+    
+    public void setExpiryDate(Date newDate) {
+    	this.expiryDate = newDate;
+    }
 }

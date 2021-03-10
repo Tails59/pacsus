@@ -82,12 +82,13 @@ abstract public class Permit {
      */
     private Vehicle_list permittedVehicles;
     
-    protected Permit(String permitHolder, Date issueDate) {
+    protected Permit(String permitHolder, Date issueDate, Vehicle_list permittedVehicles) {
     	this.UNIQUE_ID = uniqueId + 1;
     	uniqueId++;
     	
     	this.permitHolder = permitHolder;
     	this.issueDate = issueDate;
+    	this.permittedVehicles = permittedVehicles;
     }
     
     public void addWarning() {
@@ -127,6 +128,10 @@ abstract public class Permit {
     }
     
     public void setTodaysVehicle(Vehicle_info todaysVehicle) {
-    	Main.getVehicleList().addNew(todaysVehicle, this);
+    	permittedVehicles.addNew(todaysVehicle, this);
+    }
+    
+    public void removeVehicleFromPermit(Vehicle_info veh_info) {
+    	permittedVehicles.remove(veh_info);
     }
 }

@@ -9,14 +9,24 @@ public class Day_visitor_permit extends Permit {
      * The name of the University member hosting the visit.
      */
     private String hostName;
+    private Date activeDate;
     
-    protected Day_visitor_permit(String permitHolder, String hostName, Date activeDate) {
-		super(permitHolder, activeDate);
+    protected Day_visitor_permit(String permitHolder, String hostName, Vehicle_list permittedVehicles, Date activeDate, Date issueDate) {
+		super(permitHolder, activeDate, permittedVehicles);
 		
+		this.activeDate = activeDate;
 		this.hostName = hostName;
 	}
     
     public String getHostname() {
     	return this.hostName;
+    }
+    
+    public void changeActiveDate(Date newDate) {
+    	this.activeDate = newDate;
+    }
+    
+    public Date getActiveDate() {
+    	return this.activeDate;
     }
 }

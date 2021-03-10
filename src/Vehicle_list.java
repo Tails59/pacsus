@@ -40,4 +40,8 @@ public class Vehicle_list {
     public void addNew(Vehicle_info veh_info, Permit permit) {
     	vehicleList.put(veh_info, permit);
     }
+    
+    public void remove(Vehicle_info veh_info) {
+    	vehicleList.remove(veh_info);
+    }
 }
