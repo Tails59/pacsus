@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -175,25 +174,30 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		
         // Display the frame
         setVisible(true);
-        status.addObserver(this);
-    	
-    } // constructor
-    
-	public void update(Observable o, Object arg) {
-		
-		
-	} // update
+        status.addObserver(this);    	
 
+    	//
+    	lnkSystem_status.addObserver(this);
+    }
+    
+	@Override
+	public void update(Observable o, Object arg) {
+		//
+		boolean sysStatus = lnkSystem_status.getStatus();
+		if (sysStatus) {
+			System.out.println("System is ON");
+		} else {
+			System.out.println("System is OFF");
+		}
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == activateBarrier) {
-
-			
+			lnkSystem_status.setStatus(true);		
 		}
 		else if (e.getSource() == deactivateBarrier) {
-			
-
+			lnkSystem_status.setStatus(false);
 		}
 		else if (e.getSource() == checkLog) {
 			
