@@ -172,17 +172,26 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		
         setVisible(true);
         status.addObserver(this);
+       
     }
     
     
 	@Override
 	public void update(Observable o, Object arg) {
 		
+		 active=lnkSystem_status.getStatus();
 		if (active == false)
 		{
 			lblBarrierPosition.setText("The barrier is raised");
 			lblInstruction.setText("GO");
 			barrierStatus.setBackground(GO_COLOUR);
+			
+		}
+		else if(active == true)
+		{
+			lblBarrierPosition.setText("The barrier is lowered");
+			lblInstruction.setText("STOP");
+			barrierStatus.setBackground(STOP_COLOUR);
 		}
 		else if (raised == true)
 		{
