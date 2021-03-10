@@ -174,7 +174,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		
         // Display the frame
         setVisible(true);
-        status.addObserver(this);    	
+        //status.addObserver(this);    	
 
     	//
     	lnkSystem_status.addObserver(this);
