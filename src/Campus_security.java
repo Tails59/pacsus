@@ -1,3 +1,7 @@
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -82,6 +86,46 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
     	this.lnkSystem_status = status;
     	this.lnkVehicle_list = veh;
     	
+
+    	//
+    	lnkSystem_status.addObserver(this);
+    	
+		// this will have to be put in the action listener method
+		System.out.println("Enter '1' or '0' to change system status or 'exit' to quit.");
+		// create a BufferedReader using System.in
+		BufferedReader obj = new BufferedReader(new InputStreamReader(System.in));
+		String str = "";
+		
+		do {
+
+			try {
+				str = obj.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.err.println("Your input: " + str);
+			if (str.equals("1")) {
+				lnkSystem_status.setStatus(true);
+			}
+			else if (str.equals("0")) {
+				lnkSystem_status.setStatus(false);
+			}
+		} while (!str.equals("exit"));
+		System.out.println("Quitting.");
+    }
+    
+	@Override
+	public void update(Observable o, Object arg) {
+		//
+		boolean sysStatus = lnkSystem_status.getStatus();
+		if (sysStatus) {
+			System.out.println("System is ON");
+		} else {
+			System.out.println("System is OFF");
+		}
+	}
+
     	// Window properties
     	final String WINDOW_TITLE = "Campus Security";
         final int PADDING = 20;
@@ -200,4 +244,5 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		}
 		
 	} // actionPerformed
+
 }
