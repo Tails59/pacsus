@@ -42,7 +42,8 @@ public class Campus_security extends JFrame implements Observer {
      * @clientCardinality 1..*
      * @supplierCardinality 1
      * @label Control/monitor
-     * @directed*/
+     * @directed
+     */
     private System_status lnkSystem_status;
 
     public Campus_security(System_status status, Vehicle_list veh) {
