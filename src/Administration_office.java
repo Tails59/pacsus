@@ -281,7 +281,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_HostNameAdd.gridy = 8;
 		addPermit.add(tf_HostNameAdd, gbc_HostNameAdd);
 		tf_HostNameAdd.setColumns(10);
-<
 
 		submitBtn = new JButton("Submit");
 		submitBtn.addActionListener(this);
