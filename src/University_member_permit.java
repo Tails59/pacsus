@@ -5,8 +5,37 @@
  * use case for issuing a new University member permit.
  */
 public class University_member_permit extends Permit {
-    public University_member_permit(String permitHolder, Date issueDate, Vehicle_list permittedVehicles) {
-		super(permitHolder, issueDate, permittedVehicles);
-	}
+	/**
+     * The name of the University member hosting the visit.
+     */
+    private String hostName;
 
+    /**
+     * The date that the visit ends - entry will not be allowed after this date.
+     * @label Ending on
+     * @clientCardinality 1
+     * @supplierCardinality 1
+     * @link aggregation
+     * @directed
+     */
+    private Date expiryDate;
+    
+    public University_member_permit(String permitHolder, String host, Date issue, Date expiry, Vehicle_list permittedVehicles) {
+		super(permitHolder, issue, permittedVehicles);
+		
+		this.hostName = host;
+		this.expiryDate = expiry;
+	}
+    
+    public String getHostName() {
+    	return this.hostName;
+    }
+    
+    public Date getExpiryDate() {
+    	return this.expiryDate;
+    }
+    
+    public void setExpiryDate(Date newDate) {
+    	this.expiryDate = newDate;
+    }
 }

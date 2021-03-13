@@ -40,4 +40,14 @@ public class Permit_list {
     	
     }
     
+    public boolean checkPermit(String name) {
+    	
+    	if (lnkPermit == null) return false; // temporary will be removed when rest of the code is added to the class
+    	if (lnkPermit.containsKey(name)) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
 }
