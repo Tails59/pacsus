@@ -77,7 +77,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	private JPanel contentPane;
 	private JButton submitBtn;
-	private JComboBox<String> comboBox;
+	private JComboBox<String> cb_PermitTypeAdd;
 	private JTextField tf_NameAdd;
 	private JTextField tf_regNumberAdd;
 	private JTextField tf_CarMakeAdd;
@@ -133,12 +133,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(lblName, gbc_lblName);
 
 		tf_NameAdd = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 6;
-		gbc_textField.gridy = 0;
-		addPermit.add(tf_NameAdd, gbc_textField);
+		GridBagConstraints gbc_tfNameAdd = new GridBagConstraints();
+		gbc_tfNameAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_tfNameAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfNameAdd.gridx = 6;
+		gbc_tfNameAdd.gridy = 0;
+		addPermit.add(tf_NameAdd, gbc_tfNameAdd);
 		tf_NameAdd.setColumns(10);
 
 		JLabel lblRegistrationNumber = new JLabel("Registration Number:");
@@ -149,12 +149,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(lblRegistrationNumber, gbc_lblRegistrationNumber);
 
 		tf_regNumberAdd = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 6;
-		gbc_textField_1.gridy = 1;
-		addPermit.add(tf_regNumberAdd, gbc_textField_1);
+		GridBagConstraints gbc_regNumberAdd = new GridBagConstraints();
+		gbc_regNumberAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_regNumberAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_regNumberAdd.gridx = 6;
+		gbc_regNumberAdd.gridy = 1;
+		addPermit.add(tf_regNumberAdd, gbc_regNumberAdd);
 		tf_regNumberAdd.setColumns(10);
 
 		JLabel lblCarMake = new JLabel("Car make:");
@@ -166,12 +166,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(lblCarMake, gbc_lblCarMake);
 
 		tf_CarMakeAdd = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 6;
-		gbc_textField_2.gridy = 2;
-		addPermit.add(tf_CarMakeAdd, gbc_textField_2);
+		GridBagConstraints gbc_CarMakeAdd = new GridBagConstraints();
+		gbc_CarMakeAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_CarMakeAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_CarMakeAdd.gridx = 6;
+		gbc_CarMakeAdd.gridy = 2;
+		addPermit.add(tf_CarMakeAdd, gbc_CarMakeAdd);
 		tf_CarMakeAdd.setColumns(10);
 
 		JLabel lblCarModel = new JLabel("Car model:");
@@ -183,12 +183,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(lblCarModel, gbc_lblCarModel);
 
 		tf_CarModelAdd = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 6;
-		gbc_textField_3.gridy = 3;
-		addPermit.add(tf_CarModelAdd, gbc_textField_3);
+		GridBagConstraints gbc_lblCarModelAdd = new GridBagConstraints();
+		gbc_lblCarModelAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCarModelAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblCarModelAdd.gridx = 6;
+		gbc_lblCarModelAdd.gridy = 3;
+		addPermit.add(tf_CarModelAdd, gbc_lblCarModelAdd);
 		tf_CarModelAdd.setColumns(10);
 
 		JLabel lblCarColor = new JLabel("Car color:");
@@ -200,12 +200,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(lblCarColor, gbc_lblCarColor);
 
 		tf_CarColorAdd = new JTextField();
-		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_4.gridx = 6;
-		gbc_textField_4.gridy = 4;
-		addPermit.add(tf_CarColorAdd, gbc_textField_4);
+		GridBagConstraints gbc_CarColorAdd = new GridBagConstraints();
+		gbc_CarColorAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_CarColorAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_CarColorAdd.gridx = 6;
+		gbc_CarColorAdd.gridy = 4;
+		addPermit.add(tf_CarColorAdd, gbc_CarColorAdd);
 		tf_CarColorAdd.setColumns(10);
 
 		JLabel lblEnterPermitType = new JLabel("Enter Permit Type:");
@@ -216,17 +216,17 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblEnterPermitType.gridy = 5;
 		addPermit.add(lblEnterPermitType, gbc_lblEnterPermitType);
 
-		comboBox = new JComboBox<String>();
-		comboBox.addItem("Day Visitor");
-		comboBox.addItem("Regular Visitor");
-		comboBox.addItem("Permanent Visitor");
-		comboBox.addItem("University Member");
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 6;
-		gbc_comboBox.gridy = 5;
-		addPermit.add(comboBox, gbc_comboBox);
+		cb_PermitTypeAdd = new JComboBox<String>();
+		cb_PermitTypeAdd.addItem("Day Visitor");
+		cb_PermitTypeAdd.addItem("Regular Visitor");
+		cb_PermitTypeAdd.addItem("Permanent Visitor");
+		cb_PermitTypeAdd.addItem("University Member");
+		GridBagConstraints gbc_cbPermitTypeAdd = new GridBagConstraints();
+		gbc_cbPermitTypeAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_cbPermitTypeAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbPermitTypeAdd.gridx = 6;
+		gbc_cbPermitTypeAdd.gridy = 5;
+		addPermit.add(cb_PermitTypeAdd, gbc_cbPermitTypeAdd);
 
 		JLabel lblVisitDate = new JLabel("Visit Date:");
 		GridBagConstraints gbc_lblVisitDate = new GridBagConstraints();
@@ -237,13 +237,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(lblVisitDate, gbc_lblVisitDate);
 
 		tf_VisitDateAdd = new JTextField();
-		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-		gbc_textField_5.gridheight = 2;
-		gbc_textField_5.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_5.fill = GridBagConstraints.BOTH;
-		gbc_textField_5.gridx = 6;
-		gbc_textField_5.gridy = 6;
-		addPermit.add(tf_VisitDateAdd, gbc_textField_5);
+		GridBagConstraints gbc_VisitDateAdd = new GridBagConstraints();
+		gbc_VisitDateAdd.gridheight = 2;
+		gbc_VisitDateAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_VisitDateAdd.fill = GridBagConstraints.BOTH;
+		gbc_VisitDateAdd.gridx = 6;
+		gbc_VisitDateAdd.gridy = 6;
+		addPermit.add(tf_VisitDateAdd, gbc_VisitDateAdd);
 		tf_VisitDateAdd.setColumns(10);
 
 		JLabel lblHostName = new JLabel("Host Name:");
@@ -255,12 +255,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(lblHostName, gbc_lblHostName);
 
 		tf_HostNameAdd = new JTextField();
-		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-		gbc_textField_6.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_6.gridx = 6;
-		gbc_textField_6.gridy = 8;
-		addPermit.add(tf_HostNameAdd, gbc_textField_6);
+		GridBagConstraints gbc_HostNameAdd = new GridBagConstraints();
+		gbc_HostNameAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_HostNameAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_HostNameAdd.gridx = 6;
+		gbc_HostNameAdd.gridy = 8;
+		addPermit.add(tf_HostNameAdd, gbc_HostNameAdd);
 		tf_HostNameAdd.setColumns(10);
 
 		submitBtn = new JButton("Submit");
@@ -564,7 +564,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		String carMake = tf_CarMakeAdd.getText();
 		String carModel = tf_CarModelAdd.getText();
 		String carColor = tf_CarColorAdd.getText();
-		String permitType = String.valueOf(comboBox.getSelectedItem());
+		String permitType = String.valueOf(cb_PermitTypeAdd.getSelectedItem());
 		String visitDate = tf_VisitDateAdd.getText();
 		String hostName = tf_HostNameAdd.getText();
 
@@ -593,7 +593,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				displayAlert("Vechile is already permitted!", 'w');
 			} else {
 				// add new permit depending on type
-				switch (comboBox.getSelectedIndex()) {
+				switch (cb_PermitTypeAdd.getSelectedIndex()) {
 				case 0:
 					// Day visitor permit
 
