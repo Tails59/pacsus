@@ -22,10 +22,24 @@
  */
 @SuppressWarnings({"unused"})
 public class Date {
-    /**
+	
+    public int getDayNumber() {
+		return dayNumber;
+	}
+
+	public void setDayNumber(int dayNumber) {
+		this.dayNumber = dayNumber;
+	}
+
+	/**
      * This operation adds one to the day number, wrapping round to 1 after 365 automatically.
      */
     public void increment() {
+    	if (dayNumber < 10) { // for testing, for final version it must be 365
+    		dayNumber++;
+    	} else {
+    		dayNumber = 1;
+    	}
     }
 
     /**
