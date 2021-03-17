@@ -86,6 +86,10 @@ public class Timer extends JFrame implements ActionListener {
     	
     	this.lnkSystem_status = status;
     	this.lnkPermit_list = permits;
+    	
+    	today = new Date();           
+        today.setDayNumber(1);	
+        status.setToday(today);
 
     	setTitle("Timer");
     	setSize(350,150);
@@ -103,7 +107,7 @@ public class Timer extends JFrame implements ActionListener {
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
     	
     	placeholder=new JLabel("Date");
-        placeholder.setText("Date: n ");
+        placeholder.setText("Date: " + today.getDayNumber());
         placeholder.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(placeholder);
         
@@ -115,10 +119,23 @@ public class Timer extends JFrame implements ActionListener {
         // Display the frame
         setVisible(true);
     }
+    
+    public void incrementDate() {
+    	today.increment();		
+		placeholder.setText("Date: " + today.getDayNumber());
+		informSystem();
+    }
+    
+    public void informSystem() {
+    	// code to inform system_status class about the new date
+    	lnkSystem_status.setToday(today);
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		//
+		if (e.getSource() == update) {
+			incrementDate();
+		}
 	}
 }

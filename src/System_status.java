@@ -37,7 +37,20 @@ public class System_status extends Observable {
      */
     private Date today;
     
-    private Campus_security security;
+    public void setToday(Date date) { // might need to be changed
+    	//
+    	today = date;
+    	System.out.println("Date: " + today.getDayNumber());
+    	setChanged();
+    	notifyObservers();
+    }
+
+	public Date getToday() {
+		//
+		return today;
+	}
+
+	private Campus_security security;
     
     public void setStatus(boolean status) {
     	systemActive = status;
