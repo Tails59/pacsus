@@ -89,6 +89,8 @@ abstract public class Permit {
     	this.permitHolder = permitHolder;
     	this.issueDate = issueDate;
     	this.permittedVehicles = permittedVehicles;
+    	
+    	Main.getPermitList().addPermit(this);
     }
     
     public void addWarning() {
@@ -113,6 +115,10 @@ abstract public class Permit {
     
     private void suspend() {
     	this.suspended = true;
+    }
+    
+    public int getUniqueID() {
+    	return this.UNIQUE_ID;
     }
     
     void cancelPermit() {
