@@ -109,12 +109,17 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_VisitDateMod;
 
 	private JTextField tf_HostNameMod;
+	
+	private int date;
 
 	public Administration_office(System_status status, Vehicle_list veh, Permit_list permits) {
 		this.lnkSystem_status = status;
 		this.lnkVehicle_list = veh;
 		this.lnkPermit_list = permits;
-		setTitle("Administration Office");
+		
+		date = status.getToday().getDayNumber();
+		
+		setTitle("Administration Office \t Date: " + date);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -583,6 +588,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_sumbitBtnMod.gridy = 11;
 		modifyPermit.add(sumbitBtnMod, gbc_sumbitBtnMod);
 
+    	//
+    	lnkSystem_status.addObserver(this);
+
 		setVisible(true);
 	}
 
@@ -674,7 +682,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
+		//
+		Date newDate = lnkSystem_status.getToday();
+		if (newDate.getDayNumber() != date) {
+			setTitle("Administration Office \t Date: " + newDate.getDayNumber());
+		}
 	}
 }
