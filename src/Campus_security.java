@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -62,6 +63,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
      */
     private System_status lnkSystem_status;
     
+    private JPanel contentPane;
     private JPanel header;
     private JPanel barrierControl;
     private JPanel regNoInput;
@@ -77,6 +79,10 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
     private JTextPane regNoPane;
     private JScrollPane regNoScroll;
     private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
+    private final Color ACTIVATE_BTN_BGKD = new Color(0,179,44);
+    private final Color DEACTIVATE_BTN_BGKD = new Color(220,61,42);
+    private final String WINDOW_TITLE;
+    private int date;
     
     public Campus_security(System_status status, Vehicle_list veh) {
     	
@@ -85,7 +91,8 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
     	this.lnkVehicle_list = veh;
     	
     	// Window properties
-    	final String WINDOW_TITLE = "Campus Security";
+    	WINDOW_TITLE = "Campus Security";
+    	date = status.getToday().getDayNumber();
         final int PADDING = 20;
         final int X_LOCATION = 100;
         final int Y_LOCATION = 100;
@@ -93,7 +100,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
         final int HEIGHT = 435;
         
     	// Configure the window 	
-    	setTitle(WINDOW_TITLE);
+    	setTitle(WINDOW_TITLE + "  [Date: " + date + "]");
     	setLocation(X_LOCATION,Y_LOCATION);
     	setSize(WIDTH, HEIGHT);
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -108,103 +115,160 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
         final Color HEADER_BACKGROUND = new Color(0,105,56);
         final Font  HEADER_FONT = new Font("Calibri", Font.BOLD, 25);
         header = new JPanel();
-	        header.setBackground(HEADER_BACKGROUND);
-	        header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
-	        header.setLayout(new FlowLayout(FlowLayout.LEFT));
-        lblCampusSecurity = new JLabel("PACSUS - Campus Security");
-	        lblCampusSecurity.setFont(HEADER_FONT);
-	        lblCampusSecurity.setForeground(Color.WHITE);
-			header.add(lblCampusSecurity);
+	    header.setBackground(HEADER_BACKGROUND);
+	    header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
+	    header.setLayout(new FlowLayout(FlowLayout.LEFT));
+	    lblCampusSecurity = new JLabel("PACSUS - Campus Security");
+	    lblCampusSecurity.setFont(HEADER_FONT);
+	    lblCampusSecurity.setForeground(Color.WHITE);
+		header.add(lblCampusSecurity);
 		window.add(header);
     	
 		// Add: Barrier controls
-        final Color ACTIVATE_BTN_BGKD = new Color(0,179,44);
-        final Color DEACTIVATE_BTN_BGKD = new Color(220,61,42);
 		barrierControl = new JPanel();
-			Border borderBarrierControl = BorderFactory.createTitledBorder("Barrier controls");
-			barrierControl.setBorder(borderBarrierControl);	
+		Border borderBarrierControl = BorderFactory.createTitledBorder("Barrier controls");
+		barrierControl.setBorder(borderBarrierControl);	
+		
 		activateBarrier = new JButton("Activate Barrier");
-			activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
-			activateBarrier.setForeground(Color.WHITE);
-			activateBarrier.setFocusPainted(false);
-			activateBarrier.addActionListener(this);
-			barrierControl.add(activateBarrier);
+		activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
+		activateBarrier.setForeground(Color.WHITE);
+		activateBarrier.setFocusPainted(false);
+		activateBarrier.addActionListener(this);
+		barrierControl.add(activateBarrier);
+		
 		deactivateBarrier = new JButton("Deactivate Barrier");
-			deactivateBarrier.setBackground(DEACTIVATE_BTN_BGKD);
-			deactivateBarrier.setForeground(Color.WHITE);
-			deactivateBarrier.setFocusPainted(false);
-			deactivateBarrier.addActionListener(this);
-			barrierControl.add(deactivateBarrier);	
+		deactivateBarrier.setBackground(DEACTIVATE_BTN_BGKD);
+		deactivateBarrier.setForeground(Color.WHITE);
+		deactivateBarrier.setFocusPainted(false);
+		deactivateBarrier.addActionListener(this);
+		barrierControl.add(deactivateBarrier);	
 		window.add(barrierControl);
 		
 		// Add: Registration number input
 		final int REG_NO_INPUT_WIDTH = 20;
 		final Color REG_NO_BTN_BGKD = new Color(112,128,144);
+		
 		regNoInput = new JPanel();
-			Border borderRegNoInput = BorderFactory.createTitledBorder("Check registration number");
-			regNoInput.setBorder(borderRegNoInput);
-			regNo = new JTextField(REG_NO_INPUT_WIDTH);
-			regNoInput.add(regNo);
+		Border borderRegNoInput = BorderFactory.createTitledBorder("Check registration number");
+		regNoInput.setBorder(borderRegNoInput);
+		regNo = new JTextField(REG_NO_INPUT_WIDTH);
+		regNoInput.add(regNo);
+		
 		checkLog = new JButton("Check log");
-			checkLog.setBackground(REG_NO_BTN_BGKD);
-			checkLog.setForeground(Color.WHITE);
-			checkLog.setFocusPainted(false);
-			checkLog.addActionListener(this);
-			regNoInput.add(checkLog);
+		checkLog.setBackground(REG_NO_BTN_BGKD);
+		checkLog.setForeground(Color.WHITE);
+		checkLog.setFocusPainted(false);
+		checkLog.addActionListener(this);
+		
+		regNoInput.add(checkLog);
 		issueWarning = new JButton("Issue warning");
-			issueWarning.setBackground(REG_NO_BTN_BGKD);
-			issueWarning.setForeground(Color.WHITE);
-			issueWarning.setFocusPainted(false);
-			issueWarning.addActionListener(this);
-			regNoInput.add(issueWarning);
+		issueWarning.setBackground(REG_NO_BTN_BGKD);
+		issueWarning.setForeground(Color.WHITE);
+		issueWarning.setFocusPainted(false);
+		issueWarning.addActionListener(this);
+		regNoInput.add(issueWarning);
 		window.add(regNoInput);
 		
 		// Add: Registration number text pane
 		final int REG_NO_SCROLL_WIDTH = 729;
 		final int REG_NO_SCROLL_HEIGHT = 250;
 		regNoPanel = new JPanel();
-			Border BorderRegNoPanel = BorderFactory.createTitledBorder("Registration number history");
-			regNoPanel.setBorder(BorderRegNoPanel);
+		Border BorderRegNoPanel = BorderFactory.createTitledBorder("Registration number history");
+		regNoPanel.setBorder(BorderRegNoPanel);
 		regNoPane = new JTextPane();
+		regNoPane.setEditable(false);
 		regNoScroll = new JScrollPane(regNoPane);
-			regNoScroll.setPreferredSize(new Dimension(REG_NO_SCROLL_WIDTH, REG_NO_SCROLL_HEIGHT));
-			regNoScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-			regNoPanel.add(regNoScroll);
+		regNoScroll.setPreferredSize(new Dimension(REG_NO_SCROLL_WIDTH, REG_NO_SCROLL_HEIGHT));
+		regNoScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		regNoPanel.add(regNoScroll);
 		window.add(regNoPanel);
 		
         // Display the frame
-        setVisible(true);
-        //status.addObserver(this);    	
-
-    	//
+        setVisible(true);  	
+        
     	lnkSystem_status.addObserver(this);
-    }
+    } // constructor
     
 	@Override
-	public void update(Observable o, Object arg) {
-		//
+	public void update(Observable o, Object arg) 
+	{
 		boolean sysStatus = lnkSystem_status.getStatus();
-		if (sysStatus) {
+		Date newDate = lnkSystem_status.getToday();
+		if (newDate.getDayNumber() != date) 
+		{
+			setTitle(WINDOW_TITLE + "  [Date: " + newDate.getDayNumber() + "]");
+		}		
+		if (sysStatus) 
+		{
 			System.out.println("System is ON");
-		} else {
+			activateBarrier.setEnabled(false);
+			activateBarrier.setBackground(DISABLE_BTN_COLOUR);
+			deactivateBarrier.setEnabled(true);
+			deactivateBarrier.setBackground(DEACTIVATE_BTN_BGKD);
+		} 
+		else 
+		{
 			System.out.println("System is OFF");
+			activateBarrier.setEnabled(true);
+			activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
+			deactivateBarrier.setEnabled(false);
+			deactivateBarrier.setBackground(DISABLE_BTN_COLOUR);
 		}
-	}
+	} // update
 
-	public void actionPerformed(ActionEvent e) {
-		
-		if (e.getSource() == activateBarrier) {
+	public void actionPerformed(ActionEvent e) 
+	{
+		final int REG_NO_LENGTH = 8;
+		if (e.getSource() == activateBarrier) 
+		{
 			lnkSystem_status.setStatus(true);		
 		}
-		else if (e.getSource() == deactivateBarrier) {
+		else if (e.getSource() == deactivateBarrier) 
+		{
 			lnkSystem_status.setStatus(false);
 		}
-		else if (e.getSource() == checkLog) {
-			
+		else if (e.getSource() == checkLog) 
+		{			
+			if (regNo.getText().equals(""))
+			{
+				displayAlert("Please enter a registration number.", 'w');
+			}
+			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
+			{
+				displayAlert("Please enter a valid registration number.", 'w');
+				regNo.setText("");
+			}
 		}
-		else if (e.getSource() == issueWarning) {
-			
-		}
-		
+		else if (e.getSource() == issueWarning) 
+		{
+			if (regNo.getText().equals(""))
+			{
+				displayAlert("Please enter a registration number to.", 'w');
+			}
+			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
+			{
+				displayAlert("Please enter a valid registration number.", 'w');
+				regNo.setText("");
+			}		
+		}	
 	} // actionPerformed
+	
+	public void displayAlert(String text, char type) 
+	{
+		switch (type) {
+		case 'i':
+			JOptionPane.showMessageDialog(contentPane, text, "Success", JOptionPane.PLAIN_MESSAGE);
+			break;
+		case 'w':
+			JOptionPane.showMessageDialog(contentPane, text, "Attention", JOptionPane.WARNING_MESSAGE);
+			break;
+		case 'e':
+			JOptionPane.showMessageDialog(contentPane, text, "Error", JOptionPane.ERROR_MESSAGE);
+			break;
+		default:
+			JOptionPane.showMessageDialog(contentPane, "There was an issue while displaying a message!", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			break;
+		}
+	} //displayAlert
 }
