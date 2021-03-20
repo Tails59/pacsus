@@ -189,7 +189,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		
 		if (newDate.getDayNumber() != date) 
 		{
-			setTitle(windowTitle + "  [Date: " + newDate.getDayNumber() + "]");
+			setTitle(windowTitle + "  [Date: " + lnkSystem_status.getToday().getDayNumber() + "]");
 		}
 		
 		if (active == false)

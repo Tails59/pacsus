@@ -351,6 +351,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 
 		JTextPane tp_RecordWarning = new JTextPane();
+		tp_RecordWarning.setEditable(false);
 		tp_RecordWarning.setBounds(29, 138, 666, 287);
 		recordWarning.add(tp_RecordWarning);
 
@@ -362,7 +363,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		JLabel lblWarningNumberCancel = new JLabel("Warning Number: ");
 		lblWarningNumberCancel.setBounds(32, 38, 106, 13);
 		deleteWarning.add(lblWarningNumberCancel);
-
 
 		tf_WarningNumber = new JTextField();
 		tf_WarningNumber.setBounds(179, 35, 516, 19);
@@ -380,6 +380,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 
 		JTextPane textPaneWarningCanc = new JTextPane();
+		textPaneWarningCanc.setEditable(false);
 		textPaneWarningCanc.setBounds(29, 138, 666, 287);
 		deleteWarning.add(textPaneWarningCanc);
 
@@ -409,6 +410,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		cancelPermit.add(btnSubmitPermitCanc);
 
 		JTextPane textPanePermitCanc = new JTextPane();
+		textPanePermitCanc.setEditable(false);
 		textPanePermitCanc.setBounds(29, 138, 666, 287);
 		cancelPermit.add(textPanePermitCanc);
 
@@ -437,6 +439,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 
 		JTextPane tp_Enquiry = new JTextPane();
+		tp_Enquiry.setEditable(false);
 		tp_Enquiry.setBounds(29, 138, 666, 287);
 		statusEnquiry.add(tp_Enquiry);
 
