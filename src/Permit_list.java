@@ -25,29 +25,19 @@ public class Permit_list {
     private Hashtable<String, Permit> lnkPermit;
     
     /**
-     * Issue a new permit
+     * add a new permit
      * 
      * @param permit The new permit to issue
-     * @return The permit holder, used as a unique ID for the hashtable
+     * @return The permit's UNIQUE_ID field.
      */
-    public String issuePermit(Permit permit) {
+    public String addPermit(Permit permit) {
     	lnkPermit.put(permit.getPermitHolder(), permit);
     	
     	return permit.getPermitHolder();
     }
     
-    public void issuePermit(String permitHolder) {
-    	
-    }
-    
     public boolean checkPermit(String name) {
-    	
-    	if (lnkPermit == null) return false; // temporary will be removed when rest of the code is added to the class
-    	if (lnkPermit.containsKey(name)) {
-    		return true;
-    	} else {
-    		return false;
-    	}
+    	return lnkPermit != null && lnkPermit.containsKey(name);
     }
     
 }

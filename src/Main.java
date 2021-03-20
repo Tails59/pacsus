@@ -42,4 +42,8 @@ public class Main {
     public static Vehicle_list getVehicleList() {
     	return vehicleList;
     }
+    
+    public static Permit_list getPermitList() {
+    	return permitList;
+    }
 }

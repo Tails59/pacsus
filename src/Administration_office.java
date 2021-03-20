@@ -269,6 +269,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		cb_PermitTypeAdd.addItem("Regular Visitor");
 		cb_PermitTypeAdd.addItem("Permanent Visitor");
 		cb_PermitTypeAdd.addItem("University Member");
+		cb_PermitTypeAdd.addActionListener(this);
 		GridBagConstraints gbc_cbPermitTypeAdd = new GridBagConstraints();
 		gbc_cbPermitTypeAdd.insets = new Insets(0, 0, 5, 0);
 		gbc_cbPermitTypeAdd.fill = GridBagConstraints.HORIZONTAL;
@@ -642,24 +643,34 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submitBtn) {
-			addNewPermit();
+			chackInputs();
+		}
+		if (e.getSource() == cb_PermitTypeAdd) {
+			int index = cb_PermitTypeAdd.getSelectedIndex();
+			if (index < 2) {
+				tf_VisitDateAdd.setEditable(true);
+				tf_HostNameAdd.setEditable(true);
+			} else {
+				tf_VisitDateAdd.setEditable(false);
+				tf_HostNameAdd.setEditable(false);
+			}
 		}
 	}
 
-	private void addNewPermit() {
+	private void chackInputs() {
 		//
 		String name = tf_NameAdd.getText();
 		String regNum = tf_regNumberAdd.getText();
 		String carMake = tf_CarMakeAdd.getText();
 		String carModel = tf_CarModelAdd.getText();
 		String carColor = tf_CarColorAdd.getText();
-		String permitType = String.valueOf(cb_PermitTypeAdd.getSelectedItem());
+		int permitType = cb_PermitTypeAdd.getSelectedIndex();
 		String visitDate = tf_VisitDateAdd.getText();
 		String hostName = tf_HostNameAdd.getText();
 
 		//
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
-			displayAlert("Wrong name entered!", 'w');
+			displayAlert("Invalid name entered!", 'w');
 		} else if (regNum.equals("")) {
 			displayAlert("No registration number entered!", 'w');
 		} else if (carMake.equals("")) {
@@ -668,42 +679,45 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			displayAlert("No car model entered!", 'w');
 		} else if (!carColor.matches("[A-Za-z ]*") || carColor.equals("")) {
 			displayAlert("Wrong car color entered!", 'w');
-		} else if (permitType.equals("")) {
-			displayAlert("No permit type selected!", 'w');
-		} else if (visitDate.equals("")) {
+		} else if (visitDate.equals("") & permitType < 2) {
 			displayAlert("No visit date entered!", 'w');
-		} else if (hostName.equals("")) {
-			displayAlert("No host name enetered!", 'w');
+		} else if (hostName.equals("") & permitType < 2) {
+			displayAlert("No host name entered!", 'w');
 		} else {
 			// check for existing permit and vehicles
 			if (lnkPermit_list.checkPermit(name)) {
 				displayAlert("Visitor already has a permit!", 'w');
-			} else if (lnkVehicle_list.getVehicleList().contains(regNum)) {
-				displayAlert("Vechile is already permitted!", 'w');
+			} else if (lnkVehicle_list.checkPermit(regNum)) {
+				displayAlert("Vehicle is already permitted!", 'w');
 			} else {
 				// add new permit depending on type
-				switch (cb_PermitTypeAdd.getSelectedIndex()) {
-				case 0:
-					// Day visitor permit
-
-					break;
-				case 1:
-					// Regular visitor permit
-
-					break;
-				case 2:
-					// Permanent visitor permit
-
-					break;
-				case 3:
-					// University member permit
-
-					break;
-				}
-				// success message
-				displayAlert("Permit has been created!", 'i');
+				createPermit(permitType);
 			}
 		}
+	}
+	
+	public void createPermit(int type) {
+		// code for setting permit data
+		switch (type) {
+		case 0:
+			// Day visitor permit
+
+			break;
+		case 1:
+			// Regular visitor permit
+
+			break;
+		case 2:
+			// Permanent visitor permit
+
+			break;
+		case 3:
+			// University member permit
+
+			break;
+		}
+		// success message
+		displayAlert("Permit has been created!", 'i');
 	}
 
 	public void displayAlert(String text, char type) {
