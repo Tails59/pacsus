@@ -745,9 +745,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	@Override
 	public void update(Observable o, Object arg) {
 		//
-		Date newDate = lnkSystem_status.getToday();
-		if (newDate.getDayNumber() != date) {
-			setTitle("Administration Office \t [Date: " + newDate.getDayNumber() + "]");
-		}
+		setTitle("Administration Office \t [Date: " + lnkSystem_status.getToday().getDayNumber() + "]");
 	}
 }
