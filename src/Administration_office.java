@@ -727,7 +727,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		//
 		switch (type) {
 		case 'i':
-			JOptionPane.showMessageDialog(contentPane, text, "Success", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(contentPane, text, "Success", JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case 'w':
 			JOptionPane.showMessageDialog(contentPane, text, "Attention", JOptionPane.WARNING_MESSAGE);
