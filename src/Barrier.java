@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -80,6 +81,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
      */
     private boolean raised = true;
 
+    private JPanel contentPane;
     private JPanel header;
     private JPanel regNoInput;
     private JPanel barrierControls;
@@ -92,8 +94,10 @@ public class Barrier extends JFrame implements Observer, ActionListener {
     private JButton vehicleClear;
     private final Color GO_COLOUR = new Color(0,179,44);
     private final Color STOP_COLOUR = new Color(220,61,42);
+    private String windowTitle;
+    private int date;
     
-    public Barrier(System_status status, Vehicle_list veh, String windowTitle, int xLocation, int yLocation) {
+    public Barrier(System_status status, Vehicle_list veh, String wt, int xLocation, int yLocation) {
     	
     	// Record references to the system status and vehicle list
     	this.lnkSystem_status = status;
@@ -102,10 +106,12 @@ public class Barrier extends JFrame implements Observer, ActionListener {
     	// Window properties
         final int PADDING = 20;
         final int WIDTH = 400;
-        final int HEIGHT = 290;
+        final int HEIGHT = 290; 
+        date = status.getToday().getDayNumber();
+        windowTitle = wt;
         
     	// Configure the window 	
-    	setTitle(windowTitle);
+    	setTitle(windowTitle + "  [Date: " + date + "]");
     	setLocation(xLocation,yLocation);
     	setSize(WIDTH, HEIGHT);
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -119,38 +125,38 @@ public class Barrier extends JFrame implements Observer, ActionListener {
         final Color HEADER_BACKGROUND = new Color(0,105,56);
         final Font  HEADER_FONT = new Font("Calibri", Font.BOLD, 25);
         header = new JPanel();
-	        header.setBackground(HEADER_BACKGROUND);
-	        header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
-	        header.setLayout(new FlowLayout(FlowLayout.LEFT));
+	    header.setBackground(HEADER_BACKGROUND);
+	    header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
+	    header.setLayout(new FlowLayout(FlowLayout.LEFT));
         lblBarrierHeader = new JLabel("PACSUS - " + windowTitle);
-	        lblBarrierHeader.setFont(HEADER_FONT);
-	        lblBarrierHeader.setForeground(Color.WHITE);
-			header.add(lblBarrierHeader);
+	    lblBarrierHeader.setFont(HEADER_FONT);
+	    lblBarrierHeader.setForeground(Color.WHITE);
+		header.add(lblBarrierHeader);
 		window.add(header);
 		
 		//Add: Registration number input
 		final int REG_NO_INPUT_WIDTH = 32;
 		regNoInput = new JPanel();
-			Border borderRegNoInput = BorderFactory.createTitledBorder("Enter registration number");
-			regNoInput.setBorder(borderRegNoInput);
-			regNo = new JTextField(REG_NO_INPUT_WIDTH);
-			regNoInput.add(regNo);
+		Border borderRegNoInput = BorderFactory.createTitledBorder("Enter registration number");
+		regNoInput.setBorder(borderRegNoInput);
+		regNo = new JTextField(REG_NO_INPUT_WIDTH);
+		regNoInput.add(regNo);
 		window.add(regNoInput);
 		
 		//Add: Barrier controls
 		final Color BUTTON_BGKD = new Color(112,128,144);
 		barrierControls = new JPanel();
 		submit = new JButton("Submit");
-			submit.setBackground(BUTTON_BGKD);
-			submit.setForeground(Color.WHITE);
-			submit.setFocusPainted(false);
-			submit.addActionListener(this);
-			barrierControls.add(submit);
+		submit.setBackground(BUTTON_BGKD);
+		submit.setForeground(Color.WHITE);
+		submit.setFocusPainted(false);
+		submit.addActionListener(this);
+		barrierControls.add(submit);
 		vehicleClear = new JButton("Vehicle Clear");
-			vehicleClear.setBackground(BUTTON_BGKD);
-			vehicleClear.setForeground(Color.WHITE);
-			vehicleClear.setFocusPainted(false);
-			vehicleClear.addActionListener(this);
+		vehicleClear.setBackground(BUTTON_BGKD);
+		vehicleClear.setForeground(Color.WHITE);
+		vehicleClear.setFocusPainted(false);
+		vehicleClear.addActionListener(this);
 		barrierControls.add(vehicleClear);
 		window.add(barrierControls);
 
@@ -160,26 +166,32 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		final Color BARRIER_STATUS_BGKD = new Color(211,211,211);
 		final Font INSTRUCTION_FONT = new Font("",Font.PLAIN, 45);
 		barrierStatus = new JPanel();
-			barrierStatus.setBackground(BARRIER_STATUS_BGKD);
-			barrierStatus.setPreferredSize(new Dimension(BARRIER_STATUS_WIDTH, BARRIER_STATUS_HEIGHT));
-			barrierStatus.setLayout(new GridBagLayout());
+		barrierStatus.setBackground(BARRIER_STATUS_BGKD);
+		barrierStatus.setPreferredSize(new Dimension(BARRIER_STATUS_WIDTH, BARRIER_STATUS_HEIGHT));
+		barrierStatus.setLayout(new GridBagLayout());
 		lblBarrierPosition = new JLabel("Barrier status undefined");
 		barrierStatus.add(lblBarrierPosition);
 		lblInstruction = new JLabel("");
-			lblInstruction.setFont(INSTRUCTION_FONT);
+		lblInstruction.setFont(INSTRUCTION_FONT);
 		barrierStatus.add(lblInstruction);	
 		window.add(barrierStatus);
 		
         setVisible(true);
-        status.addObserver(this);
-       
+        lnkSystem_status.addObserver(this); 
     }
     
     
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg) 
+	{
+		active=lnkSystem_status.getStatus();
+		Date newDate = lnkSystem_status.getToday();
 		
-		 active=lnkSystem_status.getStatus();
+		if (newDate.getDayNumber() != date) 
+		{
+			setTitle(windowTitle + "  [Date: " + newDate.getDayNumber() + "]");
+		}
+		
 		if (active == false)
 		{
 			lblBarrierPosition.setText("System inactive");
@@ -208,14 +220,51 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		if (e.getSource() == submit) {
-			
+	public void actionPerformed(ActionEvent e) 
+	{
+		final int REG_NO_LENGTH = 8;
+		if (e.getSource() == submit) 
+		{			
+			if (regNo.getText().equals(""))
+			{
+				displayAlert("Please enter a registration number.", 'w');
+			}
+			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
+			{
+				displayAlert("Please enter a valid registration number.", 'w');
+				regNo.setText("");
+			}
 		}
 		else if (e.getSource() == vehicleClear)
 		{
-			
+			if (regNo.getText().equals(""))
+			{
+				displayAlert("Please enter a registration number.", 'w');
+			}
+			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
+			{
+				displayAlert("Please enter a valid registration number.", 'w');
+				regNo.setText("");
+			}						
 		}
 	}
+	
+	public void displayAlert(String text, char type) 
+	{
+		switch (type) {
+		case 'i':
+			JOptionPane.showMessageDialog(contentPane, text, "Success", JOptionPane.PLAIN_MESSAGE);
+			break;
+		case 'w':
+			JOptionPane.showMessageDialog(contentPane, text, "Attention", JOptionPane.WARNING_MESSAGE);
+			break;
+		case 'e':
+			JOptionPane.showMessageDialog(contentPane, text, "Error", JOptionPane.ERROR_MESSAGE);
+			break;
+		default:
+			JOptionPane.showMessageDialog(contentPane, "There was an issue while displaying a message!", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			break;
+		}
+	} //displayAlert
 }
