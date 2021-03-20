@@ -40,6 +40,12 @@ public class Vehicle_list {
     }
     
     public void addNew(Vehicle_info veh_info, Permit permit) {
+    	Permit old = vehicleList.put(veh_info, permit);
+    	
+    	if(old != null) {
+    		
+    	}
+    	
     	vehicleList.put(veh_info, permit);
     }
     
@@ -59,5 +65,9 @@ public class Vehicle_list {
     	}
     	
     	return false;
+    }
+    
+    public Permit getPermit(Vehicle_info veh) {
+    	return vehicleList.get(veh);
     }
 }

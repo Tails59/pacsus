@@ -21,7 +21,7 @@ public class Vehicle_info {
      * Each vehicle (and so each registration number) is associated with exactly one permit,
      * which describes its authorization to enter the campus (or not!).
      *
-     * This attribute references the permit associated with this vehicle. It alows the permit
+     * This attribute references the permit associated with this vehicle. It allows the permit
      * status of any vehicle to be accessed via the Vehicle_list knowing only the registration
      * number - for example for barrier checks, recording warnings, and so on.
      *

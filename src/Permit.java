@@ -82,15 +82,24 @@ abstract public class Permit {
      */
     private Vehicle_list permittedVehicles;
     
-    protected Permit(String permitHolder, Date issueDate, Vehicle_list permittedVehicles) {
+    protected Permit(String permitHolder, Vehicle_info firstVehicle, Date issueDate) {
     	this.UNIQUE_ID = uniqueId + 1;
     	uniqueId++;
     	
     	this.permitHolder = permitHolder;
     	this.issueDate = issueDate;
-    	this.permittedVehicles = permittedVehicles;
+    	//permittedVehicles = new Vehicle_list();
     	
+    	Main.getVehicleList().addNew(firstVehicle, this);
     	Main.getPermitList().addPermit(this);
+    }
+    
+    public void addVehicle(Vehicle_info veh) {
+    	Main.getVehicleList().addNew(veh, this);
+    }
+    
+    public void removeVehicle(Vehicle_info veh) {
+    	Main.getVehicleList().remove(veh);
     }
     
     public void addWarning() {
@@ -134,10 +143,16 @@ abstract public class Permit {
     }
     
     public void setTodaysVehicle(Vehicle_info todaysVehicle) {
-    	permittedVehicles.addNew(todaysVehicle, this);
+    	this.vehicleUsedToday = todaysVehicle;
+    	this.addVehicle(todaysVehicle);
     }
     
-    public void removeVehicleFromPermit(Vehicle_info veh_info) {
-    	permittedVehicles.remove(veh_info);
+    /**
+     * Check if a car is allowed to pass a barrier,
+     * i.e. if their permit is not suspended and their issue date is on or before today
+     * @return canPass [boolean] If the vehicle is permitted through the barrier
+     */
+    public boolean canPassBarrier() {
+    	return (! this.suspended) && (Main.getSystemStatus().getToday().getDayNumber() >= issueDate.getDayNumber());
     }
 }

@@ -46,4 +46,8 @@ public class Main {
     public static Permit_list getPermitList() {
     	return permitList;
     }
+    
+    public static System_status getSystemStatus() {
+    	return systemStatus;
+    }
 }
