@@ -193,11 +193,8 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 	public void update(Observable o, Object arg) 
 	{
 		boolean sysStatus = lnkSystem_status.getStatus();
-		Date newDate = lnkSystem_status.getToday();
-		if (newDate.getDayNumber() != date) 
-		{
-			setTitle(WINDOW_TITLE + "  [Date: " + newDate.getDayNumber() + "]");
-		}		
+		setTitle(WINDOW_TITLE + "  [Date: " + lnkSystem_status.getToday().getDayNumber() + "]");
+	
 		if (sysStatus) 
 		{
 			System.out.println("System is ON");
@@ -243,7 +240,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		{
 			if (regNo.getText().equals(""))
 			{
-				displayAlert("Please enter a registration number to.", 'w');
+				displayAlert("Please enter a registration number.", 'w');
 			}
 			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
 			{
