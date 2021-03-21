@@ -54,7 +54,7 @@ public class Vehicle_list {
     }
     
     public boolean checkPermit(String reg) {
-    	Set<Vehicle_info> keySet = vehicleList.keySet();
+    	Set<Vehicle_info> keySet = vehicleList.keySet() ;
     	
     	Iterator<Vehicle_info> iterator = keySet.iterator();
     	
