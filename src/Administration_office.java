@@ -104,6 +104,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_WarningNumber;
 	private JTextField tf_PermitNumberCanc;
 	private JTextField tf_Status;
+	private JButton btnSubmitEnquiry;
 
 
 	private JTextField tf_PermitNumberMod;
@@ -429,10 +430,11 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		statusEnquiry.add(tf_Status);
 		tf_Status.setColumns(10);
 
-		JButton btnSubmitEnquiry = new JButton("Submit");
+		btnSubmitEnquiry = new JButton("Submit");
 		btnSubmitEnquiry.setBackground(BUTTON_BGKD);
 		btnSubmitEnquiry.setForeground(BUTTON_FGND);
 		btnSubmitEnquiry.setFocusPainted(false);
+		btnSubmitEnquiry.addActionListener(this);
 		btnSubmitEnquiry.setBounds(331, 90, 81, 21);
 		btnSubmitEnquiry.addActionListener(this);
 		statusEnquiry.add(btnSubmitEnquiry);
@@ -646,7 +648,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submitBtn) {
-			chackInputs();
+			checkInputs();
 		}
 		if (e.getSource() == cb_PermitTypeAdd) {
 			int index = cb_PermitTypeAdd.getSelectedIndex();
@@ -658,9 +660,14 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				tf_HostNameAdd.setEditable(false);
 			}
 		}
+		if (e.getSource() == btnSubmitEnquiry) {
+			// code for testing
+			String permitNo = tf_Status.getText();
+			System.out.println("Exists: " + lnkPermit_list.checkPermit(permitNo));
+		}
 	}
 
-	private void chackInputs() {
+	private void checkInputs() {
 		//
 		String name = tf_NameAdd.getText();
 		String regNum = tf_regNumberAdd.getText();
