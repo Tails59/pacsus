@@ -16,6 +16,9 @@ public class Vehicle_info {
      * The vehicle's registration number.
      */
     private String regNo;
+    private String colour;
+    private String make;
+    private String model;    
 
     /**
      * Each vehicle (and so each registration number) is associated with exactly one permit,
@@ -34,7 +37,14 @@ public class Vehicle_info {
     private Permit lnkPermit;
     
     public Vehicle_info(String reg) {
+    	this(reg, null, null, null);
+    }
+    
+    public Vehicle_info(String reg, String colour, String make, String model) {
     	this.regNo = reg;
+    	this.colour = colour;
+    	this.make = make;
+    	this.model = model;
     }
     
     public String getRegistration() {
