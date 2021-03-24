@@ -91,11 +91,15 @@ abstract public class Permit {
     	this.permitHolder = permitHolder;
     	this.issueDate = issueDate;
     	
-    	Main.getVehicleList().addNew(firstVehicle, this);
+    	try {
+			Main.getVehicleList().addNew(firstVehicle, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	Main.getPermitList().addPermit(this);
     }
     
-    public void addVehicle(Vehicle_info veh) {
+    public void addVehicle(Vehicle_info veh) throws Exception {
     	Main.getVehicleList().addNew(veh, this);
     }
     
@@ -143,7 +147,7 @@ abstract public class Permit {
     	return this.permitHolder;
     }
     
-    public void setTodaysVehicle(Vehicle_info todaysVehicle) {
+    public void setTodaysVehicle(Vehicle_info todaysVehicle) throws Exception {
     	this.vehicleUsedToday = todaysVehicle;
     	this.addVehicle(todaysVehicle);
     }
