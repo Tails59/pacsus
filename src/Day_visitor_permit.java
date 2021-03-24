@@ -11,8 +11,8 @@ public class Day_visitor_permit extends Permit {
     private String hostName;
     private Date activeDate;
     
-    protected Day_visitor_permit(String permitHolder, String hostName, Vehicle_list permittedVehicles, Date activeDate, Date issueDate) {
-		super(permitHolder, activeDate, permittedVehicles);
+    protected Day_visitor_permit(String permitHolder, String hostName, Vehicle_info firstVehicle, Date activeDate, Date issueDate) {
+		super(permitHolder, firstVehicle, activeDate);
 		
 		this.activeDate = activeDate;
 		this.hostName = hostName;

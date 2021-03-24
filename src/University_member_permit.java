@@ -20,8 +20,8 @@ public class University_member_permit extends Permit {
      */
     private Date expiryDate;
     
-    public University_member_permit(String permitHolder, String host, Date issue, Date expiry, Vehicle_list permittedVehicles) {
-		super(permitHolder, issue, permittedVehicles);
+    public University_member_permit(String permitHolder, String host, Date issue, Date expiry, Vehicle_info firstVehicle) {
+		super(permitHolder, firstVehicle, issue);
 		
 		this.hostName = host;
 		this.expiryDate = expiry;
