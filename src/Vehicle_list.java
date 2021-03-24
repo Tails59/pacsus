@@ -39,8 +39,13 @@ public class Vehicle_list {
     	return this.vehicleList;
     }
     
-    public void addNew(Vehicle_info veh_info, Permit permit) {
-    	vehicleList.put(veh_info, permit);
+    public void addNew(Vehicle_info veh_info, Permit permit) throws Exception {
+    	Permit old = vehicleList.put(veh_info, permit);
+    	
+    	if(old != null) {
+    		vehicleList.put(veh_info, old);
+    		throw new Exception("Vehicle already assigned to permit");
+    	}
     }
     
     public void remove(Vehicle_info veh_info) {
@@ -48,7 +53,7 @@ public class Vehicle_list {
     }
     
     public boolean checkPermit(String reg) {
-    	Set<Vehicle_info> keySet = vehicleList.keySet();
+    	Set<Vehicle_info> keySet = vehicleList.keySet() ;
     	
     	Iterator<Vehicle_info> iterator = keySet.iterator();
     	
@@ -59,5 +64,9 @@ public class Vehicle_list {
     	}
     	
     	return false;
+    }
+    
+    public Permit getPermit(Vehicle_info veh) {
+    	return vehicleList.get(veh);
     }
 }
