@@ -39,14 +39,13 @@ public class Vehicle_list {
     	return this.vehicleList;
     }
     
-    public void addNew(Vehicle_info veh_info, Permit permit) {
+    public void addNew(Vehicle_info veh_info, Permit permit) throws Exception {
     	Permit old = vehicleList.put(veh_info, permit);
     	
     	if(old != null) {
-    		
+    		vehicleList.put(veh_info, old);
+    		throw new Exception("Vehicle already assigned to permit");
     	}
-    	
-    	vehicleList.put(veh_info, permit);
     }
     
     public void remove(Vehicle_info veh_info) {
