@@ -69,7 +69,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	private Permit_list lnkPermit_list;
 
-
 	/**
 	 * Each instance of Administration_office has a navigable association to the
 	 * vehicle list so that it can enquire about/add/delete/modify vehicle details.
@@ -106,9 +105,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_WarningNumber;
 	private JTextField tf_PermitNumberCanc;
 	private JTextField tf_Status;
-	private JTextPane tp_Enquiry ;
+	private JTextPane tp_Enquiry;
 	private JButton btnSubmitEnquiry;
-
 
 	private JTextField tf_PermitNumberMod;
 	private JTextField tf_NameMode;
@@ -122,7 +120,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JComboBox<String> comboBoxMod;
 	private JButton btnGetInfo;
 	private JButton submitBtnMod;
-	
+
 	private Date today;
 	private int date;
 
@@ -130,13 +128,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		this.lnkSystem_status = status;
 		this.lnkVehicle_list = veh;
 		this.lnkPermit_list = permits;
-		
-		final Color BUTTON_BGKD = new Color(112,128,144);
-		final Color BUTTON_FGND = new Color(255,255,255);
-		
+
+		final Color BUTTON_BGKD = new Color(112, 128, 144);
+		final Color BUTTON_FGND = new Color(255, 255, 255);
+
 		today = status.getToday();
 		date = today.getDayNumber();
-		
+
 		setTitle("Administration Office \t [Date: " + date + "]");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -153,22 +151,22 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		tabbedPane.setForeground(BUTTON_FGND);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
-		 // Add: Header
+		// Add: Header
 		final int HEADER_HEIGHT = 750;
-        final int HEADER_WIDTH = 35;
-        final Color HEADER_BACKGROUND = new Color(0,105,56);
-        final Font  HEADER_FONT = new Font("Calibri", Font.BOLD, 25);
-        JPanel header = new JPanel();
-	    header.setBackground(HEADER_BACKGROUND);
-	    header.setLayout(new FlowLayout(FlowLayout.LEFT));
-	    header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
-	    JLabel lblAdminOffice = new JLabel("PACSUS - Administration Office");
-	    lblAdminOffice.setFont(HEADER_FONT);
-	    lblAdminOffice.setForeground(Color.WHITE);
-	    header.add(lblAdminOffice);
+		final int HEADER_WIDTH = 35;
+		final Color HEADER_BACKGROUND = new Color(0, 105, 56);
+		final Font HEADER_FONT = new Font("Calibri", Font.BOLD, 25);
+		JPanel header = new JPanel();
+		header.setBackground(HEADER_BACKGROUND);
+		header.setLayout(new FlowLayout(FlowLayout.LEFT));
+		header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
+		JLabel lblAdminOffice = new JLabel("PACSUS - Administration Office");
+		lblAdminOffice.setFont(HEADER_FONT);
+		lblAdminOffice.setForeground(Color.WHITE);
+		header.add(lblAdminOffice);
 		contentPane.add(header, BorderLayout.PAGE_START);
-		
-		//Add Permit Page  
+
+		// Add Permit Page
 		JPanel addPermit = new JPanel();
 		tabbedPane.addTab("Add Permit", null, addPermit, null);
 		GridBagLayout gbl_addPermit = new GridBagLayout();
@@ -195,7 +193,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(tf_NameAdd, gbc_tfNameAdd);
 		tf_NameAdd.setColumns(10);
 
-
 		JLabel lblRegistrationNumber = new JLabel("Registration Number:");
 		GridBagConstraints gbc_lblRegistrationNumber = new GridBagConstraints();
 		gbc_lblRegistrationNumber.insets = new Insets(0, 0, 5, 5);
@@ -212,7 +209,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(tf_regNumberAdd, gbc_regNumberAdd);
 		tf_regNumberAdd.setColumns(10);
 
-		
 		JLabel lblCarMakeAdd = new JLabel("Car make:");
 		GridBagConstraints gbc_lblCarMakeAdd = new GridBagConstraints();
 		gbc_lblCarMakeAdd.insets = new Insets(0, 0, 5, 5);
@@ -220,7 +216,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblCarMakeAdd.gridx = 1;
 		gbc_lblCarMakeAdd.gridy = 2;
 		addPermit.add(lblCarMakeAdd, gbc_lblCarMakeAdd);
-		
+
 		tf_CarMakeAdd = new JTextField();
 		GridBagConstraints gbc_CarMakeAdd = new GridBagConstraints();
 		gbc_CarMakeAdd.insets = new Insets(0, 0, 5, 0);
@@ -237,7 +233,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblCarModelAdd.gridx = 1;
 		gbc_lblCarModelAdd.gridy = 3;
 		addPermit.add(lblCarModelAdd, gbc_lblCarModelAdd);
-		
+
 		tf_CarModelAdd = new JTextField();
 		GridBagConstraints gbc_CarModelAdd = new GridBagConstraints();
 		gbc_CarModelAdd.insets = new Insets(0, 0, 5, 0);
@@ -246,7 +242,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_CarModelAdd.gridy = 3;
 		addPermit.add(tf_CarModelAdd, gbc_CarModelAdd);
 		tf_CarModelAdd.setColumns(10);
-		
+
 		JLabel lblCarColorAdd = new JLabel("Car color:");
 		GridBagConstraints gbc_lblCarColorAdd = new GridBagConstraints();
 		gbc_lblCarColorAdd.insets = new Insets(0, 0, 5, 5);
@@ -254,7 +250,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblCarColorAdd.gridx = 1;
 		gbc_lblCarColorAdd.gridy = 4;
 		addPermit.add(lblCarColorAdd, gbc_lblCarColorAdd);
-		
+
 		tf_CarColorAdd = new JTextField();
 		GridBagConstraints gbc_CarColorAdd = new GridBagConstraints();
 		gbc_CarColorAdd.insets = new Insets(0, 0, 5, 0);
@@ -266,7 +262,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		tf_CarColorAdd.setColumns(10);
 
 		JLabel lblEnterPermitTypeAdd = new JLabel("Enter Permit Type:");
-		GridBagConstraints gbc_lblEnterPermitTypeAdd= new GridBagConstraints();
+		GridBagConstraints gbc_lblEnterPermitTypeAdd = new GridBagConstraints();
 		gbc_lblEnterPermitTypeAdd.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEnterPermitTypeAdd.anchor = GridBagConstraints.WEST;
 		gbc_lblEnterPermitTypeAdd.gridx = 1;
@@ -285,7 +281,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_cbPermitTypeAdd.gridx = 6;
 		gbc_cbPermitTypeAdd.gridy = 5;
 		addPermit.add(cb_PermitTypeAdd, gbc_cbPermitTypeAdd);
-		
+
 		JLabel lblVisitDateAdd = new JLabel("Visit Date:");
 		GridBagConstraints gbc_lblVisitDateAdd = new GridBagConstraints();
 		gbc_lblVisitDateAdd.insets = new Insets(0, 0, 5, 5);
@@ -293,7 +289,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblVisitDateAdd.gridx = 1;
 		gbc_lblVisitDateAdd.gridy = 6;
 		addPermit.add(lblVisitDateAdd, gbc_lblVisitDateAdd);
-		
+
 		tf_VisitDateAdd = new JTextField();
 		GridBagConstraints gbc_VisitDateAdd = new GridBagConstraints();
 		gbc_VisitDateAdd.gridheight = 2;
@@ -304,7 +300,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		addPermit.add(tf_VisitDateAdd, gbc_VisitDateAdd);
 		tf_VisitDateAdd.setColumns(10);
 
-		
 		JLabel lblHostNameAdd = new JLabel("Host Name:");
 		GridBagConstraints gbc_lblHostNameAdd = new GridBagConstraints();
 		gbc_lblHostNameAdd.insets = new Insets(0, 0, 5, 5);
@@ -312,9 +307,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblHostNameAdd.gridx = 1;
 		gbc_lblHostNameAdd.gridy = 8;
 		addPermit.add(lblHostNameAdd, gbc_lblHostNameAdd);
-		
+
 		tf_HostNameAdd = new JTextField();
-		GridBagConstraints gbc_HostNameAdd  = new GridBagConstraints();
+		GridBagConstraints gbc_HostNameAdd = new GridBagConstraints();
 		gbc_HostNameAdd.insets = new Insets(0, 0, 5, 0);
 		gbc_HostNameAdd.fill = GridBagConstraints.HORIZONTAL;
 		gbc_HostNameAdd.gridx = 6;
@@ -344,7 +339,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		lblRegistrationNumberRecord.setBounds(29, 38, 140, 13);
 		recordWarning.add(lblRegistrationNumberRecord);
 
-
 		tf_RegNumberWarning = new JTextField();
 		tf_RegNumberWarning.setBounds(179, 35, 516, 19);
 		tf_RegNumberWarning.setColumns(10);
@@ -357,7 +351,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		btnSubmitWarning.setFocusPainted(false);
 		btnSubmitWarning.addActionListener(this);
 		recordWarning.add(btnSubmitWarning);
-
 
 		JTextPane tp_RecordWarning = new JTextPane();
 		tp_RecordWarning.setEditable(false);
@@ -387,7 +380,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		deleteWarning.setLayout(null);
 		deleteWarning.add(btnSubmitWarningCanc);
 
-
 		JTextPane textPaneWarningCanc = new JTextPane();
 		textPaneWarningCanc.setEditable(false);
 		textPaneWarningCanc.setBounds(29, 138, 666, 287);
@@ -403,12 +395,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		lblPermitNumberCanc.setBounds(29, 38, 140, 13);
 		cancelPermit.add(lblPermitNumberCanc);
 
-
 		tf_PermitNumberCanc = new JTextField();
 		tf_PermitNumberCanc.setBounds(179, 35, 516, 19);
 		cancelPermit.add(tf_PermitNumberCanc);
 		tf_PermitNumberCanc.setColumns(10);
-
 
 		JButton btnSubmitPermitCanc = new JButton("Submit");
 		btnSubmitPermitCanc.setBackground(BUTTON_BGKD);
@@ -447,7 +437,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		btnSubmitEnquiry.addActionListener(this);
 		statusEnquiry.add(btnSubmitEnquiry);
 
-
 		tp_Enquiry = new JTextPane();
 		tp_Enquiry.setEditable(false);
 		tp_Enquiry.setBounds(29, 138, 666, 287);
@@ -464,7 +453,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbl_modifyPermit.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		modifyPermit.setLayout(gbl_modifyPermit);
 
-
 		JLabel lblPermitMod = new JLabel("Permit Holder:");
 		GridBagConstraints gbc_lblPermitMod = new GridBagConstraints();
 		gbc_lblPermitMod.anchor = GridBagConstraints.WEST;
@@ -473,7 +461,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblPermitMod.gridy = 0;
 
 		modifyPermit.add(lblPermitMod, gbc_lblPermitMod);
-
 
 		tf_PermitNumberMod = new JTextField();
 		GridBagConstraints gbc_PermitNumberMod = new GridBagConstraints();
@@ -518,7 +505,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		modifyPermit.add(tf_RegNumberMod, gbc_RegNumberMod);
 		tf_RegNumberMod.setColumns(10);
 
-
 		JLabel lblCarMakeMod = new JLabel("Car make:");
 		GridBagConstraints gbc_lblCarMakeMod = new GridBagConstraints();
 		gbc_lblCarMakeMod.insets = new Insets(0, 0, 5, 5);
@@ -526,7 +512,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblCarMakeMod.gridx = 1;
 		gbc_lblCarMakeMod.gridy = 3;
 		modifyPermit.add(lblCarMakeMod, gbc_lblCarMakeMod);
-
 
 		tf_CarMakeMod = new JTextField();
 		GridBagConstraints gbc_CarMakeMod = new GridBagConstraints();
@@ -619,7 +604,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_lblHostNameMod.gridy = 9;
 		modifyPermit.add(lblHostNameMod, gbc_lblHostNameMod);
 
-
 		tf_HostNameMod = new JTextField();
 		GridBagConstraints gbc_HostNameMod = new GridBagConstraints();
 
@@ -654,8 +638,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_submitBtnMod.gridy = 11;
 		modifyPermit.add(submitBtnMod, gbc_submitBtnMod);
 
-    	//
-    	lnkSystem_status.addObserver(this);
+		//
+		lnkSystem_status.addObserver(this);
 
 		setVisible(true);
 	}
@@ -675,22 +659,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			}
 		}
 		if (e.getSource() == btnSubmitEnquiry) {
-			// code for testing
-			String nameStatus = tf_Status.getText();
-			if(!nameStatus.matches("^[\\p{L} .'-]+$") || nameStatus.equals("")) 
-			{
-				displayAlert("Invalid name entered!", 'w');
-			}
-			else {
-				if(lnkPermit_list.checkPermit(nameStatus))
-				{
-					tp_Enquiry.setText("Permit found \nInformation:"+lnkPermit_list.getPermit(nameStatus));
-				}
-				else {
-					tp_Enquiry.setText("Permit not found");
-				}
-			}
-			System.out.println("Exists: " + lnkPermit_list.checkPermit(nameStatus));
+			checkStatus();
 		}
 		if (e.getSource() == comboBoxMod) {
 			int index = comboBoxMod.getSelectedIndex();
@@ -739,11 +708,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else if (hostName.equals("") & permitType < 2) {
 			displayAlert("No host name entered!", 'w');
 		} else {
-			if (permitType >= 2) visitDate = Integer.toString(Integer.MAX_VALUE); // a fix to skip the next if
+			if (permitType >= 2)
+				visitDate = Integer.toString(Integer.MAX_VALUE); // a fix to skip the next if
 			// check the visit date
 			if (Integer.parseInt(visitDate) < today.getDayNumber()) {
 				displayAlert("Visit date cannot be in the past.", 'w');
-			} else if (lnkPermit_list.checkPermit(name)) {	// check for existing permit and vehicles
+			} else if (lnkPermit_list.checkPermit(name)) { // check for existing permit and vehicles
 				displayAlert("Visitor already has a permit!", 'w');
 			} else if (lnkVehicle_list.checkPermit(regNum)) {
 				displayAlert("Vehicle is already permitted!", 'w');
@@ -754,26 +724,76 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
-	private void modifyPermit(int permitType, String name, String regNum, String carMake, String carModel, String carColor, String visitDate, String hostName) {
+	private void checkStatus() {
+		String nameStatus = tf_Status.getText();
+
+		if (!nameStatus.matches("^[\\p{L} .'-]+$") || nameStatus.equals("")) {
+			displayAlert("Invalid name entered!", 'w');
+		} else {
+			if (lnkPermit_list.checkPermit(nameStatus)) {
+				Permit aPermit = lnkPermit_list.getPermit(nameStatus);
+				Vehicle_info vehicle = null;
+				Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet();
+				String permitType = null;
+				String hostName = null;
+				String issueDate=null;
+				Iterator<Vehicle_info> iterator = keySet.iterator();
+				while (iterator.hasNext()) {
+					vehicle = iterator.next();
+					if (lnkVehicle_list.getPermit(vehicle) == aPermit) {
+						
+						issueDate=Integer.toString(aPermit.getIssueDate().getDayNumber());
+						
+						if (aPermit instanceof Day_visitor_permit) {
+							permitType = "Day Visitor Permit";
+							hostName = ((Day_visitor_permit) aPermit).getHostName();
+						} else if (aPermit instanceof Regular_visitor_permit) {
+							permitType = "Regular Visitor Permit";
+							hostName = ((Regular_visitor_permit) aPermit).getHostName();
+						} else if (aPermit instanceof Permanent_visitor_permit) {
+							permitType = "Permanent Visitor Permit";
+							hostName = "N/A";
+						} else {
+							permitType = null;
+							hostName = "N/A";
+						}
+						tp_Enquiry.setText(" Permit found! \n Information:\n Permit Name: " + aPermit.getPermitHolder()
+								+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
+								+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate +"\n Registration Number: " + vehicle.getRegistration()
+								+ "\n Car maker: " + vehicle.getMake() + "\n Car model: " + vehicle.getModel()
+								+ "\n Car color: " + vehicle.getColour());
+
+					}
+
+				}
+			} else {
+				tp_Enquiry.setText("Permit not found");
+			}
+
+		}
+	}
+
+	private void modifyPermit(int permitType, String name, String regNum, String carMake, String carModel,
+			String carColor, String visitDate, String hostName) {
 		//
 		Permit aPermit = lnkPermit_list.getPermit(name);
 		//
 		switch (permitType) {
 		case 0:
 			// Day visitor permit
-			
+
 			break;
 		case 1:
 			// Regular visitor permit
-			
+
 			break;
 		case 2:
 			// Permanent visitor permit
-			
+
 			break;
 		case 3:
 			// University member permit
-			
+
 			break;
 		}
 	}
@@ -791,41 +811,41 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			Vehicle_info vehicle = null;
 			int dropdown = 0;
 			//
-			Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet() ;
-	    	
-	    	Iterator<Vehicle_info> iterator = keySet.iterator();
-	    	
-	    	while(iterator.hasNext()) {
-	    		vehicle = iterator.next();
-	    		if (lnkVehicle_list.getPermit(vehicle) == aPermit) {
-	    			// fill fields with data from the permit
-	    			tf_NameMode.setText(aPermit.getPermitHolder());
-	    			tf_RegNumberMod.setText(vehicle.getRegistration());
-	    			tf_CarMakeMod.setText(vehicle.getMake());
-	    			tf_CarModelMod.setText(vehicle.getModel());
-	    			tf_CarColorMod.setText(vehicle.getColour());
-	    			//
-	    			if (aPermit instanceof Day_visitor_permit) {
-	    				dropdown = 0;
-	    			} else if (aPermit instanceof Regular_visitor_permit) {
-	    				dropdown = 1;
-	    			} else if (aPermit instanceof Permanent_visitor_permit) {
-	    				dropdown = 2;
-	    			} else {
-	    				dropdown = 3;
-	    			}
-	    			comboBoxMod.setSelectedIndex(dropdown);
-	    			//
-	    			if (dropdown < 2) {
-	    				tf_VisitDateMod.setText(Integer.toString(aPermit.getIssueDate().getDayNumber()));
-	    				if (dropdown == 0) {
-	    					tf_HostNameMod.setText(((Day_visitor_permit) aPermit).getHostName());
-	    				} else {
-	    					tf_HostNameMod.setText(((Regular_visitor_permit) aPermit).getHostName());
-	    				}
-	    			}
-	    		}
-	    	}
+			Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet();
+
+			Iterator<Vehicle_info> iterator = keySet.iterator();
+
+			while (iterator.hasNext()) {
+				vehicle = iterator.next();
+				if (lnkVehicle_list.getPermit(vehicle) == aPermit) {
+					// fill fields with data from the permit
+					tf_NameMode.setText(aPermit.getPermitHolder());
+					tf_RegNumberMod.setText(vehicle.getRegistration());
+					tf_CarMakeMod.setText(vehicle.getMake());
+					tf_CarModelMod.setText(vehicle.getModel());
+					tf_CarColorMod.setText(vehicle.getColour());
+					//
+					if (aPermit instanceof Day_visitor_permit) {
+						dropdown = 0;
+					} else if (aPermit instanceof Regular_visitor_permit) {
+						dropdown = 1;
+					} else if (aPermit instanceof Permanent_visitor_permit) {
+						dropdown = 2;
+					} else {
+						dropdown = 3;
+					}
+					comboBoxMod.setSelectedIndex(dropdown);
+					//
+					if (dropdown < 2) {
+						tf_VisitDateMod.setText(Integer.toString(aPermit.getIssueDate().getDayNumber()));
+						if (dropdown == 0) {
+							tf_HostNameMod.setText(((Day_visitor_permit) aPermit).getHostName());
+						} else {
+							tf_HostNameMod.setText(((Regular_visitor_permit) aPermit).getHostName());
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -857,11 +877,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else if (hostName.equals("") & permitType < 2) {
 			displayAlert("No host name entered!", 'w');
 		} else {
-			if (permitType >= 2) visitDate = Integer.toString(Integer.MAX_VALUE); // a fix to skip the next if
+			if (permitType >= 2)
+				visitDate = Integer.toString(Integer.MAX_VALUE); // a fix to skip the next if
 			// check the visit date
 			if (Integer.parseInt(visitDate) < today.getDayNumber()) {
 				displayAlert("Visit date cannot be in the past.", 'w');
-			} else if (lnkPermit_list.checkPermit(name)) {	// check for existing permit and vehicles
+			} else if (lnkPermit_list.checkPermit(name)) { // check for existing permit and vehicles
 				displayAlert("Visitor already has a permit!", 'w');
 			} else if (lnkVehicle_list.checkPermit(regNum)) {
 				displayAlert("Vehicle is already permitted!", 'w');
@@ -871,11 +892,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			}
 		}
 	}
-	
-	public void createPermit(int type, String name, String regNum, String carMake, String carModel, String carColor, String visitDate, String hostName) {
+
+	public void createPermit(int type, String name, String regNum, String carMake, String carModel, String carColor,
+			String visitDate, String hostName) {
 		//
 		Date later = new Date();
-		if (type < 2) later.setDayNumber(Integer.parseInt(visitDate));
+		if (type < 2)
+			later.setDayNumber(Integer.parseInt(visitDate));
 		Vehicle_info veh = new Vehicle_info(regNum, carColor, carMake, carModel);
 		// code for setting permit data
 		switch (type) {
