@@ -224,19 +224,23 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				displayAlert("Please enter a valid registration number.", 'w');
 				regNo.setText("");
 			}
-			else if (lnkVehicle_list.checkPermit(regNo.getText()) == true)
-			{
-				raised = true;
-				regNo.setText("");
-				lblBarrierPosition.setText("The barrier is raised");
-				lblInstruction.setText(" GO");
-				barrierStatus.setBackground(GO_COLOUR);
-			}
-			else if (lnkVehicle_list.checkPermit(regNo.getText()) == false)
-			{				
-				raised = false;
-				regNo.setText("");
-				displayAlert("Access is denied for this vehicle.", 'w');
+			else
+			{	
+				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText());
+				if (lnkVehicle_list.canPass(toCheck))
+				{
+					raised = true;
+					regNo.setText("");
+					lblBarrierPosition.setText("The barrier is raised");
+					lblInstruction.setText(" GO");
+					barrierStatus.setBackground(GO_COLOUR);
+				}
+				else
+				{
+					raised = false;
+					regNo.setText("");
+					displayAlert("Access is denied for this vehicle.", 'w');
+				}	
 			}
 		}
 		else if (e.getSource() == vehicleClear && active == true)
