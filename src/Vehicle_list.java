@@ -73,7 +73,6 @@ public class Vehicle_list {
     public Permit getAPermit(String reg) {
     	//
     	Permit aPermit = null;
-    	
     	if (checkPermit(reg)) {
     		Set<Vehicle_info> keySet = vehicleList.keySet() ;
         	
