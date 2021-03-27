@@ -197,7 +197,6 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 	
 		if (sysStatus) 
 		{
-			System.out.println("System is ON");
 			activateBarrier.setEnabled(false);
 			activateBarrier.setBackground(DISABLE_BTN_COLOUR);
 			deactivateBarrier.setEnabled(true);
@@ -205,7 +204,6 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		} 
 		else 
 		{
-			System.out.println("System is OFF");
 			activateBarrier.setEnabled(true);
 			activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
 			deactivateBarrier.setEnabled(false);
@@ -224,7 +222,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		{
 			lnkSystem_status.setStatus(false);
 		}
-		else if (e.getSource() == checkLog) 
+		else if (e.getSource() == checkLog && lnkSystem_status.getStatus() == true) 
 		{			
 			if (regNo.getText().equals(""))
 			{
@@ -235,8 +233,12 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 				displayAlert("Please enter a valid registration number.", 'w');
 				regNo.setText("");
 			}
+			else
+			{
+				regNo.setText("");
+			}
 		}
-		else if (e.getSource() == issueWarning) 
+		else if (e.getSource() == issueWarning && lnkSystem_status.getStatus() == true) 
 		{
 			if (regNo.getText().equals(""))
 			{
@@ -246,8 +248,16 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			{
 				displayAlert("Please enter a valid registration number.", 'w');
 				regNo.setText("");
-			}		
-		}	
+			}
+			else
+			{
+				regNo.setText("");
+			}
+		}
+		else
+		{
+			displayAlert("The system is inactive. Please activate the system to use this function.", 'w');
+		}
 	} // actionPerformed
 	
 	public void displayAlert(String text, char type) 
