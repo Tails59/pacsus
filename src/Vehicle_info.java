@@ -36,7 +36,15 @@ public class Vehicle_info {
      */
     private Permit lnkPermit;
     
-    public Vehicle_info(String reg) {
+    public Permit getLnkPermit() {
+		return lnkPermit;
+	}
+
+	public void setLnkPermit(Permit lnkPermit) {
+		this.lnkPermit = lnkPermit;
+	}
+
+	public Vehicle_info(String reg) {
     	this(reg, null, null, null);
     }
     
@@ -47,7 +55,35 @@ public class Vehicle_info {
     	this.model = model;
     }
     
-    public String getRegistration() {
+    public String getColour() {
+		return colour;
+	}
+
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
+
+	public String getMake() {
+		return make;
+	}
+
+	public void setMake(String make) {
+		this.make = make;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public void setRegNo(String regNo) {
+		this.regNo = regNo;
+	}
+
+	public String getRegistration() {
     	return this.regNo;
     }
 }
