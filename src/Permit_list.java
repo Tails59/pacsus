@@ -44,4 +44,12 @@ public class Permit_list {
     	return lnkPermit != null && lnkPermit.containsKey(name);
     }
     
+    public Permit getPermit(String name) {
+    	if (lnkPermit == null || !lnkPermit.containsKey(name)) {
+        	return null;
+    	} else {
+    		return lnkPermit.get(name);
+    	}
+    }
+    
 }
