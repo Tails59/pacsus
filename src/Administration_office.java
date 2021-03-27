@@ -839,7 +839,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		int permitType = cb_PermitTypeAdd.getSelectedIndex();
 		String visitDate = tf_VisitDateAdd.getText();
 		String hostName = tf_HostNameAdd.getText();
-		String nameStatus=tf_Status.getText();
+		String nameStatus = tf_Status.getText();
 
 		//
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
