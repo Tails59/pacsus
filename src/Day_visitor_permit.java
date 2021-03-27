@@ -18,7 +18,7 @@ public class Day_visitor_permit extends Permit {
 		this.hostName = hostName;
 	}
     
-    public String getHostname() {
+    public String getHostName() {
     	return this.hostName;
     }
     

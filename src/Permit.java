@@ -82,7 +82,7 @@ abstract public class Permit {
      * @label Controls access of
      * @supplierCardinality 0..*
      */
-    //private Vehicle_list permittedVehicles;
+    private Vehicle_list permittedVehicles;
     
     protected Permit(String permitHolder, Vehicle_info firstVehicle, Date issueDate) {
     	this.UNIQUE_ID = uniqueId + 1;

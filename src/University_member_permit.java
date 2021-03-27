@@ -5,37 +5,25 @@
  * use case for issuing a new University member permit.
  */
 public class University_member_permit extends Permit {
-	/**
-     * The name of the University member hosting the visit.
-     */
-    private String hostName;
 
-    /**
-     * The date that the visit ends - entry will not be allowed after this date.
-     * @label Ending on
+	/**
+     * The date that this permit was issued. This information is required in case a member
+     * of the University leaves the University part way through the year and becomes eligible for a pro-rata rebate.
+     * @label Issued on
      * @clientCardinality 1
      * @supplierCardinality 1
      * @link aggregation
      * @directed
      */
-    private Date expiryDate;
+    private Date lnkDate;
     
-    public University_member_permit(String permitHolder, String host, Date issue, Date expiry, Vehicle_info firstVehicle) {
+    public University_member_permit(String permitHolder, Date issue, Vehicle_info firstVehicle) {
 		super(permitHolder, firstVehicle, issue);
 		
-		this.hostName = host;
-		this.expiryDate = expiry;
+		lnkDate = issue;
 	}
-    
-    public String getHostName() {
-    	return this.hostName;
-    }
-    
-    public Date getExpiryDate() {
-    	return this.expiryDate;
-    }
-    
-    public void setExpiryDate(Date newDate) {
-    	this.expiryDate = newDate;
-    }
+
+	public Date getLnkDate() {
+		return lnkDate;
+	}
 }
