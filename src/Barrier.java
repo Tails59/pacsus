@@ -194,6 +194,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		
 		if (active == false)
 		{
+			raised = true;
 			lblBarrierPosition.setText("System inactive");
 			lblInstruction.setText(" GO");
 			barrierStatus.setBackground(GO_COLOUR);
@@ -201,18 +202,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		}
 		else if(active == true)
 		{
-			lblBarrierPosition.setText("The barrier is lowered");
-			lblInstruction.setText(" STOP");
-			barrierStatus.setBackground(STOP_COLOUR);
-		}
-		else if (raised == true)
-		{
-			lblBarrierPosition.setText("The barrier is raised");
-			lblInstruction.setText(" GO");
-			barrierStatus.setBackground(GO_COLOUR);
-		}
-		else if (raised == false)
-		{
+			raised = false;
 			lblBarrierPosition.setText("The barrier is lowered");
 			lblInstruction.setText(" STOP");
 			barrierStatus.setBackground(STOP_COLOUR);
@@ -223,7 +213,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		final int REG_NO_LENGTH = 8;
-		if (e.getSource() == submit) 
+		if (e.getSource() == submit && active == true) 
 		{			
 			if (regNo.getText().equals(""))
 			{
@@ -234,18 +224,37 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				displayAlert("Please enter a valid registration number.", 'w');
 				regNo.setText("");
 			}
-		}
-		else if (e.getSource() == vehicleClear)
-		{
-			if (regNo.getText().equals(""))
+			else if (lnkVehicle_list.checkPermit(regNo.getText()) == true)
 			{
-				displayAlert("Please enter a registration number.", 'w');
-			}
-			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
-			{
-				displayAlert("Please enter a valid registration number.", 'w');
+				raised = true;
 				regNo.setText("");
-			}						
+				lblBarrierPosition.setText("The barrier is raised");
+				lblInstruction.setText(" GO");
+				barrierStatus.setBackground(GO_COLOUR);
+			}
+			else if (lnkVehicle_list.checkPermit(regNo.getText()) == false)
+			{				
+				raised = false;
+				regNo.setText("");
+				displayAlert("Access is denied for this vehicle.", 'w');
+			}
+		}
+		else if (e.getSource() == vehicleClear && active == true)
+		{
+			if (raised = true)
+			{
+				lblBarrierPosition.setText("The barrier is lowered");
+				lblInstruction.setText(" STOP");
+				barrierStatus.setBackground(STOP_COLOUR);
+			}
+			else
+			{
+				displayAlert("The barrier is already lowered.", 'w');
+			}
+		}
+		else
+		{
+			displayAlert("The system is inactive. Please activate the system to use this function.", 'w');
 		}
 	}
 	
