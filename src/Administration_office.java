@@ -758,6 +758,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		//
 		Permit aPermit = lnkPermit_list.getPermit(name);
 		//
+		aPermit.setPermitHolder(name);
+		aPermit.setIssueDate(today);
+		//
 		switch (permitType) {
 		case 0:
 			// Day visitor permit
@@ -776,6 +779,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			
 			break;
 		}
+		// success message
+		displayAlert("Permit for " + name + " has been modified!", 'i');
 	}
 
 	private void findPermit() {

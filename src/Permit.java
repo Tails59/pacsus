@@ -84,7 +84,15 @@ abstract public class Permit {
      */
     private Vehicle_list permittedVehicles;
     
-    protected Permit(String permitHolder, Vehicle_info firstVehicle, Date issueDate) {
+    public void setPermitHolder(String permitHolder) {
+		this.permitHolder = permitHolder;
+	}
+
+	public void setIssueDate(Date issueDate) {
+		this.issueDate = issueDate;
+	}
+
+	protected Permit(String permitHolder, Vehicle_info firstVehicle, Date issueDate) {
     	this.UNIQUE_ID = uniqueId + 1;
     	uniqueId++;
     	
