@@ -104,6 +104,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_WarningNumber;
 	private JTextField tf_PermitNumberCanc;
 	private JTextField tf_Status;
+	private JTextPane tp_Enquiry ;
 	private JButton btnSubmitEnquiry;
 
 
@@ -421,7 +422,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		tabbedPane.addTab("Status Enquiry", null, statusEnquiry, null);
 		statusEnquiry.setLayout(null);
 
-		JLabel lblStatusEnquiry = new JLabel("Permit Number: ");
+		JLabel lblStatusEnquiry = new JLabel("Name: ");
 		lblStatusEnquiry.setBounds(29, 38, 140, 13);
 		statusEnquiry.add(lblStatusEnquiry);
 
@@ -440,7 +441,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		statusEnquiry.add(btnSubmitEnquiry);
 
 
-		JTextPane tp_Enquiry = new JTextPane();
+		tp_Enquiry = new JTextPane();
 		tp_Enquiry.setEditable(false);
 		tp_Enquiry.setBounds(29, 138, 666, 287);
 		statusEnquiry.add(tp_Enquiry);
@@ -662,8 +663,21 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 		if (e.getSource() == btnSubmitEnquiry) {
 			// code for testing
-			String permitNo = tf_Status.getText();
-			System.out.println("Exists: " + lnkPermit_list.checkPermit(permitNo));
+			String nameStatus = tf_Status.getText();
+			if(!nameStatus.matches("^[\\p{L} .'-]+$") || nameStatus.equals("")) 
+			{
+				displayAlert("Invalid name entered!", 'w');
+			}
+			else {
+				if(lnkPermit_list.checkPermit(nameStatus))
+				{
+					tp_Enquiry.setText("Permit found \nInformation:"+lnkPermit_list.getPermit(nameStatus));
+				}
+				else {
+					tp_Enquiry.setText("Permit not found");
+				}
+			}
+			System.out.println("Exists: " + lnkPermit_list.checkPermit(nameStatus));
 		}
 	}
 
@@ -677,6 +691,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		int permitType = cb_PermitTypeAdd.getSelectedIndex();
 		String visitDate = tf_VisitDateAdd.getText();
 		String hostName = tf_HostNameAdd.getText();
+		String nameStatus=tf_Status.getText();
 
 		//
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
@@ -693,7 +708,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			displayAlert("No visit date entered!", 'w');
 		} else if (hostName.equals("") & permitType < 2) {
 			displayAlert("No host name entered!", 'w');
-		} else {
+		} 
+		else {
 			// check for existing permit and vehicles
 			if (lnkPermit_list.checkPermit(name)) {
 				displayAlert("Visitor already has a permit!", 'w');
