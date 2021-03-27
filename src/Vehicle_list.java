@@ -69,4 +69,28 @@ public class Vehicle_list {
     public Permit getPermit(Vehicle_info veh) {
     	return vehicleList.get(veh);
     }
+    
+    public Permit getAPermit(String reg) {
+    	//
+    	Permit aPermit = null;
+    	
+    	if (checkPermit(reg)) {
+    		Set<Vehicle_info> keySet = vehicleList.keySet() ;
+        	
+        	Iterator<Vehicle_info> iterator = keySet.iterator();
+        	
+        	while(iterator.hasNext()) {
+        		if(iterator.next().getRegistration() == reg) {
+        			aPermit = vehicleList.get(iterator.next());
+        		}
+        	}
+    	}
+    	
+    	return aPermit;
+    }
+    
+    public boolean canPass(Permit p) {
+    	if (p.canPassBarrier()) return true; 
+    	else return false;
+    }
 }
