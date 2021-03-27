@@ -96,7 +96,7 @@ public class Timer extends JFrame implements ActionListener {
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	//window.setLayout(new FlowLayout());
     	
-    	setBounds(100, 100, 400, 200);
+    	setBounds(1300, 550, 400, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

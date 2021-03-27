@@ -24,6 +24,10 @@ public class Permit_list {
      * @directed*/
     private Hashtable<String, Permit> lnkPermit;
     
+    public Permit_list() {
+    	this.lnkPermit = new Hashtable<String, Permit>();
+    }
+    
     /**
      * add a new permit
      * 
