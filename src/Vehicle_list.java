@@ -84,7 +84,6 @@ public class Vehicle_list {
         		}
         	}
     	}
-    	
     	return aPermit;
     }
     
