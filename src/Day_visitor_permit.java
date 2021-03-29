@@ -26,7 +26,15 @@ public class Day_visitor_permit extends Permit {
     	this.activeDate = newDate;
     }
     
-    public Date getActiveDate() {
+    public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+
+	public void setActiveDate(Date activeDate) {
+		this.activeDate = activeDate;
+	}
+
+	public Date getActiveDate() {
     	return this.activeDate;
     }
 }

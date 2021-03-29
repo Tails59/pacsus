@@ -27,6 +27,10 @@ public class Regular_visitor_permit extends Permit {
 		this.expiryDate = expiry;
 	}
 
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+
 	public String getHostName() {
     	return this.hostName;
     }
