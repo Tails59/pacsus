@@ -680,6 +680,23 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			checkPermit();
 		}
 	}
+	
+	private Vehicle_info getVehicle(Permit p) {
+		Vehicle_info vehicle = null;
+		Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet();
+		String permitType = null;
+		String hostName = null;
+		String issueDate=null;
+		Iterator<Vehicle_info> iterator = keySet.iterator();
+		while (iterator.hasNext()) {
+			vehicle = iterator.next();
+			if (lnkVehicle_list.getPermit(vehicle) == p) {
+				return vehicle;
+			}
+
+		}
+		return vehicle;
+	}
 
 	private void checkPermit() {
 		//
@@ -691,7 +708,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		int permitType = comboBoxMod.getSelectedIndex();
 		String visitDate = tf_VisitDateMod.getText();
 		String hostName = tf_HostNameMod.getText();
-
 		//
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
 			displayAlert("Invalid name entered!", 'w');
@@ -713,13 +729,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			// check the visit date
 			if (Integer.parseInt(visitDate) < today.getDayNumber()) {
 				displayAlert("Visit date cannot be in the past.", 'w');
-			} else if (lnkPermit_list.checkPermit(name)) { // check for existing permit and vehicles
-				displayAlert("Visitor already has a permit!", 'w');
-			} else if (lnkVehicle_list.checkPermit(regNum)) {
-				displayAlert("Vehicle is already permitted!", 'w');
 			} else {
+				// cancel old permit and remove old vehicle
+				lnkPermit_list.cancelPermit(tf_PermitNumberMod.getText());
+				Vehicle_info v = getVehicle(lnkPermit_list.getPermit(tf_PermitNumberMod.getText()));
+				lnkVehicle_list.remove(v);
 				// add new permit depending on type
-				modifyPermit(permitType, name, regNum, carMake, carModel, carColor, visitDate, hostName);
+				createPermit(permitType, name, regNum, carMake, carModel, carColor, visitDate, hostName);
 			}
 		}
 	}
@@ -732,39 +748,32 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else {
 			if (lnkPermit_list.checkPermit(nameStatus)) {
 				Permit aPermit = lnkPermit_list.getPermit(nameStatus);
-				Vehicle_info vehicle = null;
-				Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet();
-				String permitType = null;
-				String hostName = null;
-				String issueDate=null;
-				Iterator<Vehicle_info> iterator = keySet.iterator();
-				while (iterator.hasNext()) {
-					vehicle = iterator.next();
-					if (lnkVehicle_list.getPermit(vehicle) == aPermit) {
-						
-						issueDate=Integer.toString(aPermit.getIssueDate().getDayNumber());
-						
-						if (aPermit instanceof Day_visitor_permit) {
-							permitType = "Day Visitor Permit";
-							hostName = ((Day_visitor_permit) aPermit).getHostName();
-						} else if (aPermit instanceof Regular_visitor_permit) {
-							permitType = "Regular Visitor Permit";
-							hostName = ((Regular_visitor_permit) aPermit).getHostName();
-						} else if (aPermit instanceof Permanent_visitor_permit) {
-							permitType = "Permanent Visitor Permit";
-							hostName = "N/A";
-						} else {
-							permitType = null;
-							hostName = "N/A";
-						}
-						tp_Enquiry.setText(" Permit found! \n Information:\n Permit Name: " + aPermit.getPermitHolder()
-								+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
-								+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate +"\n Registration Number: " + vehicle.getRegistration()
-								+ "\n Car maker: " + vehicle.getMake() + "\n Car model: " + vehicle.getModel()
-								+ "\n Car color: " + vehicle.getColour());
-
+				Vehicle_info vehicle = getVehicle(aPermit);
+				if (vehicle != null) {
+					String permitType = null;
+					String hostName = null;
+					String issueDate=null;
+					//
+					issueDate=Integer.toString(aPermit.getIssueDate().getDayNumber());
+					
+					if (aPermit instanceof Day_visitor_permit) {
+						permitType = "Day Visitor Permit";
+						hostName = ((Day_visitor_permit) aPermit).getHostName();
+					} else if (aPermit instanceof Regular_visitor_permit) {
+						permitType = "Regular Visitor Permit";
+						hostName = ((Regular_visitor_permit) aPermit).getHostName();
+					} else if (aPermit instanceof Permanent_visitor_permit) {
+						permitType = "Permanent Visitor Permit";
+						hostName = "N/A";
+					} else {
+						permitType = "University Member Permit";
+						hostName = "N/A";
 					}
-
+					tp_Enquiry.setText(" Permit found! \n Information:\n Permit Name: " + aPermit.getPermitHolder()
+							+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
+							+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate +"\n Registration Number: " + vehicle.getRegistration()
+							+ "\n Car maker: " + vehicle.getMake() + "\n Car model: " + vehicle.getModel()
+							+ "\n Car color: " + vehicle.getColour());
 				}
 			} else {
 				tp_Enquiry.setText("Permit not found");
@@ -773,31 +782,35 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
-	private void modifyPermit(int permitType, String name, String regNum, String carMake, String carModel,
+	private void modifyPermit_old(int permitType, String name, String regNum, String carMake, String carModel,
 			String carColor, String visitDate, String hostName) {
 		//
-		Permit aPermit = lnkPermit_list.getPermit(name);
+		Permit aPermit = lnkPermit_list.getPermit(tf_PermitNumberMod.getText());
 		//
 		aPermit.setPermitHolder(name);
 		aPermit.setIssueDate(today);
 		//
-		switch (permitType) {
-		case 0:
-			// Day visitor permit
-
-			break;
-		case 1:
-			// Regular visitor permit
-
-			break;
-		case 2:
-			// Permanent visitor permit
-
-			break;
-		case 3:
-			// University member permit
-
-			break;
+		Vehicle_info vehicle = getVehicle(aPermit);
+		//
+		vehicle.setRegNo(regNum);
+		vehicle.setMake(carMake);
+		vehicle.setModel(carModel);
+		vehicle.setColour(carColor);
+		//
+		if (permitType < 2) {	// Day visitor permit and Regular visitor permit
+			Date date = new Date();
+			date.setDayNumber(Integer.parseInt(visitDate));
+			//
+			switch (permitType) {
+			case 0:
+				((Day_visitor_permit) aPermit).changeActiveDate(date);
+				((Day_visitor_permit) aPermit).setHostName(hostName);
+				break;
+			case 1:
+				((Regular_visitor_permit) aPermit).setExpiryDate(date);
+				((Regular_visitor_permit) aPermit).setHostName(hostName);
+				break;
+			}
 		}
 		// success message
 		displayAlert("Permit for " + name + " has been modified!", 'i');
@@ -813,43 +826,38 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else {
 			//
 			Permit aPermit = lnkPermit_list.getPermit(permitName);
-			Vehicle_info vehicle = null;
+			Vehicle_info vehicle = getVehicle(aPermit);
 			int dropdown = 0;
 			//
-			Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet();
-
-			Iterator<Vehicle_info> iterator = keySet.iterator();
-
-			while (iterator.hasNext()) {
-				vehicle = iterator.next();
-				if (lnkVehicle_list.getPermit(vehicle) == aPermit) {
-					// fill fields with data from the permit
-					tf_NameMode.setText(aPermit.getPermitHolder());
-					tf_RegNumberMod.setText(vehicle.getRegistration());
-					tf_CarMakeMod.setText(vehicle.getMake());
-					tf_CarModelMod.setText(vehicle.getModel());
-					tf_CarColorMod.setText(vehicle.getColour());
-					//
-					if (aPermit instanceof Day_visitor_permit) {
-						dropdown = 0;
-					} else if (aPermit instanceof Regular_visitor_permit) {
-						dropdown = 1;
-					} else if (aPermit instanceof Permanent_visitor_permit) {
-						dropdown = 2;
+			if (vehicle != null) {
+				// fill fields with data from the permit
+				tf_NameMode.setText(aPermit.getPermitHolder());
+				tf_RegNumberMod.setText(vehicle.getRegistration());
+				tf_CarMakeMod.setText(vehicle.getMake());
+				tf_CarModelMod.setText(vehicle.getModel());
+				tf_CarColorMod.setText(vehicle.getColour());
+				//
+				if (aPermit instanceof Day_visitor_permit) {
+					dropdown = 0;
+				} else if (aPermit instanceof Regular_visitor_permit) {
+					dropdown = 1;
+				} else if (aPermit instanceof Permanent_visitor_permit) {
+					dropdown = 2;
+				} else {
+					dropdown = 3;
+				}
+				comboBoxMod.setSelectedIndex(dropdown);
+				//
+				if (dropdown < 2) {
+					tf_VisitDateMod.setText(Integer.toString(aPermit.getIssueDate().getDayNumber()));
+					if (dropdown == 0) {
+						tf_HostNameMod.setText(((Day_visitor_permit) aPermit).getHostName());
 					} else {
-						dropdown = 3;
-					}
-					comboBoxMod.setSelectedIndex(dropdown);
-					//
-					if (dropdown < 2) {
-						tf_VisitDateMod.setText(Integer.toString(aPermit.getIssueDate().getDayNumber()));
-						if (dropdown == 0) {
-							tf_HostNameMod.setText(((Day_visitor_permit) aPermit).getHostName());
-						} else {
-							tf_HostNameMod.setText(((Regular_visitor_permit) aPermit).getHostName());
-						}
+						tf_HostNameMod.setText(((Regular_visitor_permit) aPermit).getHostName());
 					}
 				}
+			} else {
+				displayAlert("There was an issue while fetching the vehicle information!", 'w');
 			}
 		}
 	}
@@ -864,7 +872,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		int permitType = cb_PermitTypeAdd.getSelectedIndex();
 		String visitDate = tf_VisitDateAdd.getText();
 		String hostName = tf_HostNameAdd.getText();
-		String nameStatus = tf_Status.getText();
 
 		//
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
