@@ -123,6 +123,11 @@ abstract public class Permit {
     	}
     }
     
+    public int getWarnings()
+    {
+    	return this.warnings;
+    }
+    
     public void removeWarnings(int amount) {
     	this.warnings -= amount;
     	
