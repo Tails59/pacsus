@@ -52,4 +52,12 @@ public class Permit_list {
     	}
     }
     
+    public void cancelPermit(String name) {
+    	if (lnkPermit != null && lnkPermit.containsKey(name)) {
+    		lnkPermit.remove(name);
+    	} else {
+    		System.out.println("No permit found!");
+    	}
+    }
+    
 }
