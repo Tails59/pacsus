@@ -94,8 +94,9 @@ public class Vehicle_list {
         	Iterator<Vehicle_info> iterator = keySet.iterator();
         	
         	while(iterator.hasNext()) {
-        		if(iterator.next().getRegistration().equals(reg)) {
-        			aPermit = vehicleList.get(iterator.next());
+        		Vehicle_info veh = iterator.next();
+        		if(veh.getRegistration().equals(reg)) {
+        			aPermit = vehicleList.get(veh);
         		}
         	}
     	}
