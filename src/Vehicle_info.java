@@ -36,11 +36,11 @@ public class Vehicle_info {
      */
     private Permit lnkPermit;
     
-    public Permit getLnkPermit() {
+    public Permit getPermit() {
 		return lnkPermit;
 	}
 
-	public void setLnkPermit(Permit lnkPermit) {
+	public void setPermit(Permit lnkPermit) {
 		this.lnkPermit = lnkPermit;
 	}
 
