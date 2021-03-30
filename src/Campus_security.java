@@ -222,7 +222,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		{
 			lnkSystem_status.setStatus(false);
 		}
-		else if (e.getSource() == checkLog && lnkSystem_status.getStatus() == true) 
+		else if (e.getSource() == checkLog) 
 		{			
 			if (regNo.getText().equals(""))
 			{
@@ -238,7 +238,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 				regNo.setText("");
 			}
 		}
-		else if (e.getSource() == issueWarning && lnkSystem_status.getStatus() == true) 
+		else if (e.getSource() == issueWarning) 
 		{
 			if (regNo.getText().equals(""))
 			{
@@ -251,12 +251,17 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			}
 			else
 			{
+				boolean warningIssued = lnkVehicle_list.issueWarning(regNo.getText());
+				if (warningIssued == true)
+				{
+					displayAlert("Warning issued for vehicle " + regNo.getText(), 'i');
+				}
+				else
+				{
+					displayAlert("Could not find vehicle " + regNo.getText(), 'e');
+				}
 				regNo.setText("");
 			}
-		}
-		else
-		{
-			displayAlert("The system is inactive. Please activate the system to use this function.", 'w');
 		}
 	} // actionPerformed
 	
