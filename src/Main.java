@@ -42,13 +42,14 @@ public class Main {
     } // main
     
     private static void testPermits() {
-    	Date now = systemStatus.getToday();
+    	Date now = new Date();
+    	now.setDayNumber(systemStatus.getToday().getDayNumber());
     	Date later = new Date();
     	later.setDayNumber(now.getDayNumber() + 5); //5 days in the future
     	
     	Permanent_visitor_permit pvp1 = new Permanent_visitor_permit("Taylor", now, new Vehicle_info("MW13 TWO", "Red", "Audi", "TT"));
     	permitList.addPermit(pvp1);
-    	Day_visitor_permit dvp1 = new Day_visitor_permit("Davide", "Taylor", new Vehicle_info("Y976 NEN", "Blue", "VW", "Golf"), now, systemStatus.getToday());
+    	Day_visitor_permit dvp1 = new Day_visitor_permit("Davide", "Taylor", new Vehicle_info("Y976 NEN", "Blue", "VW", "Golf"), now, now);
     	permitList.addPermit(dvp1);
     	University_member_permit ump = new University_member_permit("Rory", now, new Vehicle_info("KR11 PSE", "White", "Honda", "Civic"));
     	permitList.addPermit(ump);
