@@ -81,6 +81,7 @@ public class Timer extends JFrame implements ActionListener {
      * @directed
      */
     private Date today;
+    private final Color BUTTON_BGKD = new Color(112,128,144);
 
     public Timer(System_status status, Permit_list permits) {
     	
@@ -112,6 +113,9 @@ public class Timer extends JFrame implements ActionListener {
         panel.add(placeholder);
         
     	update = new JButton("Update");
+    	update.setBackground(BUTTON_BGKD);
+    	update.setForeground(Color.WHITE);
+    	update.setFocusPainted(false);
         panel.add(update);
         update.addActionListener(this);
     	
