@@ -104,7 +104,12 @@ public class Vehicle_list {
     }
     
     public boolean canPass(Permit p) {
-    	if (p.canPassBarrier()) return true; 
+    	if (p.canPassBarrier())
+    	{
+    		p.addEntry();
+    		return true; 
+    	
+    	}
     	else return false;
     }
 }
