@@ -173,9 +173,10 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		final int REG_NO_SCROLL_WIDTH = 729;
 		final int REG_NO_SCROLL_HEIGHT = 250;
 		regNoPanel = new JPanel();
-		Border BorderRegNoPanel = BorderFactory.createTitledBorder("Registration number history");
+		Border BorderRegNoPanel = BorderFactory.createTitledBorder("System log");
 		regNoPanel.setBorder(BorderRegNoPanel);
 		regNoPane = new JTextPane();
+		regNoPane.setText("[INFO] Barrier system is inactive");
 		regNoPane.setEditable(false);
 		regNoScroll = new JScrollPane(regNoPane);
 		regNoScroll.setPreferredSize(new Dimension(REG_NO_SCROLL_WIDTH, REG_NO_SCROLL_HEIGHT));
@@ -197,6 +198,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 	
 		if (sysStatus) 
 		{
+			regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system activated");
 			activateBarrier.setEnabled(false);
 			activateBarrier.setBackground(DISABLE_BTN_COLOUR);
 			deactivateBarrier.setEnabled(true);
@@ -204,6 +206,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		} 
 		else 
 		{
+			regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system deactivated");
 			activateBarrier.setEnabled(true);
 			activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
 			deactivateBarrier.setEnabled(false);
@@ -222,7 +225,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		{
 			lnkSystem_status.setStatus(false);
 		}
-		else if (e.getSource() == checkLog && lnkSystem_status.getStatus() == true) 
+		else if (e.getSource() == checkLog) 
 		{			
 			if (regNo.getText().equals(""))
 			{
@@ -235,10 +238,20 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			}
 			else
 			{
+				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText()); // Get the permit using the registration number entered by the user.
+				if (toCheck != null)
+				{
+					regNoPane.setText(regNoPane.getText() + "\n----------------------" + "\nLOG FOR " + regNo.getText() + "\n----------------------" 
+					+ "\nPermit holder: " + toCheck.getPermitHolder() + "\nEntered today: " + toCheck.entered() + "\nNo. of entries: " + toCheck.getEntries() + "\nNo. of warnings: " + toCheck.getWarnings());
+				}
+				else
+				{
+					displayAlert("Could not find vehicle " + regNo.getText(), 'e');
+				}
 				regNo.setText("");
 			}
 		}
-		else if (e.getSource() == issueWarning && lnkSystem_status.getStatus() == true) 
+		else if (e.getSource() == issueWarning) 
 		{
 			if (regNo.getText().equals(""))
 			{
@@ -251,12 +264,17 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			}
 			else
 			{
+				boolean warningIssued = lnkVehicle_list.issueWarning(regNo.getText());
+				if (warningIssued == true)
+				{
+					displayAlert("Warning issued for vehicle " + regNo.getText(), 'i');
+				}
+				else
+				{
+					displayAlert("Could not find vehicle " + regNo.getText(), 'e');
+				}
 				regNo.setText("");
 			}
-		}
-		else
-		{
-			displayAlert("The system is inactive. Please activate the system to use this function.", 'w');
 		}
 	} // actionPerformed
 	

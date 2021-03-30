@@ -70,6 +70,21 @@ public class Vehicle_list {
     	return vehicleList.get(veh);
     }
     
+    public boolean issueWarning(String regNo)
+    {	
+    	if (getAPermit(regNo) != null)
+    	{
+    		Permit toWarn = getAPermit(regNo);
+        	toWarn.addWarning();
+        	System.out.println("Warnings: " + toWarn.getWarnings());
+        	return true;
+    	}
+    	else
+    	{
+    		return false;
+    	} 	
+    }
+    
     public Permit getAPermit(String reg) {
     	//
     	Permit aPermit = null;
@@ -79,8 +94,9 @@ public class Vehicle_list {
         	Iterator<Vehicle_info> iterator = keySet.iterator();
         	
         	while(iterator.hasNext()) {
-        		if(iterator.next().getRegistration().equals(reg)) {
-        			aPermit = vehicleList.get(iterator.next());
+        		Vehicle_info veh = iterator.next();
+        		if(veh.getRegistration().equals(reg)) {
+        			aPermit = vehicleList.get(veh);
         		}
         	}
     	}
@@ -88,7 +104,12 @@ public class Vehicle_list {
     }
     
     public boolean canPass(Permit p) {
-    	if (p.canPassBarrier()) return true; 
+    	if (p.canPassBarrier())
+    	{
+    		p.addEntry();
+    		return true; 
+    	
+    	}
     	else return false;
     }
 }
