@@ -94,6 +94,8 @@ public class Barrier extends JFrame implements Observer, ActionListener {
     private JButton vehicleClear;
     private final Color GO_COLOUR = new Color(0,179,44);
     private final Color STOP_COLOUR = new Color(220,61,42);
+    private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
+    private final Color BUTTON_BGKD = new Color(112,128,144);
     private String windowTitle;
     private int date;
     
@@ -144,7 +146,6 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		window.add(regNoInput);
 		
 		//Add: Barrier controls
-		final Color BUTTON_BGKD = new Color(112,128,144);
 		barrierControls = new JPanel();
 		submit = new JButton("Submit");
 		submit.setBackground(BUTTON_BGKD);
@@ -195,14 +196,26 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		if (active == false)
 		{
 			raised = true;
+			submit.setEnabled(false);
+			submit.setBackground(DISABLE_BTN_COLOUR);
+			vehicleClear.setEnabled(false);
+			vehicleClear.setBackground(DISABLE_BTN_COLOUR);
+			regNo.setText("");
+			regNo.setEnabled(false);
 			lblBarrierPosition.setText("System inactive");
 			lblInstruction.setText(" GO");
 			barrierStatus.setBackground(GO_COLOUR);
+			
 			
 		}
 		else if(active == true)
 		{
 			raised = false;
+			submit.setEnabled(true);
+			submit.setBackground(BUTTON_BGKD);
+			vehicleClear.setEnabled(true);
+			vehicleClear.setBackground(BUTTON_BGKD);
+			regNo.setEnabled(true);
 			lblBarrierPosition.setText("The barrier is lowered");
 			lblInstruction.setText(" STOP");
 			barrierStatus.setBackground(STOP_COLOUR);
@@ -227,26 +240,35 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			else
 			{	
 				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText());
-				if (lnkVehicle_list.canPass(toCheck))
+				if (toCheck != null)
 				{
-					raised = true;
-					regNo.setText("");
-					lblBarrierPosition.setText("The barrier is raised");
-					lblInstruction.setText(" GO");
-					barrierStatus.setBackground(GO_COLOUR);
+					if (lnkVehicle_list.canPass(toCheck))
+					{
+						raised = true;
+						regNo.setText("");
+						lblBarrierPosition.setText("The barrier is raised");
+						lblInstruction.setText(" GO");
+						barrierStatus.setBackground(GO_COLOUR);
+					}
+					else
+					{
+						raised = false;
+						regNo.setText("");
+						displayAlert("Access is denied for this vehicle.", 'w');	
+					}	
 				}
 				else
 				{
-					raised = false;
+					displayAlert("No permit found for this vehicle.", 'w');
 					regNo.setText("");
-					displayAlert("Access is denied for this vehicle.", 'w');
-				}	
+				}
 			}
 		}
 		else if (e.getSource() == vehicleClear && active == true)
 		{
-			if (raised = true)
+			if (raised == true)
 			{
+				raised = false;
 				lblBarrierPosition.setText("The barrier is lowered");
 				lblInstruction.setText(" STOP");
 				barrierStatus.setBackground(STOP_COLOUR);
