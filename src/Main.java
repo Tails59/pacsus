@@ -48,13 +48,13 @@ public class Main {
     	later.setDayNumber(now.getDayNumber() + 5); //5 days in the future
     	
     	Permanent_visitor_permit pvp1 = new Permanent_visitor_permit("Taylor", now, new Vehicle_info("MW13 TWO", "Red", "Audi", "TT"));
+
     	permitList.addPermit(pvp1);
     	Day_visitor_permit dvp1 = new Day_visitor_permit("Davide", "Taylor", new Vehicle_info("Y976 NEN", "Blue", "VW", "Golf"), now, now);
     	permitList.addPermit(dvp1);
+
     	University_member_permit ump = new University_member_permit("Rory", now, new Vehicle_info("KR11 PSE", "White", "Honda", "Civic"));
-    	permitList.addPermit(ump);
     	Regular_visitor_permit rvp = new Regular_visitor_permit("Almantas", "Davide", now, later, new Vehicle_info("N17 LRN", "Black", "Mercedes", "CLK 320"));
-    	permitList.addPermit(rvp);
     }
     
     public static Vehicle_list getVehicleList() {
