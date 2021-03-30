@@ -989,6 +989,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	public void createPermit(int type, String name, String regNum, String carMake, String carModel, String carColor,
 			String visitDate, String hostName) {
 		//
+		Date theDay = new Date();
+		theDay.setDayNumber(today.getDayNumber());
 		Date later = new Date();
 		if (type < 2)
 			later.setDayNumber(Integer.parseInt(visitDate));
@@ -997,22 +999,22 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		switch (type) {
 		case 0:
 			// Day visitor permit
-			Day_visitor_permit dvp = new Day_visitor_permit(name, hostName, veh, today, today);
+			Day_visitor_permit dvp = new Day_visitor_permit(name, hostName, veh, theDay, today);
 			lnkPermit_list.addPermit(dvp);
 			break;
 		case 1:
 			// Regular visitor permit
-			Regular_visitor_permit rvp = new Regular_visitor_permit(name, hostName, today, later, veh);
+			Regular_visitor_permit rvp = new Regular_visitor_permit(name, hostName, theDay, later, veh);
 			lnkPermit_list.addPermit(rvp);
 			break;
 		case 2:
 			// Permanent visitor permit
-			Permanent_visitor_permit pvp = new Permanent_visitor_permit(name, today, veh);
+			Permanent_visitor_permit pvp = new Permanent_visitor_permit(name, theDay, veh);
 			lnkPermit_list.addPermit(pvp);
 			break;
 		case 3:
 			// University member permit
-			University_member_permit ump = new University_member_permit(name, today, veh);
+			University_member_permit ump = new University_member_permit(name, theDay, veh);
 			lnkPermit_list.addPermit(ump);
 			break;
 		}
