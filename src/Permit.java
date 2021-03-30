@@ -21,7 +21,7 @@ import java.util.Hashtable;
  * permits) are automatically cancelled from PACSUS at the start of the day following their last valid day.
  */
 @SuppressWarnings("unused")
-abstract public class Permit {
+public class Permit {
 	public static final int MAX_WARNINGS = 3;
 	
 	/**
@@ -41,7 +41,7 @@ abstract public class Permit {
      */
 	protected int noOfEntries = 0;
 
-    /** kay
+    /** 
      * Counts the number of warnings issued to vehicles registered on this permit.
      */
 	protected int warnings = 0;
@@ -99,20 +99,22 @@ abstract public class Permit {
     	this.permitHolder = permitHolder;
     	this.issueDate = issueDate;
     	
+    	permittedVehicles = Main.getVehicleList();
+    	
     	try {
-			Main.getVehicleList().addNew(firstVehicle, this);
+			permittedVehicles.addNew(firstVehicle, this);
 		} catch (Exception e) {
+			System.out.println("Issue with adding of the new vehicle!");
 			e.printStackTrace();
 		}
-    	Main.getPermitList().addPermit(this);
     }
     
     public void addVehicle(Vehicle_info veh) throws Exception {
-    	Main.getVehicleList().addNew(veh, this);
+    	permittedVehicles.addNew(veh, this);
     }
     
     public void removeVehicle(Vehicle_info veh) {
-    	Main.getVehicleList().remove(veh);
+    	permittedVehicles.remove(veh);
     }
     
     public void addWarning() {
@@ -121,6 +123,11 @@ abstract public class Permit {
     	if(this.warnings >= MAX_WARNINGS) {
     		this.suspend();
     	}
+    }
+    
+    public int getWarnings()
+    {
+    	return this.warnings;
     }
     
     public void removeWarnings(int amount) {
@@ -141,10 +148,6 @@ abstract public class Permit {
     
     public int getUniqueID() {
     	return this.UNIQUE_ID;
-    }
-    
-    void cancelPermit() {
-    	
     }
     
     public Date getIssueDate() {
