@@ -107,6 +107,9 @@ public class Permit {
 			System.out.println("Issue with adding of the new vehicle!");
 			e.printStackTrace();
 		}
+    	
+    	firstVehicle.setPermit(this);
+    	Main.getPermitList().addPermit(this);
     }
     
     public void addVehicle(Vehicle_info veh) throws Exception {
