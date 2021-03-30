@@ -90,6 +90,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	 * @directed
 	 */
 	private System_status lnkSystem_status;
+	
+	private JTabbedPane tabbedPane;
 
 	private JPanel contentPane;
 	private JButton submitBtn;
@@ -153,7 +155,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBackground(BUTTON_BGKD);
 		tabbedPane.setForeground(BUTTON_FGND);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
@@ -370,7 +372,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		tabbedPane.addTab("Delete Warning", null, deleteWarning, null);
 
 		JLabel lblWarningNumberCancel = new JLabel("Name: ");
-		lblWarningNumberCancel.setBounds(32, 38, 106, 13);
+		lblWarningNumberCancel.setBounds(29, 38, 106, 13);
 		deleteWarning.add(lblWarningNumberCancel);
 
 		tf_CancelWarningNumber = new JTextField();
@@ -646,6 +648,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		modifyPermit.add(submitBtnMod, gbc_submitBtnMod);
 
 		//
+//		tabbedPane.addChangeListener(new ChangeListener() {
+//	        public void stateChanged(ChangeEvent e) {
+//	            System.out.println("Tab: " + tabbedPane.getSelectedIndex());
+//	        }
+//	    });
+		
 		lnkSystem_status.addObserver(this);
 
 		setVisible(true);
@@ -876,7 +884,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 					}
 					tp_Enquiry.setText(" Permit found! \n Information:\n Permit Name: " + aPermit.getPermitHolder()
 							+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
-							+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate +"\n Registration Number: " + vehicle.getRegistration()
+							+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate + "\n Warnings: " + aPermit.getWarnings() + "\n Registration Number: " + vehicle.getRegistration()
 							+ "\n Car maker: " + vehicle.getMake() + "\n Car model: " + vehicle.getModel()
 							+ "\n Car color: " + vehicle.getColour());
 				
@@ -887,40 +895,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			}
 
 		}
-	}
-
-	private void modifyPermit_old(int permitType, String name, String regNum, String carMake, String carModel,
-			String carColor, String visitDate, String hostName) {
-		//
-		Permit aPermit = lnkPermit_list.getPermit(tf_PermitNumberMod.getText());
-		//
-		aPermit.setPermitHolder(name);
-		aPermit.setIssueDate(today);
-		//
-		Vehicle_info vehicle = getVehicle(aPermit);
-		//
-		vehicle.setRegNo(regNum);
-		vehicle.setMake(carMake);
-		vehicle.setModel(carModel);
-		vehicle.setColour(carColor);
-		//
-		if (permitType < 2) {	// Day visitor permit and Regular visitor permit
-			Date date = new Date();
-			date.setDayNumber(Integer.parseInt(visitDate));
-			//
-			switch (permitType) {
-			case 0:
-				((Day_visitor_permit) aPermit).changeActiveDate(date);
-				((Day_visitor_permit) aPermit).setHostName(hostName);
-				break;
-			case 1:
-				((Regular_visitor_permit) aPermit).setExpiryDate(date);
-				((Regular_visitor_permit) aPermit).setHostName(hostName);
-				break;
-			}
-		}
-		// success message
-		displayAlert("Permit for " + name + " has been modified!", 'i');
 	}
 
 	private void findPermit() {
@@ -1024,22 +998,30 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		case 0:
 			// Day visitor permit
 			Day_visitor_permit dvp = new Day_visitor_permit(name, hostName, veh, today, today);
+			lnkPermit_list.addPermit(dvp);
 			break;
 		case 1:
 			// Regular visitor permit
 			Regular_visitor_permit rvp = new Regular_visitor_permit(name, hostName, today, later, veh);
+			lnkPermit_list.addPermit(rvp);
 			break;
 		case 2:
 			// Permanent visitor permit
 			Permanent_visitor_permit pvp = new Permanent_visitor_permit(name, today, veh);
+			lnkPermit_list.addPermit(pvp);
 			break;
 		case 3:
 			// University member permit
 			University_member_permit ump = new University_member_permit(name, today, veh);
+			lnkPermit_list.addPermit(ump);
 			break;
 		}
 		// success message
-		displayAlert("Permit for " + name + " has been created!", 'i');
+		if (tabbedPane.getSelectedIndex() == 0) {
+			displayAlert("Permit for " + name + " has been created!", 'i');
+		} else {
+			displayAlert("Permit for " + name + " has been modified!", 'i');
+		}
 	}
 
 	public void displayAlert(String text, char type) {
