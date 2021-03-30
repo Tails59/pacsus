@@ -37,6 +37,8 @@ public class System_status extends Observable {
      */
     private Date today;
     
+    private int nextIndex;
+    
     public void setToday(Date date) { // might need to be changed
     	//
     	today = date;
@@ -61,5 +63,19 @@ public class System_status extends Observable {
 	public boolean getStatus() {
 		//
 		return systemActive;
+	}
+	
+	public void recordEntry(String regNo, boolean entered)
+	{
+		if (entered = true)
+		{
+			log[nextIndex] = "[DAY ] " + today + "Successful entry for " + regNo;
+			nextIndex++;
+		}
+		else
+		{
+			log[nextIndex] = "[DAY ] " + today + "Unsuccessful entry for " + regNo;
+			nextIndex++;
+		}	
 	}
 }

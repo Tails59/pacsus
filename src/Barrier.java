@@ -226,25 +226,27 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		final int REG_NO_LENGTH = 8;
-		if (e.getSource() == submit && active == true) 
+		if (e.getSource() == submit && active == true) // Check if the event source is the submit button and if the system is active.
 		{			
-			if (regNo.getText().equals(""))
+			if (regNo.getText().equals("")) // Check for user input.
 			{
 				displayAlert("Please enter a registration number.", 'w');
 			}
-			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
+			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH) // Validate input and warn user if invalid.
 			{
 				displayAlert("Please enter a valid registration number.", 'w');
 				regNo.setText("");
 			}
 			else
 			{	
-				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText());
-				if (toCheck != null)
+				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText()); // Get the permit using the registration number entered by the user.
+				if (toCheck != null) // If the permit has been successfully found, then check if the vehicle can pass the barrier.
 				{
 					if (lnkVehicle_list.canPass(toCheck))
 					{
+						// Update the barrier status.
 						raised = true;
+						lnkSystem_status.recordEntry(regNo.getText(), true);
 						regNo.setText("");
 						lblBarrierPosition.setText("The barrier is raised");
 						lblInstruction.setText(" GO");
@@ -253,13 +255,14 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					else
 					{
 						raised = false;
+						lnkSystem_status.recordEntry(regNo.getText(), false);
 						regNo.setText("");
 						displayAlert("Access is denied for this vehicle.", 'w');	
 					}	
 				}
 				else
 				{
-					displayAlert("No permit found for this vehicle.", 'w');
+					displayAlert("No permit found for this vehicle.", 'w'); // Alert the user that no permit was found with the registration number entered.
 					regNo.setText("");
 				}
 			}

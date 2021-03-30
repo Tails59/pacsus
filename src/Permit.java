@@ -128,8 +128,7 @@ public class Permit {
     	}
     }
     
-    public int getWarnings()
-    {
+    public int getWarnings(){
     	return this.warnings;
     }
     
@@ -147,6 +146,23 @@ public class Permit {
     
     private void suspend() {
     	this.suspended = true;
+    }
+    
+    public void addEntry() {
+    	this.noOfEntries += 1;
+    	this.enteredToday = true;
+    }
+    
+    public void resetEntry() {
+    	this.enteredToday = false;
+    }
+    
+    public int getEntries() {
+    	return this.noOfEntries;
+    }
+    
+    public boolean entered() {
+    	return this.enteredToday;
     }
     
     public int getUniqueID() {
