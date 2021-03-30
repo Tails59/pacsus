@@ -52,12 +52,16 @@ public class Permit_list {
     	}
     }
     
-    public void cancelPermit(String name) {
+    public boolean cancelPermit(String name) {
+    	boolean permitFound=false;
     	if (lnkPermit != null && lnkPermit.containsKey(name)) {
     		lnkPermit.remove(name);
+    		permitFound=true;
     	} else {
-    		System.out.println("No permit found!");
+    		permitFound=false;
     	}
+    	return permitFound;
     }
+    
     
 }
