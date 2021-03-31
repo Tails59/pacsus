@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -382,7 +383,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		tf_CancelWarningNumber.setColumns(10);
 		deleteWarning.add(tf_CancelWarningNumber);
 
-		JLabel lblWarningNumber = new JLabel("N° Warnings: ");
+		JLabel lblWarningNumber = new JLabel("Nï¿½ Warnings: ");
 		lblWarningNumber.setBounds(500, 38, 106, 13);
 		deleteWarning.add(lblWarningNumber);
 

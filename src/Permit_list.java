@@ -100,10 +100,6 @@ public class Permit_list {
 				aPermit.setSuspended(false);
 
 			}
-		}
-		
-		
-	}
-    
-    
+		}				
+	}    
 }

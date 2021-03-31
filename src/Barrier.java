@@ -80,6 +80,12 @@ public class Barrier extends JFrame implements Observer, ActionListener {
      * with the permitted vehicles list, and the "vehicle clear" button.
      */
     private boolean raised = true;
+    private boolean recorded = false;
+    
+    /**
+     * Stores the date set by the timer.
+     */
+    private int date;
 
     private JPanel contentPane;
     private JPanel header;
@@ -89,15 +95,14 @@ public class Barrier extends JFrame implements Observer, ActionListener {
     private JLabel lblBarrierHeader;
     private JLabel lblBarrierPosition;
     private JLabel lblInstruction;
-    private JTextField regNo;
-    private JButton submit;
-    private JButton vehicleClear;
+    JTextField regNo;
+    JButton submit;
+    JButton vehicleClear;
     private final Color GO_COLOUR = new Color(0,179,44);
     private final Color STOP_COLOUR = new Color(220,61,42);
     private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
     private final Color BUTTON_BGKD = new Color(112,128,144);
     private String windowTitle;
-    private int date;
     
     public Barrier(System_status status, Vehicle_list veh, String wt, int xLocation, int yLocation) {
     	
@@ -180,8 +185,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
         setVisible(true);
         lnkSystem_status.addObserver(this); 
     }
-    
-    
+        
 	@Override
 	public void update(Observable o, Object arg) 
 	{
@@ -204,11 +208,9 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			regNo.setEnabled(false);
 			lblBarrierPosition.setText("System inactive");
 			lblInstruction.setText(" GO");
-			barrierStatus.setBackground(GO_COLOUR);
-			
-			
+			barrierStatus.setBackground(GO_COLOUR);	
 		}
-		else if(active == true)
+		else if(active == true && !recorded)
 		{
 			raised = false;
 			submit.setEnabled(true);
@@ -220,6 +222,8 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			lblInstruction.setText(" STOP");
 			barrierStatus.setBackground(STOP_COLOUR);
 		}
+		//
+		recorded = false;
 	}
 
 	@Override
@@ -244,8 +248,11 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				{
 					if (lnkVehicle_list.canPass(toCheck))
 					{
-						// Update the barrier status.
+						// Raise the barrier
 						raised = true;
+						lnkSystem_status.addEntry(lnkVehicle_list.getVehicle(toCheck), true);
+						recorded = true;
+						lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 						regNo.setText("");
 						lblBarrierPosition.setText("The barrier is raised");
 						lblInstruction.setText(" GO");
@@ -253,8 +260,10 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					}
 					else
 					{
+						// Warn the user that access is denied for the vehicle.
 						raised = false;
-						lnkSystem_status.recordEntry(regNo.getText(), false);
+						lnkSystem_status.addEntry(lnkVehicle_list.getVehicle(toCheck), false);
+						lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 						regNo.setText("");
 						displayAlert("Access is denied for this vehicle.", 'w');	
 					}	
@@ -266,16 +275,16 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				}
 			}
 		}
-		else if (e.getSource() == vehicleClear && active == true)
+		else if (e.getSource() == vehicleClear && active == true) // Check if the event source is vehicle clear and if the system is active.
 		{
-			if (raised == true)
+			if (raised == true) // Check if the barrier is raised and lower if true.
 			{
 				raised = false;
 				lblBarrierPosition.setText("The barrier is lowered");
 				lblInstruction.setText(" STOP");
 				barrierStatus.setBackground(STOP_COLOUR);
 			}
-			else
+			else // Warn the user that the barrier is already lowered.
 			{
 				displayAlert("The barrier is already lowered.", 'w');
 			}
@@ -304,4 +313,8 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			break;
 		}
 	} //displayAlert
+	
+	public boolean isRaised() {
+		return this.raised;
+	}
 }
