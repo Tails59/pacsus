@@ -868,48 +868,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
-	private void cancelWarning2() {
-
-//		String name = tf_CancelWarningNumber.getText();
-//		int numberOfWarnings = 0;
-//		try {
-//			numberOfWarnings = Integer.parseInt(tf_numberOfWarnings.getText());
-//		} catch (NumberFormatException e) {
-//			displayAlert("Number of warnings is not a number", 'w');
-//		}
-//		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
-//			displayAlert("Invalid name entered!", 'w');
-//		} else if (!lnkPermit_list.checkPermit(name)) {
-//			displayAlert("Permit with entered name does not exist!", 'w');
-//		} else {
-//			//
-//			Permit aPermit = lnkPermit_list.getPermit(name);
-//
-//			if (aPermit != null) {
-//				Object[] options = { "OK", "CANCEL" };
-//				int option = JOptionPane.showOptionDialog(null,
-//						"Do you want to delete " + numberOfWarnings + " warning for Permit: " + name, "Warning",
-//						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-//				if (option == 0) {
-//					if (numberOfWarnings <= aPermit.getWarnings()) {
-//						aPermit.removeWarnings(numberOfWarnings);
-//						textPaneWarningCanc.setText(" Permit found! \n Number of Warnings: " + aPermit.getWarnings());
-//						tf_CancelWarningNumber.setText("");
-//					}
-//					else
-//					{
-//						displayAlert("You tried to delete more warning that the one on the Permit!", 'w');
-//					}
-//				}
-//
-//			} else {
-//				textPaneWarningCanc.setText(" Permit not found!");
-//				tf_CancelWarningNumber.setText("");
-//			}
-//
-//		}
-	}
-
 	private void checkStatus() {
 		String nameStatus = tf_Status.getText();
 
