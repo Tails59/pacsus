@@ -121,15 +121,32 @@ public class Permit {
     }
     
     public void addWarning() {
-    	if(this.warnings >= MAX_WARNINGS) {
-    		this.suspend();
+    	if(warnings == MAX_WARNINGS-1) {
+    		suspend();
     	}
+
     	else {
     		this.warnings += 1;
-    	}
+  
     }
     
-    public int getWarnings(){
+    public int getNoOfEntries() {
+		return noOfEntries;
+	}
+
+	public void setNoOfEntries(int noOfEntries) {
+		this.noOfEntries = noOfEntries;
+	}
+
+	public boolean isSuspended() {
+		return suspended;
+	}
+
+	public void setSuspended(boolean suspended) {
+		this.suspended = suspended;
+	}
+
+	public int getWarnings(){
     	return this.warnings;
     }
     

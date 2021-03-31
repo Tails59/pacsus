@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -90,7 +91,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	 * @directed
 	 */
 	private System_status lnkSystem_status;
-	
+
 	private JTabbedPane tabbedPane;
 
 	private JPanel contentPane;
@@ -104,20 +105,20 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_VisitDateAdd;
 	private JTextField tf_HostNameAdd;
 	private JTextField tf_NameAddWarning;
-	private JTextPane tp_RecordWarning; 
-	private JButton btnSubmitWarning; 
+	private JTextPane tp_RecordWarning;
+	private JButton btnSubmitWarning;
 	private JTextField tf_CancelWarningNumber;
 	private JTextPane textPaneWarningCanc;
 	private JTextField tf_NameCanc;
 	private JTextPane textPanePermitCanc;
 	private JButton btnSubmitWarningCanc;
-	JTextField tf_Status;
-	JTextPane tp_Enquiry;
-	JButton btnSubmitEnquiry;
+	private JTextField tf_Status;
+	private JTextPane tp_Enquiry;
+	private JButton btnSubmitEnquiry;
 
-	JTextField tf_PermitNumberMod;
-	JTextField tf_NameMode;
-	JTextField tf_RegNumberMod;
+	private JTextField tf_PermitNumberMod;
+	private JTextField tf_NameMode;
+	private JTextField tf_RegNumberMod;
 	private JTextField tf_CarMakeMod;
 	private JTextField tf_CarModelMod;
 	private JTextField tf_CarColorMod;
@@ -125,13 +126,15 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	private JTextField tf_HostNameMod;
 	private JComboBox<String> comboBoxMod;
-	JButton btnGetInfo;
-	JButton submitBtnMod;
+	private JButton btnGetInfo;
+	private JButton submitBtnMod;
 
 	private Date today;
 	private int date;
 
 	private JButton btnSubmitPermitCanc;
+
+	private JTextField tf_numberOfWarnings;
 
 	public Administration_office(System_status status, Vehicle_list veh, Permit_list permits) {
 		this.lnkSystem_status = status;
@@ -376,9 +379,18 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		deleteWarning.add(lblWarningNumberCancel);
 
 		tf_CancelWarningNumber = new JTextField();
-		tf_CancelWarningNumber.setBounds(179, 35, 516, 19);
+		tf_CancelWarningNumber.setBounds(100, 35, 350, 19);
 		tf_CancelWarningNumber.setColumns(10);
 		deleteWarning.add(tf_CancelWarningNumber);
+
+		JLabel lblWarningNumber = new JLabel("N� Warnings: ");
+		lblWarningNumber.setBounds(500, 38, 106, 13);
+		deleteWarning.add(lblWarningNumber);
+
+		tf_numberOfWarnings = new JTextField();
+		tf_numberOfWarnings.setBounds(600, 38, 50, 19);
+		tf_numberOfWarnings.setColumns(10);
+		deleteWarning.add(tf_numberOfWarnings);
 
 		btnSubmitWarningCanc = new JButton("Submit");
 		btnSubmitWarningCanc.setBounds(331, 90, 81, 21);
@@ -653,7 +665,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 //	            System.out.println("Tab: " + tabbedPane.getSelectedIndex());
 //	        }
 //	    });
-		
+
 		lnkSystem_status.addObserver(this);
 
 		setVisible(true);
@@ -673,16 +685,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				tf_HostNameAdd.setEditable(false);
 			}
 		}
-		if(e.getSource() == btnSubmitWarning)
-		{
+		if (e.getSource() == btnSubmitWarning) {
 			addWarning();
 		}
-		if(e.getSource() == btnSubmitWarningCanc)
-		{
+		if (e.getSource() == btnSubmitWarningCanc) {
 			cancelWarning();
 		}
-		if(e.getSource() == btnSubmitPermitCanc)
-		{
+		if (e.getSource() == btnSubmitPermitCanc) {
 			cancelPermit();
 		}
 		if (e.getSource() == btnSubmitEnquiry) {
@@ -707,13 +716,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			checkPermit();
 		}
 	}
-	
+
 	private Vehicle_info getVehicle(Permit p) {
 		Vehicle_info vehicle = null;
 		Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet();
 		String permitType = null;
 		String hostName = null;
-		String issueDate=null;
+		String issueDate = null;
 		Iterator<Vehicle_info> iterator = keySet.iterator();
 		while (iterator.hasNext()) {
 			vehicle = iterator.next();
@@ -767,35 +776,26 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
-	
-	private void cancelPermit()
-	{
-		String name=tf_NameCanc.getText();
+	private void cancelPermit() {
+		String name = tf_NameCanc.getText();
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
 			displayAlert("Invalid name entered!", 'w');
-		} 
-	    else if (!lnkPermit_list.checkPermit(name)) {
-		displayAlert("Permit with entered name does not exist!", 'w');
-	    }
-		else
-		{
+		} else if (!lnkPermit_list.checkPermit(name)) {
+			displayAlert("Permit with entered name does not exist!", 'w');
+		} else {
 			Object[] options = { "OK", "CANCEL" };
-			int option=JOptionPane.showOptionDialog(null, "Press OK to confirm cancel of Permit: "+name, "Warning",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-			null, options, options[0]);
-			if(option==0)
-			{
+			int option = JOptionPane.showOptionDialog(null, "Press OK to confirm cancel of Permit: " + name, "Warning",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if (option == 0) {
 				if (lnkPermit_list.cancelPermit(name)) {
 					textPanePermitCanc.setText("Pemit Found and Deleted");
 					tf_NameCanc.setText("");
 				}
 			}
-		}		
+		}
 	}
-	
-	
-	
-	private void addWarning(){
+
+	private void addWarning() {
 		String name = tf_NameAddWarning.getText();
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
 			displayAlert("Invalid name entered!", 'w');
@@ -804,27 +804,33 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else {
 			//
 
-				Permit aPermit = lnkPermit_list.getPermit(name);
-				if(aPermit!=null) {
-					Object[] options = { "OK", "CANCEL" };
-					int option=JOptionPane.showOptionDialog(null, "Do you want to add a warning for Permit: "+name, "Warning",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-					null, options, options[0]);
-					if(option==0)
-					{  	
-						aPermit.addWarning();
-						tp_RecordWarning.setText(" Permit found! \n Number of Warning: "+aPermit.getWarnings());
-						tf_NameCanc.setText("");
-					}
+			Permit aPermit = lnkPermit_list.getPermit(name);
+			if (aPermit != null && aPermit.getWarnings() < 3) {
+				Object[] options = { "OK", "CANCEL" };
+				int option = JOptionPane.showOptionDialog(null, "Do you want to add a warning for Permit: " + name,
+						"Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+				if (option == 0) {
+					aPermit.addWarning();
+					tp_RecordWarning.setText(" Permit found! \n Number of Warning: " + aPermit.getWarnings());
+					tf_NameCanc.setText("");
+				}
 
+			} else {
+				displayAlert("Permit reached maximum number of warnings!", 'w');
 			}
-	    }
-		
+		}
+
 	}
-	
-   private void cancelWarning() {
-		
+
+	private void cancelWarning() {
+
 		String name = tf_CancelWarningNumber.getText();
+		int numberOfWarnings = 0;
+		try {
+			numberOfWarnings = Integer.parseInt(tf_numberOfWarnings.getText());
+		} catch (NumberFormatException e) {
+			displayAlert("Number of warnings is not a number", 'w');
+		}
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
 			displayAlert("Invalid name entered!", 'w');
 		} else if (!lnkPermit_list.checkPermit(name)) {
@@ -832,27 +838,30 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else {
 			//
 			Permit aPermit = lnkPermit_list.getPermit(name);
-			int warningNumber=aPermit.getWarnings();
-			if(aPermit!=null) {
-			Object[] options = { "OK", "CANCEL" };
-			int option=JOptionPane.showOptionDialog(null, "Do you want to delete a warning for Permit: "+name, "Warning",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-			null, options, options[0]);
-			if(option==0)
-			{
-			aPermit.removeWarnings(warningNumber);
-			textPaneWarningCanc.setText(" Permit found! \n Number of Warnings: "+aPermit.getWarnings());
-			tf_CancelWarningNumber.setText("");
+
+			if (aPermit != null) {
+				Object[] options = { "OK", "CANCEL" };
+				int option = JOptionPane.showOptionDialog(null,
+						"Do you want to delete " + numberOfWarnings + " warning for Permit: " + name, "Warning",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+				if (option == 0) {
+					if (numberOfWarnings <= aPermit.getWarnings()) {
+						aPermit.removeWarnings(numberOfWarnings);
+						textPaneWarningCanc.setText(" Permit found! \n Number of Warnings: " + aPermit.getWarnings());
+						tf_CancelWarningNumber.setText("");
+					}
+					else
+					{
+						displayAlert("You tried to delete more warning that the one on the Permit!", 'w');
+					}
+				}
+
+			} else {
+				textPaneWarningCanc.setText(" Permit not found!");
+				tf_CancelWarningNumber.setText("");
 			}
-			
-			}
-			else
-			{
-			textPaneWarningCanc.setText(" Permit not found!");
-			tf_CancelWarningNumber.setText("");
-			}
-			
-	    }
+
+		}
 	}
 
 	private void checkStatus() {
@@ -867,10 +876,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				if (vehicle != null) {
 					String permitType = null;
 					String hostName = null;
-					String issueDate=null;
+					String issueDate = null;
 					//
-					issueDate=Integer.toString(aPermit.getIssueDate().getDayNumber());
-					
+					issueDate = Integer.toString(aPermit.getIssueDate().getDayNumber());
+
 					if (aPermit instanceof Day_visitor_permit) {
 						permitType = "Day Visitor Permit";
 						hostName = ((Day_visitor_permit) aPermit).getHostName();
@@ -886,14 +895,16 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 					}
 					tp_Enquiry.setText(" Permit found! \n Information:\n Permit Name: " + aPermit.getPermitHolder()
 							+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
-							+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate + "\n Warnings: " + aPermit.getWarnings() + "\n Registration Number: " + vehicle.getRegistration()
-							+ "\n Car maker: " + vehicle.getMake() + "\n Car model: " + vehicle.getModel()
-							+ "\n Car color: " + vehicle.getColour()+"\n Number of Entries: "+aPermit.getEntries());
-				
+							+ "\n Host name: " + hostName + "\n Issue Date: " + issueDate + "\n Warnings: "
+							+ aPermit.getWarnings() + "\n Suspended: " + aPermit.isSuspended()
+							+ "\n Registration Number: " + vehicle.getRegistration() + "\n Car maker: "
+							+ vehicle.getMake() + "\n Car model: " + vehicle.getModel() + "\n Car color: "
+							+ vehicle.getColour() + "\n Number of Entries: " + aPermit.getEntries());
+
 				}
 			} else {
 				tp_Enquiry.setText("Permit not found");
-				
+
 			}
 
 		}
