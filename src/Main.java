@@ -45,7 +45,7 @@ public class Main {
         adminOffice1 = new Administration_office(systemStatus, vehicleList, permitList);  // Frame, boundary class
           // Repeat for as many admin office screens as required
         
-        //testPermits();
+        testPermits();
     } // main
     
     private static void testPermits() {
