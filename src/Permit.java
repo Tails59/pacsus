@@ -125,9 +125,7 @@ public class Permit {
     		suspend();
     	}
 
-    	else {
-    		this.warnings += 1;
-  
+    	this.warnings += 1;
     }
     
     public int getNoOfEntries() {

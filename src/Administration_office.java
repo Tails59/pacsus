@@ -112,13 +112,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_NameCanc;
 	private JTextPane textPanePermitCanc;
 	private JButton btnSubmitWarningCanc;
-	private JTextField tf_Status;
-	private JTextPane tp_Enquiry;
-	private JButton btnSubmitEnquiry;
+	protected JTextField tf_Status;
+	protected JTextPane tp_Enquiry;
+	protected JButton btnSubmitEnquiry;
 
-	private JTextField tf_PermitNumberMod;
+	protected JTextField tf_PermitNumberMod;
 	private JTextField tf_NameMode;
-	private JTextField tf_RegNumberMod;
+	protected JTextField tf_RegNumberMod;
 	private JTextField tf_CarMakeMod;
 	private JTextField tf_CarModelMod;
 	private JTextField tf_CarColorMod;
@@ -126,8 +126,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	private JTextField tf_HostNameMod;
 	private JComboBox<String> comboBoxMod;
-	private JButton btnGetInfo;
-	private JButton submitBtnMod;
+	protected JButton btnGetInfo;
+	protected JButton submitBtnMod;
 
 	private Date today;
 	private int date;
@@ -383,7 +383,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		tf_CancelWarningNumber.setColumns(10);
 		deleteWarning.add(tf_CancelWarningNumber);
 
-		JLabel lblWarningNumber = new JLabel("N� Warnings: ");
+		JLabel lblWarningNumber = new JLabel("N\u00B0 Warnings: ");
 		lblWarningNumber.setBounds(500, 38, 106, 13);
 		deleteWarning.add(lblWarningNumber);
 
@@ -658,13 +658,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_submitBtnMod.gridx = 1;
 		gbc_submitBtnMod.gridy = 11;
 		modifyPermit.add(submitBtnMod, gbc_submitBtnMod);
-
-		//
-//		tabbedPane.addChangeListener(new ChangeListener() {
-//	        public void stateChanged(ChangeEvent e) {
-//	            System.out.println("Tab: " + tabbedPane.getSelectedIndex());
-//	        }
-//	    });
 
 		lnkSystem_status.addObserver(this);
 
