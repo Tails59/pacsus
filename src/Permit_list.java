@@ -79,6 +79,7 @@ public class Permit_list {
 		
 		for (int i = 0; i < permits; i++) {
 			aPermit = lnkPermit.get(keys.get(i));
+			aPermit.resetEntry();
 			if (aPermit instanceof Day_visitor_permit) {
 				visit.setDayNumber(((Day_visitor_permit) aPermit).getActiveDate().getDayNumber());
 			} else if (aPermit instanceof Regular_visitor_permit) {
@@ -90,6 +91,14 @@ public class Permit_list {
 					cancelPermit(aPermit.permitHolder);
 					permits--;
 				}
+			
+			}
+			if(today.getDayNumber() == 1)
+			{
+				aPermit.removeWarnings(aPermit.getWarnings());
+				aPermit.setNoOfEntries(0);
+				aPermit.setSuspended(false);
+
 			}
 		}
 		
