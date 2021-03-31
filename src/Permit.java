@@ -121,10 +121,12 @@ public class Permit {
     }
     
     public void addWarning() {
-    	this.warnings += 1;
-    	
     	if(this.warnings >= MAX_WARNINGS) {
     		this.suspend();
+    	}
+    	else
+    	{
+    		this.warnings += 1;
     	}
     }
     

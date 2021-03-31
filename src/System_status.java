@@ -57,13 +57,15 @@ public class System_status extends Observable {
 		return today;
 	}
 
-	private Campus_security security;
 
-	public void setStatus(boolean status) {
-		systemActive = status;
-		setChanged();
-		notifyObservers();
-	}
+	private Campus_security security;
+    
+    public void setStatus(boolean status) {
+    	systemActive = status;
+    	setChanged();
+    	notifyObservers();
+    }
+
 
 	public boolean getStatus() {
 		//

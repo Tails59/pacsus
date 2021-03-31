@@ -47,14 +47,22 @@ public class Main {
     	Date later = new Date();
     	later.setDayNumber(now.getDayNumber() + 5); //5 days in the future
     	
-    	Permanent_visitor_permit pvp1 = new Permanent_visitor_permit("Taylor", now, new Vehicle_info("MW13 TWO", "Red", "Audi", "TT"));
-
+    	Vehicle_info veh1 = new Vehicle_info("MW13 TWO", "Red", "Audi", "TT");
+    	Permanent_visitor_permit pvp1 = new Permanent_visitor_permit("Taylor", now, veh1);
+    	veh1.setPermit(pvp1);
     	permitList.addPermit(pvp1);
-    	Day_visitor_permit dvp1 = new Day_visitor_permit("Davide", "Taylor", new Vehicle_info("Y976 NEN", "Blue", "VW", "Golf"), now, now);
+    	Vehicle_info veh2 = new Vehicle_info("Y976 NEN", "Blue", "VW", "Golf");
+    	Day_visitor_permit dvp1 = new Day_visitor_permit("Davide", "Taylor", veh2, now, now);
+    	veh2.setPermit(dvp1);
     	permitList.addPermit(dvp1);
-
-    	University_member_permit ump = new University_member_permit("Rory", now, new Vehicle_info("KR11 PSE", "White", "Honda", "Civic"));
-    	Regular_visitor_permit rvp = new Regular_visitor_permit("Almantas", "Davide", now, later, new Vehicle_info("N17 LRN", "Black", "Mercedes", "CLK 320"));
+    	Vehicle_info veh3 = new Vehicle_info("KR11 PSE", "White", "Honda", "Civic");
+    	University_member_permit ump = new University_member_permit("Rory", now, veh3);
+    	veh3.setPermit(ump);
+    	permitList.addPermit(ump);
+    	Vehicle_info veh4 = new Vehicle_info("N17 LRN", "Black", "Mercedes", "CLK 320");
+    	Regular_visitor_permit rvp = new Regular_visitor_permit("Almantas", "Davide", now, later, veh4);
+    	veh4.setPermit(rvp);
+    	permitList.addPermit(rvp);
     }
     
     public static Vehicle_list getVehicleList() {
