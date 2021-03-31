@@ -195,10 +195,11 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 	{
 		boolean sysStatus = lnkSystem_status.getStatus();
 		setTitle(WINDOW_TITLE + "  [Date: " + lnkSystem_status.getToday().getDayNumber() + "]");
+		date = lnkSystem_status.getToday().getDayNumber();
 	
 		if (sysStatus) 
 		{
-			regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system activated");
+			regNoPane.setText(regNoPane.getText() + "\n[Date: " + date + "]" +" Barrier system activated");
 			activateBarrier.setEnabled(false);
 			activateBarrier.setBackground(DISABLE_BTN_COLOUR);
 			deactivateBarrier.setEnabled(true);
@@ -206,7 +207,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		} 
 		else 
 		{
-			regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system deactivated");
+			regNoPane.setText(regNoPane.getText() + "\n[Date: " + date + "]" + " Barrier system deactivated");
 			activateBarrier.setEnabled(true);
 			activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
 			deactivateBarrier.setEnabled(false);
@@ -271,7 +272,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 				}
 				else
 				{
-					displayAlert("Could not find vehicle " + regNo.getText(), 'e');
+					displayAlert("Unable to issue warning to " + regNo.getText() + "\nThe maximum number of warnings has been reached or the vehicle could not be found." , 'e');
 				}
 				regNo.setText("");
 			}

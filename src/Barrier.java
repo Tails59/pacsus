@@ -246,7 +246,6 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					{
 						// Update the barrier status.
 						raised = true;
-						lnkSystem_status.recordEntry(regNo.getText(), true);
 						regNo.setText("");
 						lblBarrierPosition.setText("The barrier is raised");
 						lblInstruction.setText(" GO");
