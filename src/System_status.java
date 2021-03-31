@@ -98,8 +98,31 @@ public class System_status extends Observable {
 				
 			}
 		}
-		setChanged();
+		//setChanged();
 		
+	}
+	
+	public void addEntry(Vehicle_info veh, boolean entryAllowed) {
+		String entryState = "";
+		if (entryAllowed) entryState = "allowed";
+		else entryState = "denied";
+		String entryInfo = "Day " + today.getDayNumber() + ". Registration: " + veh.getRegistration() + ", entry " + entryState + ".";
+		int entries = 0;
+		
+		for (int i = 0; i < log.length; i++) {
+			if (log[i] != null) {
+				entries++;
+			}
+		}
+		//
+		if (entries < log.length) {
+			log[entries] = entryInfo;
+		} else {
+			for (int i = 0; i < log.length-1; i++) {
+				log[i] = log[i+1];
+			}
+			log[log.length-1] = entryInfo;
+		}
 	}
 
 	public String[] getLog() {
