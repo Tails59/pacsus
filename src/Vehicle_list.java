@@ -87,12 +87,20 @@ public class Vehicle_list {
     
     public boolean issueWarning(String regNo)
     {	
+    	final int MAX_WARNINGS = 3;
     	if (getAPermit(regNo) != null)
     	{
     		Permit toWarn = getAPermit(regNo);
-        	toWarn.addWarning();
-        	System.out.println("Warnings: " + toWarn.getWarnings());
-        	return true;
+    		if (toWarn.getWarnings() == MAX_WARNINGS)
+    		{
+    			return false;
+    		}
+    		else
+    		{
+    			toWarn.addWarning();
+            	System.out.println("Warnings: " + toWarn.getWarnings());
+            	return true;
+    		}   	
     	}
     	else
     	{
@@ -119,7 +127,12 @@ public class Vehicle_list {
     }
     
     public boolean canPass(Permit p) {
-    	if (p.canPassBarrier()) return true; 
+    	if (p.canPassBarrier())
+    	{
+    		p.addEntry();
+    		return true; 
+    	
+    	}
     	else return false;
     }
 }
