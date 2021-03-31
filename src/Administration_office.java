@@ -1000,21 +1000,25 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		case 0:
 			// Day visitor permit
 			Day_visitor_permit dvp = new Day_visitor_permit(name, hostName, veh, theDay, today);
+			veh.setPermit(dvp);
 			lnkPermit_list.addPermit(dvp);
 			break;
 		case 1:
 			// Regular visitor permit
 			Regular_visitor_permit rvp = new Regular_visitor_permit(name, hostName, theDay, later, veh);
+			veh.setPermit(rvp);
 			lnkPermit_list.addPermit(rvp);
 			break;
 		case 2:
 			// Permanent visitor permit
 			Permanent_visitor_permit pvp = new Permanent_visitor_permit(name, theDay, veh);
+			veh.setPermit(pvp);
 			lnkPermit_list.addPermit(pvp);
 			break;
 		case 3:
 			// University member permit
 			University_member_permit ump = new University_member_permit(name, theDay, veh);
+			veh.setPermit(ump);
 			lnkPermit_list.addPermit(ump);
 			break;
 		}
