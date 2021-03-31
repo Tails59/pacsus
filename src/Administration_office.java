@@ -402,11 +402,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_comboBoxCW.gridy = 6;
 		deleteWarning.add(cancelWarningBox, gbc_comboBoxCW);
 
-//		tf_numberOfWarnings = new JTextField();
-//		tf_numberOfWarnings.setBounds(600, 38, 50, 19);
-//		tf_numberOfWarnings.setColumns(10);
-//		deleteWarning.add(tf_numberOfWarnings);
-
 		btnSubmitWarningCanc = new JButton("Submit");
 		btnSubmitWarningCanc.setBounds(331, 90, 81, 21);
 		btnSubmitWarningCanc.setBackground(BUTTON_BGKD);
