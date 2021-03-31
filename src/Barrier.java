@@ -89,9 +89,9 @@ public class Barrier extends JFrame implements Observer, ActionListener {
     private JLabel lblBarrierHeader;
     private JLabel lblBarrierPosition;
     private JLabel lblInstruction;
-    private JTextField regNo;
-    private JButton submit;
-    private JButton vehicleClear;
+    JTextField regNo;
+    JButton submit;
+    JButton vehicleClear;
     private final Color GO_COLOUR = new Color(0,179,44);
     private final Color STOP_COLOUR = new Color(220,61,42);
     private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
@@ -302,4 +302,8 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			break;
 		}
 	} //displayAlert
+	
+	public boolean isRaised() {
+		return this.raised;
+	}
 }
