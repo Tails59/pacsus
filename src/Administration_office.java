@@ -108,6 +108,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextPane tp_RecordWarning;
 	private JButton btnSubmitWarning;
 	private JTextField tf_CancelWarningNumber;
+	private JComboBox<Integer> cancelWarningBox;
 	private JTextPane textPaneWarningCanc;
 	private JTextField tf_NameCanc;
 	private JTextPane textPanePermitCanc;
@@ -387,10 +388,19 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		lblWarningNumber.setBounds(500, 38, 106, 13);
 		deleteWarning.add(lblWarningNumber);
 
-		tf_numberOfWarnings = new JTextField();
-		tf_numberOfWarnings.setBounds(600, 38, 50, 19);
-		tf_numberOfWarnings.setColumns(10);
-		deleteWarning.add(tf_numberOfWarnings);
+		cancelWarningBox = new JComboBox<Integer>();
+		cancelWarningBox.setSize(40, 19);
+		cancelWarningBox.setLocation(585, 35);
+		cancelWarningBox.addItem(1);
+		cancelWarningBox.addItem(2);
+		cancelWarningBox.addItem(3);
+		cancelWarningBox.addActionListener(this);
+		GridBagConstraints gbc_comboBoxCW = new GridBagConstraints();
+		gbc_comboBoxCW.insets = new Insets(0, 0, 0, 0);
+		gbc_comboBoxCW.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxCW.gridx = 6;
+		gbc_comboBoxCW.gridy = 6;
+		deleteWarning.add(cancelWarningBox, gbc_comboBoxCW);
 
 		btnSubmitWarningCanc = new JButton("Submit");
 		btnSubmitWarningCanc.setBounds(331, 90, 81, 21);
@@ -403,7 +413,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 		textPaneWarningCanc = new JTextPane();
 		textPaneWarningCanc.setEditable(false);
-		textPaneWarningCanc.setBounds(29, 138, 666, 287);
+		textPaneWarningCanc.setBounds(29, 138, 666, 250);
 		deleteWarning.add(textPaneWarningCanc);
 
 		// Cancel Permit Page
@@ -817,13 +827,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	private void cancelWarning() {
 
+		int numberOfWarnings = cancelWarningBox.getSelectedIndex() + 1;
 		String name = tf_CancelWarningNumber.getText();
-		int numberOfWarnings = 0;
-		try {
-			numberOfWarnings = Integer.parseInt(tf_numberOfWarnings.getText());
-		} catch (NumberFormatException e) {
-			displayAlert("Number of warnings is not a number", 'w');
-		}
+		//
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
 			displayAlert("Invalid name entered!", 'w');
 		} else if (!lnkPermit_list.checkPermit(name)) {
