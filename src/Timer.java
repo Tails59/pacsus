@@ -133,6 +133,7 @@ public class Timer extends JFrame implements ActionListener {
     public void informSystem() {
     	// code to inform system_status class about the new date
     	lnkSystem_status.setToday(today);
+    	lnkPermit_list.resetPermits(today);
     }
 
 	@Override
