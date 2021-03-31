@@ -111,9 +111,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_NameCanc;
 	private JTextPane textPanePermitCanc;
 	private JButton btnSubmitWarningCanc;
-	private JTextField tf_Status;
-	private JTextPane tp_Enquiry;
-	private JButton btnSubmitEnquiry;
+	JTextField tf_Status;
+	JTextPane tp_Enquiry;
+	JButton btnSubmitEnquiry;
 
 	JTextField tf_PermitNumberMod;
 	JTextField tf_NameMode;

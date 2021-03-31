@@ -237,4 +237,28 @@ class UnitTesting {
 		//barrier should open
 		assert(openBarrier("N11 222"));
 	}
+	
+	/**
+	 * Cancel a permit and check whether it will still be allowed
+	 * through
+	 */
+	@Test
+	@Order(15)
+	void cancelPermit() {
+		Main.getPermitList().cancelPermit("Almantas");
+		assert(!openBarrier("N11 222"));
+	}
+	
+	/**
+	 * Check whether administrators can
+	 * enquire about a permit holder
+	 */
+	@Test
+	@Order(16)
+	void statusEnquiry() {
+		Main.adminOffice1.tf_Status.setText("Taylor");
+		Main.adminOffice1.btnSubmitEnquiry.doClick();
+		
+		assert(!Main.adminOffice1.tp_Enquiry.getText().equals("Permit not found"));
+	}
 }
