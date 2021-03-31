@@ -80,6 +80,11 @@ public class Barrier extends JFrame implements Observer, ActionListener {
      * with the permitted vehicles list, and the "vehicle clear" button.
      */
     private boolean raised = true;
+    
+    /**
+     * Stores the date set by the timer.
+     */
+    private int date;
 
     private JPanel contentPane;
     private JPanel header;
@@ -97,7 +102,6 @@ public class Barrier extends JFrame implements Observer, ActionListener {
     private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
     private final Color BUTTON_BGKD = new Color(112,128,144);
     private String windowTitle;
-    private int date;
     
     public Barrier(System_status status, Vehicle_list veh, String wt, int xLocation, int yLocation) {
     	
@@ -180,8 +184,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
         setVisible(true);
         lnkSystem_status.addObserver(this); 
     }
-    
-    
+        
 	@Override
 	public void update(Observable o, Object arg) 
 	{
@@ -204,9 +207,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			regNo.setEnabled(false);
 			lblBarrierPosition.setText("System inactive");
 			lblInstruction.setText(" GO");
-			barrierStatus.setBackground(GO_COLOUR);
-			
-			
+			barrierStatus.setBackground(GO_COLOUR);	
 		}
 		else if(active == true)
 		{
@@ -244,7 +245,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				{
 					if (lnkVehicle_list.canPass(toCheck))
 					{
-						// Update the barrier status.
+						// Raise the barrier
 						raised = true;
 						regNo.setText("");
 						lblBarrierPosition.setText("The barrier is raised");
@@ -253,6 +254,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					}
 					else
 					{
+						// Warn the user that access is denied for the vehicle.
 						raised = false;
 						lnkSystem_status.recordEntry(regNo.getText(), false);
 						regNo.setText("");
@@ -266,16 +268,16 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				}
 			}
 		}
-		else if (e.getSource() == vehicleClear && active == true)
+		else if (e.getSource() == vehicleClear && active == true) // Check if the event source is vehicle clear and if the system is active.
 		{
-			if (raised == true)
+			if (raised == true) // Check if the barrier is raised and lower if true.
 			{
 				raised = false;
 				lblBarrierPosition.setText("The barrier is lowered");
 				lblInstruction.setText(" STOP");
 				barrierStatus.setBackground(STOP_COLOUR);
 			}
-			else
+			else // Warn the user that the barrier is already lowered.
 			{
 				displayAlert("The barrier is already lowered.", 'w');
 			}

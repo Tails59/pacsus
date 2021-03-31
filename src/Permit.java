@@ -124,8 +124,7 @@ public class Permit {
     	if(this.warnings >= MAX_WARNINGS) {
     		this.suspend();
     	}
-    	else
-    	{
+    	else {
     		this.warnings += 1;
     	}
     }
