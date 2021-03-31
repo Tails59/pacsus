@@ -803,6 +803,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			displayAlert("Permit with entered name does not exist!", 'w');
 		} else {
 			//
+
 				Permit aPermit = lnkPermit_list.getPermit(name);
 				if(aPermit!=null) {
 					Object[] options = { "OK", "CANCEL" };
@@ -815,6 +816,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 						tp_RecordWarning.setText(" Permit found! \n Number of Warning: "+aPermit.getWarnings());
 						tf_NameCanc.setText("");
 					}
+
 			}
 	    }
 		
@@ -886,7 +888,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 							+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
 							+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate + "\n Warnings: " + aPermit.getWarnings() + "\n Registration Number: " + vehicle.getRegistration()
 							+ "\n Car maker: " + vehicle.getMake() + "\n Car model: " + vehicle.getModel()
-							+ "\n Car color: " + vehicle.getColour());
+							+ "\n Car color: " + vehicle.getColour()+"\n Number of Entries: "+aPermit.getEntries());
 				
 				}
 			} else {
