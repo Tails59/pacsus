@@ -133,6 +133,7 @@ public class Vehicle_list {
     		return true; 
     	
     	}
-    	else return false;
+    	
+    	return false;
     }
 }

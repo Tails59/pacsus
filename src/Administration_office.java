@@ -111,13 +111,13 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JTextField tf_NameCanc;
 	private JTextPane textPanePermitCanc;
 	private JButton btnSubmitWarningCanc;
-	private JTextField tf_Status;
-	private JTextPane tp_Enquiry;
-	private JButton btnSubmitEnquiry;
+	JTextField tf_Status;
+	JTextPane tp_Enquiry;
+	JButton btnSubmitEnquiry;
 
-	private JTextField tf_PermitNumberMod;
-	private JTextField tf_NameMode;
-	private JTextField tf_RegNumberMod;
+	JTextField tf_PermitNumberMod;
+	JTextField tf_NameMode;
+	JTextField tf_RegNumberMod;
 	private JTextField tf_CarMakeMod;
 	private JTextField tf_CarModelMod;
 	private JTextField tf_CarColorMod;
@@ -125,8 +125,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	private JTextField tf_HostNameMod;
 	private JComboBox<String> comboBoxMod;
-	private JButton btnGetInfo;
-	private JButton submitBtnMod;
+	JButton btnGetInfo;
+	JButton submitBtnMod;
 
 	private Date today;
 	private int date;
