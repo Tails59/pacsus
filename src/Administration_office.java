@@ -803,18 +803,20 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			displayAlert("Permit with entered name does not exist!", 'w');
 		} else {
 			//
-			Permit aPermit = lnkPermit_list.getPermit(name);
-			if(aPermit!=null) {
-			Object[] options = { "OK", "CANCEL" };
-			int option=JOptionPane.showOptionDialog(null, "Do you want to add a warning for Permit: "+name, "Warning",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-			null, options, options[0]);
-			if(option==0)
-			{
-			aPermit.addWarning();
-			tp_RecordWarning.setText(" Permit found! \n Number of Warning: "+aPermit.getWarnings());
-			tf_NameCanc.setText("");
-			}
+
+				Permit aPermit = lnkPermit_list.getPermit(name);
+				if(aPermit!=null) {
+					Object[] options = { "OK", "CANCEL" };
+					int option=JOptionPane.showOptionDialog(null, "Do you want to add a warning for Permit: "+name, "Warning",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+					null, options, options[0]);
+					if(option==0)
+					{  	
+						aPermit.addWarning();
+						tp_RecordWarning.setText(" Permit found! \n Number of Warning: "+aPermit.getWarnings());
+						tf_NameCanc.setText("");
+					}
+
 			}
 	    }
 		
@@ -886,7 +888,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 							+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
 							+ "\n Host name: " + hostName +"\n Issue Date: "+issueDate + "\n Warnings: " + aPermit.getWarnings() + "\n Registration Number: " + vehicle.getRegistration()
 							+ "\n Car maker: " + vehicle.getMake() + "\n Car model: " + vehicle.getModel()
-							+ "\n Car color: " + vehicle.getColour());
+							+ "\n Car color: " + vehicle.getColour()+"\n Number of Entries: "+aPermit.getEntries());
 				
 				}
 			} else {
@@ -1000,21 +1002,25 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		case 0:
 			// Day visitor permit
 			Day_visitor_permit dvp = new Day_visitor_permit(name, hostName, veh, theDay, today);
+			veh.setPermit(dvp);
 			lnkPermit_list.addPermit(dvp);
 			break;
 		case 1:
 			// Regular visitor permit
 			Regular_visitor_permit rvp = new Regular_visitor_permit(name, hostName, theDay, later, veh);
+			veh.setPermit(rvp);
 			lnkPermit_list.addPermit(rvp);
 			break;
 		case 2:
 			// Permanent visitor permit
 			Permanent_visitor_permit pvp = new Permanent_visitor_permit(name, theDay, veh);
+			veh.setPermit(pvp);
 			lnkPermit_list.addPermit(pvp);
 			break;
 		case 3:
 			// University member permit
 			University_member_permit ump = new University_member_permit(name, theDay, veh);
+			veh.setPermit(ump);
 			lnkPermit_list.addPermit(ump);
 			break;
 		}

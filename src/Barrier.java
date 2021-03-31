@@ -80,6 +80,11 @@ public class Barrier extends JFrame implements Observer, ActionListener {
      * with the permitted vehicles list, and the "vehicle clear" button.
      */
     private boolean raised = true;
+    
+    /**
+     * Stores the date set by the timer.
+     */
+    private int date;
 
     private JPanel contentPane;
     private JPanel header;
@@ -97,7 +102,6 @@ public class Barrier extends JFrame implements Observer, ActionListener {
     private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
     private final Color BUTTON_BGKD = new Color(112,128,144);
     private String windowTitle;
-    private int date;
     
     public Barrier(System_status status, Vehicle_list veh, String wt, int xLocation, int yLocation) {
     	
@@ -180,8 +184,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
         setVisible(true);
         lnkSystem_status.addObserver(this); 
     }
-    
-    
+        
 	@Override
 	public void update(Observable o, Object arg) 
 	{
@@ -204,9 +207,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			regNo.setEnabled(false);
 			lblBarrierPosition.setText("System inactive");
 			lblInstruction.setText(" GO");
-			barrierStatus.setBackground(GO_COLOUR);
-			
-			
+			barrierStatus.setBackground(GO_COLOUR);	
 		}
 		else if(active == true)
 		{
@@ -226,24 +227,25 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		final int REG_NO_LENGTH = 8;
-		if (e.getSource() == submit && active == true) 
+		if (e.getSource() == submit && active == true) // Check if the event source is the submit button and if the system is active.
 		{			
-			if (regNo.getText().equals(""))
+			if (regNo.getText().equals("")) // Check for user input.
 			{
 				displayAlert("Please enter a registration number.", 'w');
 			}
-			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
+			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH) // Validate input and warn user if invalid.
 			{
 				displayAlert("Please enter a valid registration number.", 'w');
 				regNo.setText("");
 			}
 			else
 			{	
-				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText());
-				if (toCheck != null)
+				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText()); // Get the permit using the registration number entered by the user.
+				if (toCheck != null) // If the permit has been successfully found, then check if the vehicle can pass the barrier.
 				{
 					if (lnkVehicle_list.canPass(toCheck))
 					{
+						// Raise the barrier
 						raised = true;
 						regNo.setText("");
 						lblBarrierPosition.setText("The barrier is raised");
@@ -252,28 +254,30 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					}
 					else
 					{
+						// Warn the user that access is denied for the vehicle.
 						raised = false;
+						lnkSystem_status.recordEntry(regNo.getText(), false);
 						regNo.setText("");
 						displayAlert("Access is denied for this vehicle.", 'w');	
 					}	
 				}
 				else
 				{
-					displayAlert("No permit found for this vehicle.", 'w');
+					displayAlert("No permit found for this vehicle.", 'w'); // Alert the user that no permit was found with the registration number entered.
 					regNo.setText("");
 				}
 			}
 		}
-		else if (e.getSource() == vehicleClear && active == true)
+		else if (e.getSource() == vehicleClear && active == true) // Check if the event source is vehicle clear and if the system is active.
 		{
-			if (raised == true)
+			if (raised == true) // Check if the barrier is raised and lower if true.
 			{
 				raised = false;
 				lblBarrierPosition.setText("The barrier is lowered");
 				lblInstruction.setText(" STOP");
 				barrierStatus.setBackground(STOP_COLOUR);
 			}
-			else
+			else // Warn the user that the barrier is already lowered.
 			{
 				displayAlert("The barrier is already lowered.", 'w');
 			}
