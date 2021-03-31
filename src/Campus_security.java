@@ -199,7 +199,9 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 	
 		if (sysStatus) 
 		{
+
 			regNoPane.setText(regNoPane.getText() + "\n[Date: " + date + "]" +" Barrier system activated");
+
 			activateBarrier.setEnabled(false);
 			activateBarrier.setBackground(DISABLE_BTN_COLOUR);
 			deactivateBarrier.setEnabled(true);
@@ -214,17 +216,33 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			deactivateBarrier.setBackground(DISABLE_BTN_COLOUR);
 		}
 	} // update
-
+    
+	public void displayLogs()
+	{
+		String [] log=lnkSystem_status.getLog();
+		for(int i=0;i<log.length;i++)
+		{
+			if(log[i]!=null)
+			{
+				regNoPane.setText("\n[INFO] Barrier system activated ");
+				regNoPane.setText(log[i]);
+			
+			}
+		}
+	}
+	
 	public void actionPerformed(ActionEvent e) 
 	{
 		final int REG_NO_LENGTH = 8;
 		if (e.getSource() == activateBarrier) 
 		{
-			lnkSystem_status.setStatus(true);		
+			lnkSystem_status.setStatus(true);
+			//regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system activated ");
 		}
 		else if (e.getSource() == deactivateBarrier) 
 		{
 			lnkSystem_status.setStatus(false);
+			//regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system deactivated");
 		}
 		else if (e.getSource() == checkLog) 
 		{			
