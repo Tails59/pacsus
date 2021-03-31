@@ -251,7 +251,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			}
 			else
 			{
-				boolean warningIssued = Main.getVehicleList().issueWarning(regNo.getText());
+				boolean warningIssued = lnkVehicle_list.issueWarning(regNo.getText());
 				if (warningIssued == true)
 				{
 					displayAlert("Warning issued for vehicle " + regNo.getText(), 'i');
