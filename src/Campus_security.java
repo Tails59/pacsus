@@ -63,6 +63,12 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
      */
     private System_status lnkSystem_status;
     
+    
+    /**
+     * Stores the date set by the timer.
+     */
+    private int date;
+    
     private JPanel contentPane;
     private JPanel header;
     private JPanel barrierControl;
@@ -82,7 +88,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
     private final Color ACTIVATE_BTN_BGKD = new Color(0,179,44);
     private final Color DEACTIVATE_BTN_BGKD = new Color(220,61,42);
     private final String WINDOW_TITLE;
-    private int date;
+    
     
     public Campus_security(System_status status, Vehicle_list veh) {
     	
@@ -234,23 +240,23 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 	public void actionPerformed(ActionEvent e) 
 	{
 		final int REG_NO_LENGTH = 8;
-		if (e.getSource() == activateBarrier) 
+		if (e.getSource() == activateBarrier) // Activate the barrier system if the activate button is clicked.
 		{
 			lnkSystem_status.setStatus(true);
 			//regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system activated ");
 		}
-		else if (e.getSource() == deactivateBarrier) 
+		else if (e.getSource() == deactivateBarrier) // Deactivate the barrier system if the deactivate button is clicked.
 		{
 			lnkSystem_status.setStatus(false);
 			//regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system deactivated");
 		}
-		else if (e.getSource() == checkLog) 
+		else if (e.getSource() == checkLog) // Check the log for the registration number entered by the user.
 		{			
-			if (regNo.getText().equals(""))
+			if (regNo.getText().equals("")) // Check for input in the text field and warn the user if nothing found.
 			{
 				displayAlert("Please enter a registration number.", 'w');
 			}
-			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
+			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH) // Validate the input and warn the user if invalid.
 			{
 				displayAlert("Please enter a valid registration number.", 'w');
 				regNo.setText("");
@@ -258,7 +264,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			else
 			{
 				Permit toCheck = lnkVehicle_list.getAPermit(regNo.getText()); // Get the permit using the registration number entered by the user.
-				if (toCheck != null)
+				if (toCheck != null)  // If a permit is found, fetch the details.
 				{
 					regNoPane.setText(regNoPane.getText() + "\n----------------------" + "\nLOG FOR " + regNo.getText() + "\n----------------------" 
 					+ "\nPermit holder: " + toCheck.getPermitHolder() + "\nEntered today: " + toCheck.entered() + "\nNo. of entries: " + toCheck.getEntries() + "\nNo. of warnings: " + toCheck.getWarnings());
@@ -270,11 +276,11 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 				regNo.setText("");
 			}
 		}
-		else if (e.getSource() == issueWarning) 
+		else if (e.getSource() == issueWarning) // Issue a warning to the specified vehicle using the registration number.
 		{
 			if (regNo.getText().equals(""))
 			{
-				displayAlert("Please enter a registration number.", 'w');
+				displayAlert("Please enter a registration number.", 'w'); 
 			}
 			else if (!regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || regNo.getText().length() > REG_NO_LENGTH)
 			{
@@ -283,8 +289,8 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			}
 			else
 			{
-				boolean warningIssued = lnkVehicle_list.issueWarning(regNo.getText());
-				if (warningIssued == true)
+				boolean warningIssued = lnkVehicle_list.issueWarning(regNo.getText()); // Issue a warning through the vehicle list with the registration number.
+				if (warningIssued == true) // If the warning was successfully issued, advise the user. If not, warn the user the vehicle could not be found or the maximum number of warnings has been reached.
 				{
 					displayAlert("Warning issued for vehicle " + regNo.getText(), 'i');
 				}

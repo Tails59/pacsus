@@ -91,10 +91,6 @@ public class Permit_list {
 					permits--;
 				}
 			}
-		}
-		
-		
-	}
-    
-    
+		}				
+	}    
 }
