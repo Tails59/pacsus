@@ -80,6 +80,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
      * with the permitted vehicles list, and the "vehicle clear" button.
      */
     private boolean raised = true;
+    private boolean recorded = false;
     
     /**
      * Stores the date set by the timer.
@@ -209,7 +210,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			lblInstruction.setText(" GO");
 			barrierStatus.setBackground(GO_COLOUR);	
 		}
-		else if(active == true)
+		else if(active == true && !recorded)
 		{
 			raised = false;
 			submit.setEnabled(true);
@@ -221,6 +222,8 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			lblInstruction.setText(" STOP");
 			barrierStatus.setBackground(STOP_COLOUR);
 		}
+		//
+		recorded = false;
 	}
 
 	@Override
@@ -247,6 +250,9 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					{
 						// Raise the barrier
 						raised = true;
+						lnkSystem_status.addEntry(lnkVehicle_list.getVehicle(toCheck), true);
+						recorded = true;
+						lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 						regNo.setText("");
 						lblBarrierPosition.setText("The barrier is raised");
 						lblInstruction.setText(" GO");
@@ -256,7 +262,8 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					{
 						// Warn the user that access is denied for the vehicle.
 						raised = false;
-						lnkSystem_status.recordEntry(regNo.getText(), false);
+						lnkSystem_status.addEntry(lnkVehicle_list.getVehicle(toCheck), false);
+						lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 						regNo.setText("");
 						displayAlert("Access is denied for this vehicle.", 'w');	
 					}	

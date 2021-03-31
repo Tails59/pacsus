@@ -202,12 +202,12 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		boolean sysStatus = lnkSystem_status.getStatus();
 		setTitle(WINDOW_TITLE + "  [Date: " + lnkSystem_status.getToday().getDayNumber() + "]");
 		date = lnkSystem_status.getToday().getDayNumber();
+		regNoPane.setText("");
 	
 		if (sysStatus) 
 		{
 
-			regNoPane.setText(regNoPane.getText() + "\n[Date: " + date + "]" +" Barrier system activated");
-
+			displayLog();
 			activateBarrier.setEnabled(false);
 			activateBarrier.setBackground(DISABLE_BTN_COLOUR);
 			deactivateBarrier.setEnabled(true);
@@ -215,7 +215,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		} 
 		else 
 		{
-			regNoPane.setText(regNoPane.getText() + "\n[Date: " + date + "]" + " Barrier system deactivated");
+			regNoPane.setText(regNoPane.getText() + "[Date: " + date + "]" + " Barrier system deactivated");
 			activateBarrier.setEnabled(true);
 			activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
 			deactivateBarrier.setEnabled(false);
@@ -223,18 +223,22 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		}
 	} // update
     
-	public void displayLogs()
-	{
-		String [] log=lnkSystem_status.getLog();
-		for(int i=0;i<log.length;i++)
-		{
-			if(log[i]!=null)
-			{
-				regNoPane.setText("\n[INFO] Barrier system activated ");
-				regNoPane.setText(log[i]);
-			
+	private void displayLog() {
+		//
+		String[] log = lnkSystem_status.getLog();
+		StringBuilder text = new StringBuilder();  
+		text.append(regNoPane.getText() + "[Date: " + date + "]" +" Barrier system activated");		
+		//
+		if (log[0] != null) {
+			text.append("\nEntries:\n");  
+			//
+			for (int i = 0; i < log.length; i++) {
+				if (log[i] != null) {
+					text.append("\n").append(log[i]);
+				}
 			}
 		}
+		regNoPane.setText(text.toString());
 	}
 	
 	public void actionPerformed(ActionEvent e) 
