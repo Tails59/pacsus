@@ -10,6 +10,13 @@ public class Main {
 	private static System_status systemStatus;
 	private static Vehicle_list vehicleList;
 	private static Permit_list permitList;
+	
+	static Barrier barrier1;
+	static Barrier barrier2;
+	static Barrier barrier3;
+	
+	static Campus_security campusSecurity1;
+	static Administration_office adminOffice1;
 
     /**
      * This main method builds the operational infrastructure of PACSUS as it starts up:
@@ -27,18 +34,18 @@ public class Main {
 
         Timer timer = new Timer(systemStatus, permitList);     // Frame, boundary class
 
-        Barrier barrier1 = new Barrier(systemStatus, vehicleList, "Barrier 1", 100, 550);  // Frame, boundary class
-        Barrier barrier2 = new Barrier(systemStatus, vehicleList, "Barrier 2", 500, 550); 
-        Barrier barrier3 = new Barrier(systemStatus, vehicleList, "Barrier 3", 900, 550); 
+        barrier1 = new Barrier(systemStatus, vehicleList, "Barrier 1", 100, 550);  // Frame, boundary class
+        barrier2 = new Barrier(systemStatus, vehicleList, "Barrier 2", 500, 550); 
+        barrier3 = new Barrier(systemStatus, vehicleList, "Barrier 3", 900, 550); 
           // Repeat for as many barriers as required
 
-        Campus_security campusSecurity1 = new Campus_security(systemStatus, vehicleList);  // Frame, boundary class
+        campusSecurity1 = new Campus_security(systemStatus, vehicleList);  // Frame, boundary class
           // Repeat for as many campus security screens as required
 
-        Administration_office adminOffice1 = new Administration_office(systemStatus, vehicleList, permitList);  // Frame, boundary class
+        adminOffice1 = new Administration_office(systemStatus, vehicleList, permitList);  // Frame, boundary class
           // Repeat for as many admin office screens as required
         
-        testPermits();
+        //testPermits();
     } // main
     
     private static void testPermits() {
