@@ -302,7 +302,7 @@ class UnitTesting {
 	@Test
 	@Order(15)
 	void cancelPermit() {
-		Main.getPermitList().cancelPermit("Almantas");
+		Main.getPermitList().cancelPermit("Almantas", null);
 		assert (!openBarrier("N11 222"));
 	}
 
