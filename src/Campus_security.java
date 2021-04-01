@@ -199,6 +199,9 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		lnkSystem_status.addObserver(this);
 	} // constructor
 
+	/**
+	 * Update the GUI
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		boolean sysStatus = lnkSystem_status.getStatus();
@@ -222,6 +225,9 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		}
 	} // update
 
+	/**
+	 * Display the log of last 20 entries
+	 */
 	private void displayLog() {
 		//
 		String[] log = lnkSystem_status.getLog();
@@ -240,12 +246,16 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		tp_regNoPane.setText(text.toString());
 	}
 
+	/**
+	 * Update gui if button are clicked
+	 */
 	public void actionPerformed(ActionEvent e) {
 		final int REG_NO_LENGTH = 8;
 		if (e.getSource() == btn_activateBarrier) // Activate the barrier system if the activate button is clicked.
 		{
 			lnkSystem_status.setStatus(true);
-		} else if (e.getSource() == btn_deactivateBarrier) // Deactivate the barrier system if the deactivate button is clicked.
+		} else if (e.getSource() == btn_deactivateBarrier) // Deactivate the barrier system if the deactivate button is
+															// clicked.
 		{
 			lnkSystem_status.setStatus(false);
 		} else if (e.getSource() == btn_checkLog) // Check the log for the registration number entered by the user.
@@ -259,19 +269,22 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 				displayAlert("Please enter a valid registration number.", 'w');
 				tf_regNo.setText("");
 			} else {
-				Permit toCheck = lnkVehicle_list.getAPermit(tf_regNo.getText()); // Get the permit using the registration number entered by the user.
+				Permit toCheck = lnkVehicle_list.getAPermit(tf_regNo.getText()); // Get the permit using the
+																					// registration number entered by
+																					// the user.
 				if (toCheck != null) // If a permit is found, fetch the details.
 				{
-					tp_regNoPane.setText(tp_regNoPane.getText() + "\n----------------------" + "\nLOG FOR " + tf_regNo.getText()
-							+ "\n----------------------" + "\nPermit holder: " + toCheck.getPermitHolder()
-							+ "\nEntered today: " + toCheck.entered() + "\nNo. of entries: " + toCheck.getEntries()
-							+ "\nNo. of warnings: " + toCheck.getWarnings());
+					tp_regNoPane.setText(tp_regNoPane.getText() + "\n----------------------" + "\nLOG FOR "
+							+ tf_regNo.getText() + "\n----------------------" + "\nPermit holder: "
+							+ toCheck.getPermitHolder() + "\nEntered today: " + toCheck.entered() + "\nNo. of entries: "
+							+ toCheck.getEntries() + "\nNo. of warnings: " + toCheck.getWarnings());
 				} else {
 					displayAlert("Could not find vehicle " + tf_regNo.getText(), 'e');
 				}
 				tf_regNo.setText("");
 			}
-		} else if (e.getSource() == btn_issueWarning) // Issue a warning to the specified vehicle using the registration number.
+		} else if (e.getSource() == btn_issueWarning) // Issue a warning to the specified vehicle using the registration
+														// number.
 		{
 			if (tf_regNo.getText().equals("")) {
 				displayAlert("Please enter a registration number.", 'w');
@@ -280,8 +293,12 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 				displayAlert("Please enter a valid registration number.", 'w');
 				tf_regNo.setText("");
 			} else {
-				boolean warningIssued = lnkVehicle_list.issueWarning(tf_regNo.getText()); // Issue a warning through the vehicle list with the registration number.
-				if (warningIssued == true) // If the warning was successfully issued, advise the user. If not, warn the user the vehicle could not be found or the maximum number of warnings has been reached.
+				boolean warningIssued = lnkVehicle_list.issueWarning(tf_regNo.getText()); // Issue a warning through the
+																							// vehicle list with the
+																							// registration number.
+				if (warningIssued == true) // If the warning was successfully issued, advise the user. If not, warn the
+											// user the vehicle could not be found or the maximum number of warnings has
+											// been reached.
 				{
 					displayAlert("Warning issued for vehicle " + tf_regNo.getText(), 'i');
 				} else {
@@ -294,6 +311,12 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		}
 	} // actionPerformed
 
+	/**
+	 * Display different type of alert if mistyped or null value are insterted
+	 * 
+	 * @param text the error
+	 * @param type the type of error
+	 */
 	public void displayAlert(String text, char type) {
 		switch (type) {
 		case 'i':
