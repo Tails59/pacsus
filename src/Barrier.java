@@ -248,11 +248,10 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				{
 					if (lnkVehicle_list.canPass(toCheck))
 					{
+						//
+						recordEntry(toCheck, true);
 						// Raise the barrier
 						raised = true;
-						lnkSystem_status.addEntry(lnkVehicle_list.getVehicle(toCheck), true);
-						recorded = true;
-						lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 						regNo.setText("");
 						lblBarrierPosition.setText("The barrier is raised");
 						lblInstruction.setText(" GO");
@@ -260,12 +259,12 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 					}
 					else
 					{
+						//
+						recordEntry(toCheck, false);
 						// Warn the user that access is denied for the vehicle.
 						raised = false;
-						lnkSystem_status.addEntry(lnkVehicle_list.getVehicle(toCheck), false);
-						lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 						regNo.setText("");
-						displayAlert("Access is denied for this vehicle.", 'w');	
+						displayAlert("Access is denied for this vehicle.", 'w');
 					}	
 				}
 				else
@@ -293,6 +292,17 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		{
 			displayAlert("The system is inactive. Please activate the system to use this function.", 'w');
 		}
+	}
+	
+	public void recordEntry(Permit p, boolean state) {
+		recorded = true;	// might need to implement if check with state so it is only true when state is true
+		Vehicle_info[] vehicles = lnkVehicle_list.getVehicles(p);
+		for (int i = 0; i < vehicles.length; i++) {
+			if (vehicles[i].getRegistration().equals(regNo.getText())) {
+				lnkSystem_status.addEntry(vehicles[i], state);
+			}
+		}
+		lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 	}
 	
 	public void displayAlert(String text, char type) 
