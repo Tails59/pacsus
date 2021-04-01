@@ -94,6 +94,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	 */
 	private System_status lnkSystem_status;
 
+	// GUI elements
 	private JTabbedPane tabbedPane;
 
 	private JPanel contentPane;
@@ -136,6 +137,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private int date;
 
 	private JButton btnSubmitPermitCanc;
+	/*List to store vehicles*/
 	private Vehicle_info[] vehicles;
 
 	private JTextField tf_numberOfWarnings;
@@ -148,6 +150,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private JButton btnRemoveVehicleMod;
 	private JLabel lblCarNumberMod;
 
+	/**
+	 * Administrator consturctor
+	 * @param status the system status
+	 * @param veh the vehicle list
+	 * @param permitsv the list of permits
+	 */
 	public Administration_office(System_status status, Vehicle_list veh, Permit_list permits) {
 		this.lnkSystem_status = status;
 		this.lnkVehicle_list = veh;
@@ -156,11 +164,14 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		final Color BUTTON_BGKD = new Color(112, 128, 144);
 		final Color BUTTON_FGND = new Color(255, 255, 255);
 
+		//getting the date into a int
 		today = status.getToday();
 		date = today.getDayNumber();
 
 		vehicles = new Vehicle_info[5]; // setting a vehicle limit at 5 per permit
 
+		//setting the GUI 
+		
 		setTitle("Administration Office \t [Date: " + date + "]");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -762,7 +773,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 		setVisible(true);
 	}
-
+   /**
+    * Action Performed methods
+    * use to set action when a button is clicked
+    */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submitBtn) {
 			checkInputs();
@@ -823,7 +837,11 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			changeVehicleNum(-1);
 		}
 	}
-
+   
+	/**
+	 * Change the vehicles quantity into the permit , to add and delete
+	 * @param change the number of vehicles deleted or added
+	 */
 	private void changeVehicleNum(int change) {
 		// TODO Auto-generated method stub
 		int selectedVehicle = vehiclesBoxMod.getSelectedIndex();
@@ -904,6 +922,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		populateVehicleComboBox();
 	}
 
+	/**
+	 * Populate the vehicle list
+	 */
 	private void populateVehicleMod() {
 		// TODO Auto-generated method stub
 		int selectedVehicle = vehiclesBoxMod.getSelectedIndex();
@@ -915,7 +936,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			tf_CarColorMod.setText(vehicles[selectedVehicle - 1].getColour());
 		}
 	}
-
+    
+	/**
+	 * Clear the vehicle
+	 */
 	private void clearVehicles() {
 		//
 		vehicles = new Vehicle_info[5];
@@ -925,6 +949,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		vehiclesBoxMod.addItem("< No vehicles to show >");
 	}
 
+	/**
+	 * Add a vehicle to permit and list
+	 */
 	private void addVehicles() {
 		//
 		String regNum = tf_regNumberAdd.getText();
@@ -995,6 +1022,11 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	/**
+	 * Get a vehicle from the list
+	 * @param p Permit used to find needed vehicle
+	 * @return the vehicle info
+	 */
 	private Vehicle_info getVehicle(Permit p) {
 		Vehicle_info vehicle = null;
 		Set<Vehicle_info> keySet = lnkVehicle_list.getVehicleList().keySet();
@@ -1012,6 +1044,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		return vehicle;
 	}
 
+	/**
+	 * Check if permit already exist
+	 */
 	private void checkPermit() {
 		//
 		String name = tf_NameMode.getText();
@@ -1079,6 +1114,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	/**
+	 * Cancel an existing permit
+	 */
 	private void cancelPermit() {
 		String name = tf_NameCanc.getText();
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
@@ -1098,6 +1136,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	/**
+	 * Add a warning to the specific permit
+	 */
 	private void addWarning() {
 		String name = tf_NameAddWarning.getText();
 		if (!name.matches("^[\\p{L} .'-]+$") || name.equals("")) {
@@ -1125,6 +1166,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	}
 
+	/**
+	 * Cancel N number of warnings to the Permit 
+	 */
 	private void cancelWarning() {
 
 		int numberOfWarnings = cancelWarningBox.getSelectedIndex() + 1;
@@ -1161,6 +1205,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	/**
+	 * Check status and information of the Permit
+	 */
 	private void checkStatus() {
 		String nameStatus = tf_Status.getText();
 
@@ -1237,6 +1284,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	/**
+	 * Find a permit to be modify
+	 */
 	private void findPermit() {
 		//
 		String permitName = tf_PermitNumberMod.getText();
@@ -1291,6 +1341,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	//Populate the vehicle combobox
 	private void populateVehicleComboBox() {
 		//
 		String vehicleInfo = "";
@@ -1307,6 +1358,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	/**
+	 * Check for the inputs to find if there are any typo
+	 */
 	private void checkInputs() {
 		//
 		String name = tf_NameAdd.getText();
@@ -1354,6 +1408,17 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
+	/**
+	 * Create a Permit into the list
+	 * @param type the type of permit (use the combobox)
+	 * @param name the name of the permit holder
+	 * @param regNum the registration number of vehicle/s
+	 * @param carMake the car make of vehicle/s
+	 * @param carModel the car model of vehicle/s
+	 * @param carColor the car color of vehicle/s
+	 * @param visitDate the date of when the permit is realease
+	 * @param hostName the name of the host, if relevant
+	 */
 	public void createPermit(int type, String name, String regNum, String carMake, String carModel, String carColor,
 			String visitDate, String hostName) {
 		//

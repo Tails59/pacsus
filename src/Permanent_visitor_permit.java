@@ -4,7 +4,15 @@
  * For a description of Permanent visitors, follow hyperlink to the
  * Administration use case for issuing a new Permanent visitor permit.
  */
+
 public class Permanent_visitor_permit extends Permit {
+	/**
+	 * The permanent visitor consturctor extend Permit superclass
+	 * 
+	 * @param permitHolder the name of the holder
+	 * @param issueDate    the issue date
+	 * @param firstVehicle the first vehicle used
+	 */
 	Permanent_visitor_permit(String permitHolder, Date issueDate, Vehicle_info firstVehicle) {
 		super(permitHolder, firstVehicle, issueDate);
 	}

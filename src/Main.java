@@ -50,6 +50,9 @@ public class Main {
 		testPermits();
 	} // main
 
+	/**
+	 * Set some dummies variable to test different permits
+	 */
 	private static void testPermits() {
 		Date now = new Date();
 		now.setDayNumber(systemStatus.getToday().getDayNumber());
@@ -74,14 +77,29 @@ public class Main {
 		permitList.addPermit(rvp);
 	}
 
+	/**
+	 * allowed to get the list
+	 * 
+	 * @return the Vehicle list
+	 */
 	public static Vehicle_list getVehicleList() {
 		return vehicleList;
 	}
 
+	/**
+	 * allowed to get the list
+	 * 
+	 * @return the Permit list
+	 */
 	public static Permit_list getPermitList() {
 		return permitList;
 	}
 
+	/**
+	 * Allow to get the system_status
+	 * 
+	 * @return the system_status
+	 */
 	public static System_status getSystemStatus() {
 		return systemStatus;
 	}

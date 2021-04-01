@@ -91,6 +91,12 @@ public class Timer extends JFrame implements ActionListener {
 	private Date today;
 	private final Color BUTTON_BGKD = new Color(112, 128, 144);
 
+	/**
+	 * The Timer constructor, used to go foward in time(Date+1)
+	 * 
+	 * @param status  The system status
+	 * @param permits the list of permits
+	 */
 	public Timer(System_status status, Permit_list permits) {
 
 		this.lnkSystem_status = status;
@@ -131,18 +137,27 @@ public class Timer extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
+	/**
+	 * Incerement the Date by +1
+	 */
 	public void incrementDate() {
 		today.increment();
 		placeholder.setText("Date: " + today.getDayNumber());
 		informSystem();
 	}
 
+	/**
+	 * Inform the system of the changes
+	 */
 	public void informSystem() {
 		// code to inform system_status class about the new date
 		lnkSystem_status.setToday(today);
 		lnkPermit_list.resetPermits(today);
 	}
 
+	/**
+	 * Action performed code , to increment on button press
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//
