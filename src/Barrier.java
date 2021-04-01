@@ -317,6 +317,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		for (int i = 0; i < vehicles.length; i++) {
 			if (vehicles[i].getRegistration().equals(tf_regNo.getText())) {
 				lnkSystem_status.addEntry(vehicles[i], state);
+				p.setEntry();
 			}
 		}
 		lnkSystem_status.setStatus(lnkSystem_status.getStatus());
