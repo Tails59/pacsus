@@ -237,6 +237,13 @@ public class Permit {
 	}
 
 	/**
+	 * Set permits state as entered today as true
+	 */
+	public void setEntry() {
+		this.enteredToday = true;
+	}
+
+	/**
 	 * Reset the number of times this vehicle has passed the barriers
 	 */
 	public void resetEntries() {
