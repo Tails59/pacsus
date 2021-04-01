@@ -787,7 +787,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		if (valid) {
 			//
 			Vehicle_info veh = new Vehicle_info(regNum, carColor, carMake, carModel);
-			// need to pull cart related info, store it to array and use that info to create permit and add new vehicles to it
+			// need to pull car related info, store it to array and use that info to create permit and add new vehicles to it
 			if (vehicles[vehicles.length-1] == null) {
 				for (int i = 0; i < vehicles.length; i++) {
 					if (vehicles[i] == null) {
@@ -964,42 +964,80 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else {
 			if (lnkPermit_list.checkPermit(nameStatus)) {
 				Permit aPermit = lnkPermit_list.getPermit(nameStatus);
-				Vehicle_info vehicle = getVehicle(aPermit);
-				if (vehicle != null) {
+				    int permittedVehicles=0;
+				    Vehicle_info [] vehicles_permit=lnkVehicle_list.getVehicles(aPermit);
+					StringBuilder regNums=new StringBuilder();
+					StringBuilder carMakes=new StringBuilder();
+					StringBuilder carModels=new StringBuilder();
+					StringBuilder carColors=new StringBuilder();
+				
+						for (Vehicle_info veh:vehicles_permit) {
+							if (veh != null) {
+						
+						       if(permittedVehicles==0)
+						       {
+							    regNums.append(veh.getRegistration());
+							    carMakes.append(veh.getMake());
+							    carModels.append(veh.getModel());
+							    carColors.append(veh.getColour());
+							    permittedVehicles++;
+							   
+						       }
+						       else
+						       {
+						    	   regNums.append(" , ").append(veh.getRegistration());
+						    	   carMakes.append(" , ").append(veh.getMake());
+						    	   carModels.append(" , ").append(veh.getModel());
+						    	   carColors.append(" , ").append(veh.getColour());
+						    	   permittedVehicles++;
+						    	   
+						       }
+							    
+							
+							}
+						}
 					String permitType = null;
 					String hostName = null;
 					String issueDate = null;
+					String expireDate=null;
 					//
 					issueDate = Integer.toString(aPermit.getIssueDate().getDayNumber());
 
 					if (aPermit instanceof Day_visitor_permit) {
 						permitType = "Day Visitor Permit";
 						hostName = ((Day_visitor_permit) aPermit).getHostName();
+						expireDate=Integer.toString(((Day_visitor_permit) aPermit).getActiveDate().getDayNumber());
 					} else if (aPermit instanceof Regular_visitor_permit) {
 						permitType = "Regular Visitor Permit";
 						hostName = ((Regular_visitor_permit) aPermit).getHostName();
+						expireDate=Integer.toString(((Regular_visitor_permit) aPermit).getExpiryDate().getDayNumber());
 					} else if (aPermit instanceof Permanent_visitor_permit) {
 						permitType = "Permanent Visitor Permit";
 						hostName = "N/A";
+						expireDate="N/A";
 					} else {
 						permitType = "University Member Permit";
 						hostName = "N/A";
+						expireDate="N/A";
 					}
-					tp_Enquiry.setText(" Permit found! \n Information:\n Permit Name: " + aPermit.getPermitHolder()
+					tp_Enquiry.setText(" Permit found! \n Permit Name: " + aPermit.getPermitHolder()
 							+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
-							+ "\n Host name: " + hostName + "\n Issue Date: " + issueDate + "\n Warnings: "
-							+ aPermit.getWarnings() + "\n Suspended: " + aPermit.isSuspended()
-							+ "\n Registration Number: " + vehicle.getRegistration() + "\n Car maker: "
-							+ vehicle.getMake() + "\n Car model: " + vehicle.getModel() + "\n Car color: "
-							+ vehicle.getColour() + "\n Number of Entries: " + aPermit.getEntries());
+							+ "\n Host name: " + hostName + "\n Issue Date: " + issueDate+"\n Expiring Date: "+expireDate + "\n Warnings: "
+							+ aPermit.getWarnings() + "\n Suspended: " + aPermit.isSuspended() + "\n Number of Cars: "+permittedVehicles
+							+ "\n Registration Number: " + regNums + "\n Car maker: "
+							+ carMakes + "\n Car model: " + carModels + "\n Car color: "
+							+ carColors + "\n Number of Entries: " + aPermit.getEntries());
 
-				}
-			} else {
+				
+			
+			}
+			else {
 				tp_Enquiry.setText("Permit not found");
 
 			}
 
-		}
+		
+	}
 	}
 
 	private void findPermit() {
