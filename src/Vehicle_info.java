@@ -39,18 +39,41 @@ public class Vehicle_info {
 	 */
 	private Permit lnkPermit;
 
+	/**
+	 * Get the permit
+	 * 
+	 * @return a permit
+	 */
 	public Permit getPermit() {
 		return lnkPermit;
 	}
 
+	/**
+	 * Set permit
+	 * 
+	 * @param lnkPermit the permit
+	 */
 	public void setPermit(Permit lnkPermit) {
 		this.lnkPermit = lnkPermit;
 	}
 
+	/**
+	 * Set the vehicle info empty constructor with registration number
+	 * 
+	 * @param reg
+	 */
 	public Vehicle_info(String reg) {
 		this(reg, null, null, null);
 	}
 
+	/**
+	 * Vehicle info parameter
+	 * 
+	 * @param reg    the registartion number
+	 * @param colour the color number
+	 * @param make   the maker of the car
+	 * @param model  the model of the car
+	 */
 	public Vehicle_info(String reg, String colour, String make, String model) {
 		this.regNo = reg;
 		this.colour = colour;
@@ -58,34 +81,74 @@ public class Vehicle_info {
 		this.model = model;
 	}
 
+	/**
+	 * get Color of the car
+	 * 
+	 * @return the car color
+	 */
 	public String getColour() {
 		return colour;
 	}
 
+	/**
+	 * Set colour of the car
+	 * 
+	 * @param colour the car colour
+	 */
 	public void setColour(String colour) {
 		this.colour = colour;
 	}
 
+	/**
+	 * Get the make of the car
+	 * 
+	 * @return the car make
+	 */
 	public String getMake() {
 		return make;
 	}
 
+	/**
+	 * Set the make of the car
+	 * 
+	 * @param make the car make
+	 */
 	public void setMake(String make) {
 		this.make = make;
 	}
 
+	/**
+	 * Get the model of the car
+	 * 
+	 * @return the car model
+	 */
 	public String getModel() {
 		return model;
 	}
 
+	/**
+	 * Set the model of the car
+	 * 
+	 * @param model car model
+	 */
 	public void setModel(String model) {
 		this.model = model;
 	}
 
+	/**
+	 * Set the registration number
+	 * 
+	 * @param regNo the registration number
+	 */
 	public void setRegNo(String regNo) {
 		this.regNo = regNo;
 	}
 
+	/**
+	 * Get the registration Number
+	 * 
+	 * @return registration number
+	 */
 	public String getRegistration() {
 		return this.regNo;
 	}

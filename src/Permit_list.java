@@ -92,6 +92,7 @@ public class Permit_list {
 
 	/**
 	 * Reset all permits at the start of the year
+	 * 
 	 * @param today
 	 */
 	public void resetPermits(Date today) {

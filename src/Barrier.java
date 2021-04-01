@@ -91,7 +91,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 	 * list, and the "vehicle clear" button.
 	 */
 	private boolean raised = true;
-	
+
 	/**
 	 * Records if a vehicle was granted access through the barrier or not.
 	 */
@@ -201,6 +201,9 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		lnkSystem_status.addObserver(this);
 	}
 
+	/**
+	 * Update the GUI
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		active = lnkSystem_status.getStatus();
@@ -236,10 +239,14 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		recorded = false;
 	}
 
+	/**
+	 * Perform task if buttons are pressed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final int REG_NO_LENGTH = 8;
-		if (e.getSource() == btn_submit && active == true) // Check if the event source is the btn_submit button and if the system is active.
+		if (e.getSource() == btn_submit && active == true) // Check if the event source is the btn_submit button and if
+															// the system is active.
 		{
 			if (tf_regNo.getText().equals("")) // Check for user input.
 			{
@@ -250,8 +257,11 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 				displayAlert("Please enter a valid registration number.", 'w');
 				tf_regNo.setText("");
 			} else {
-				Permit toCheck = lnkVehicle_list.getAPermit(tf_regNo.getText()); // Get the permit using the registration number entered by the user.
-				if (toCheck != null) // If the permit has been successfully found, then check if the vehicle can pass the barrier.
+				Permit toCheck = lnkVehicle_list.getAPermit(tf_regNo.getText()); // Get the permit using the
+																					// registration number entered by
+																					// the user.
+				if (toCheck != null) // If the permit has been successfully found, then check if the vehicle can pass
+										// the barrier.
 				{
 					if (lnkVehicle_list.canPass(toCheck)) {
 						//
@@ -271,11 +281,13 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 						displayAlert("Access is denied for this vehicle.", 'w');
 					}
 				} else {
-					displayAlert("No permit found for this vehicle.", 'w'); // Alert the user that no permit was found with the registration number entered.
+					displayAlert("No permit found for this vehicle.", 'w'); // Alert the user that no permit was found
+																			// with the registration number entered.
 					tf_regNo.setText("");
 				}
 			}
-		} else if (e.getSource() == btn_vehicleClear && active == true) // Check if the event source is vehicle clear and if the system is active.
+		} else if (e.getSource() == btn_vehicleClear && active == true) // Check if the event source is vehicle clear
+																		// and if the system is active.
 		{
 			if (raised == true) // Check if the barrier is raised and lower if true.
 			{
@@ -292,8 +304,15 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		}
 	}
 
+	/**
+	 * Record if an entry happen
+	 * 
+	 * @param p     The permit holding that is entering
+	 * @param state if the entry is succesfull
+	 */
 	public void recordEntry(Permit p, boolean state) {
-		recorded = true; // might need to implement if check with state so it is only true when state is true
+		recorded = true; // might need to implement if check with state so it is only true when state is
+							// true
 		Vehicle_info[] vehicles = lnkVehicle_list.getVehicles(p);
 		for (int i = 0; i < vehicles.length; i++) {
 			if (vehicles[i].getRegistration().equals(tf_regNo.getText())) {
@@ -303,6 +322,12 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		lnkSystem_status.setStatus(lnkSystem_status.getStatus());
 	}
 
+	/**
+	 * Display alert for null and mistyped values
+	 * 
+	 * @param text the text
+	 * @param type the type of error
+	 */
 	public void displayAlert(String text, char type) {
 		switch (type) {
 		case 'i':
@@ -321,6 +346,11 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		}
 	} // displayAlert
 
+	/**
+	 * return if the barrier is raised
+	 * 
+	 * @return If the barrier is raised
+	 */
 	public boolean isRaised() {
 		return this.raised;
 	}
