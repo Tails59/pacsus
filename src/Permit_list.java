@@ -127,6 +127,7 @@ public class Permit_list {
 		for (int i = 0; i < permits; i++) {
 			aPermit = lnkPermit.get(keys.get(i));
 			aPermit.resetEntry();
+			visit.setDayNumber(0);
 			if (aPermit instanceof Day_visitor_permit) {
 				visit.setDayNumber(((Day_visitor_permit) aPermit).getActiveDate().getDayNumber());
 			} else if (aPermit instanceof Regular_visitor_permit) {
@@ -137,6 +138,7 @@ public class Permit_list {
 
 					cancelPermit(aPermit.permitHolder, null);
 					permits--;
+					System.out.println("Cancelled: " + aPermit.getPermitHolder());
 				}
 
 			}
