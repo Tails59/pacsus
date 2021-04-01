@@ -11,6 +11,15 @@ public class Day_visitor_permit extends Permit {
 	private String hostName;
 	private Date activeDate;
 
+	/**
+	 * The permit for a day visit extends super class Permit
+	 * 
+	 * @param permitHolder name of the holder
+	 * @param hostName     name of the host visited
+	 * @param firstVehicle the vehicle used
+	 * @param activeDate   the date of when is active
+	 * @param issueDate    the issue date
+	 */
 	protected Day_visitor_permit(String permitHolder, String hostName, Vehicle_info firstVehicle, Date activeDate,
 			Date issueDate) {
 		super(permitHolder, firstVehicle, activeDate);
@@ -19,22 +28,38 @@ public class Day_visitor_permit extends Permit {
 		this.hostName = hostName;
 	}
 
+	/**
+	 * Get the host name
+	 * 
+	 * @return the name of the host of the visit
+	 */
 	public String getHostName() {
 		return this.hostName;
 	}
 
-	public void changeActiveDate(Date newDate) {
-		this.activeDate = newDate;
-	}
-
+	/**
+	 * Set the host Name
+	 * 
+	 * @param hostName the person visited
+	 */
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
 	}
 
+	/**
+	 * Set the active date
+	 * 
+	 * @param activeDate the date to be set
+	 */
 	public void setActiveDate(Date activeDate) {
 		this.activeDate = activeDate;
 	}
 
+	/**
+	 * get the active date
+	 * 
+	 * @return the active date
+	 */
 	public Date getActiveDate() {
 		return this.activeDate;
 	}

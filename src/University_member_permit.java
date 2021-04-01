@@ -19,12 +19,25 @@ public class University_member_permit extends Permit {
 	 */
 	private Date lnkDate;
 
+	/**
+	 * The permit for an university member(Staff,Lecture,etc.) Extend Permit super
+	 * class
+	 * 
+	 * @param permitHolder The name of the permit Holder
+	 * @param issue        the issue date
+	 * @param firstVehicle the first vehicle in the permit
+	 */
 	public University_member_permit(String permitHolder, Date issue, Vehicle_info firstVehicle) {
 		super(permitHolder, firstVehicle, issue);
 
 		lnkDate = issue;
 	}
 
+	/**
+	 * Get the issue date
+	 * 
+	 * @return the issue date
+	 */
 	public Date getLnkDate() {
 		return lnkDate;
 	}

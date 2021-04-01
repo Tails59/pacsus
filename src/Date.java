@@ -24,10 +24,20 @@
 @SuppressWarnings({ "unused" })
 public class Date {
 
+	/**
+	 * Get the day number
+	 * 
+	 * @return the day number
+	 */
 	public int getDayNumber() {
 		return dayNumber;
 	}
 
+	/**
+	 * Set the day number
+	 * 
+	 * @param dayNumber the day number
+	 */
 	public void setDayNumber(int dayNumber) {
 		this.dayNumber = dayNumber;
 	}

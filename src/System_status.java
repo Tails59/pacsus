@@ -30,7 +30,7 @@ public class System_status extends Observable {
 	 */
 
 	private String[] log = new String[20];
-	
+
 	private Campus_security security;
 
 	/**
@@ -48,6 +48,7 @@ public class System_status extends Observable {
 
 	/**
 	 * Set todays date
+	 * 
 	 * @param date [Date] current date
 	 */
 	public void setToday(Date date) { // might need to be changed
@@ -56,7 +57,7 @@ public class System_status extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	/**
 	 * Get today's date
 	 * 
@@ -67,7 +68,7 @@ public class System_status extends Observable {
 	}
 
 	/**
-	 * Set the current system status 
+	 * Set the current system status
 	 * 
 	 * @param status [boolean] Status: true = on, false = off.
 	 */
@@ -79,6 +80,7 @@ public class System_status extends Observable {
 
 	/**
 	 * Get the current system status
+	 * 
 	 * @return status [boolean] true if the system is active
 	 */
 	public boolean getStatus() {
@@ -87,8 +89,10 @@ public class System_status extends Observable {
 
 	/**
 	 * Record an entry through the barriers
-	 * @param regNo [String] vehicle's registration number
-	 * @param entered [boolean] True if the vehicle was permitted through, false otherwise (i.e. their permit was suspended)
+	 * 
+	 * @param regNo   [String] vehicle's registration number
+	 * @param entered [boolean] True if the vehicle was permitted through, false
+	 *                otherwise (i.e. their permit was suspended)
 	 */
 	public void recordEntry(String regNo, boolean entered) {
 		if (nextIndex < 20) {
@@ -118,6 +122,12 @@ public class System_status extends Observable {
 		// setChanged();
 	}
 
+	/**
+	 * Add the entry to the log, to be displayed in Campus Security
+	 * 
+	 * @param veh          the vehicle information
+	 * @param entryAllowed if the entry was allowed or not
+	 */
 	public void addEntry(Vehicle_info veh, boolean entryAllowed) {
 		String entryState = "";
 		if (entryAllowed)
@@ -144,6 +154,11 @@ public class System_status extends Observable {
 		}
 	}
 
+	/**
+	 * return the logs
+	 * 
+	 * @return the array of log
+	 */
 	public String[] getLog() {
 		return log;
 	}
