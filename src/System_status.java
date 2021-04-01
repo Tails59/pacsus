@@ -30,6 +30,8 @@ public class System_status extends Observable {
 	 */
 
 	private String[] log = new String[20];
+	
+	private Campus_security security;
 
 	/**
 	 * This attribute is kept up to date by the Timer.
@@ -44,34 +46,50 @@ public class System_status extends Observable {
 
 	private int nextIndex;
 
+	/**
+	 * Set todays date
+	 * @param date [Date] current date
+	 */
 	public void setToday(Date date) { // might need to be changed
-		//
 		today = date;
 		System.out.println("Date: " + today.getDayNumber());
 		setChanged();
 		notifyObservers();
 	}
-
+	
+	/**
+	 * Get today's date
+	 * 
+	 * @return today [Date] current date
+	 */
 	public Date getToday() {
-		//
 		return today;
 	}
 
+	/**
+	 * Set the current system status 
+	 * 
+	 * @param status [boolean] Status: true = on, false = off.
+	 */
+	public void setStatus(boolean status) {
+		systemActive = status;
+		setChanged();
+		notifyObservers();
+	}
 
-	private Campus_security security;
-    
-    public void setStatus(boolean status) {
-    	systemActive = status;
-    	setChanged();
-    	notifyObservers();
-    }
-
-
+	/**
+	 * Get the current system status
+	 * @return status [boolean] true if the system is active
+	 */
 	public boolean getStatus() {
-		//
 		return systemActive;
 	}
 
+	/**
+	 * Record an entry through the barriers
+	 * @param regNo [String] vehicle's registration number
+	 * @param entered [boolean] True if the vehicle was permitted through, false otherwise (i.e. their permit was suspended)
+	 */
 	public void recordEntry(String regNo, boolean entered) {
 		if (nextIndex < 20) {
 			if (entered) {
@@ -80,7 +98,7 @@ public class System_status extends Observable {
 				nextIndex++;
 
 			} else {
-				log[nextIndex]= "\n[DAY " + today.getDayNumber() + "] Unsuccessful entry for " + regNo;
+				log[nextIndex] = "\n[DAY " + today.getDayNumber() + "] Unsuccessful entry for " + regNo;
 				nextIndex++;
 			}
 		} else {
@@ -91,45 +109,43 @@ public class System_status extends Observable {
 			if (entered) {
 
 				log[nextIndex] = "\n[DAY " + today.getDayNumber() + "] Successful entry for " + regNo;
-				
 
 			} else {
 				log[nextIndex] = "\n[DAY " + today.getDayNumber() + "] Unsuccessful entry for " + regNo;
-				
+
 			}
 		}
-		//setChanged();
-		
+		// setChanged();
 	}
-	
+
 	public void addEntry(Vehicle_info veh, boolean entryAllowed) {
 		String entryState = "";
-		if (entryAllowed) entryState = "allowed";
-		else entryState = "denied";
-		String entryInfo = "Day " + today.getDayNumber() + ". Registration: " + veh.getRegistration() + ", entry " + entryState + ".";
+		if (entryAllowed)
+			entryState = "allowed";
+		else
+			entryState = "denied";
+		String entryInfo = "Day " + today.getDayNumber() + ". Registration: " + veh.getRegistration() + ", entry "
+				+ entryState + ".";
 		int entries = 0;
-		
+
 		for (int i = 0; i < log.length; i++) {
 			if (log[i] != null) {
 				entries++;
 			}
 		}
-		//
+
 		if (entries < log.length) {
 			log[entries] = entryInfo;
 		} else {
-			for (int i = 0; i < log.length-1; i++) {
-				log[i] = log[i+1];
+			for (int i = 0; i < log.length - 1; i++) {
+				log[i] = log[i + 1];
 			}
-			log[log.length-1] = entryInfo;
+			log[log.length - 1] = entryInfo;
 		}
 	}
 
 	public String[] getLog() {
 		return log;
 	}
-
-	
-	
 
 }
