@@ -7,7 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
@@ -838,6 +840,18 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				vehicles[selectedVehicle - 1] = null;
 				System.out.println("Vehicles removed!");
 				//
+				Vehicle_info[] veh = vehicles;
+				vehicles = new Vehicle_info[veh.length];
+				int index = 0;
+				System.out.println("Vehicle array:");
+				for (int i = 0; i < vehicles.length; i++) {
+					if (veh[i] != null) {
+						vehicles[index] = veh[i];
+						System.out.println(vehicles[index].getRegistration());
+						index++;
+					}
+				}
+				//
 				lblCarNumberMod.setText("Vehicles permitted: " + (numberOfVehicles - 1));
 			} else {
 				System.out.println("No vehicle selected!");
@@ -883,6 +897,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			}
 		}
 		//
+		tf_RegNumberMod.setText("");
+		tf_CarMakeMod.setText("");
+		tf_CarModelMod.setText("");
+		tf_CarColorMod.setText("");
 		populateVehicleComboBox();
 	}
 
@@ -1036,6 +1054,24 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				Vehicle_info[] v = lnkVehicle_list.getVehicles(lnkPermit_list.getPermit(tf_PermitNumberMod.getText()));
 				for (int i = 0; i < v.length; i++) {
 					lnkVehicle_list.remove(v[i]);
+				}
+				//
+				List<Vehicle_info> keys = new ArrayList<Vehicle_info>(lnkVehicle_list.getVehicleList().keySet());
+				List<Permit> values = new ArrayList<Permit>(lnkVehicle_list.getVehicleList().values());
+				
+				Vehicle_info veh;
+				int ammount = lnkVehicle_list.getVehicleList().size();
+				//
+				for (int i = 0; i < ammount; i++) {
+					veh = keys.get(i);
+					for (int j = 0; j < vehicles.length; j++) {
+						if (vehicles[j] != null) {
+							if (veh.getRegistration().equals(vehicles[j].getRegistration())) {
+								lnkVehicle_list.remove(vehicles[j]);
+								ammount--;
+							}
+						}
+					}
 				}
 				// add new permit depending on type
 				createPermit(permitType, name, regNum, carMake, carModel, carColor, visitDate, hostName);
@@ -1329,15 +1365,23 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		//
 		Vehicle_info veh = new Vehicle_info(regNum, carColor, carMake, carModel);
 		//
-		if (tabbedPane.getSelectedIndex() != 0 & vehicles[0] != null) {
-			if (vehiclesBoxMod.getSelectedIndex() == 0) {
-				veh = vehicles[0];
+		for (int i = 0; i < vehicles.length; i++) {
+			if (vehicles[i] != null) {
+				veh = vehicles[i];
+				break;
 			}
 		}
-		//
-		if (vehicles[0] != null & tabbedPane.getSelectedIndex() == 0) {
-			veh = vehicles[0];
-		}
+//		//
+//		if (tabbedPane.getSelectedIndex() != 0 & vehicles[0] != null) {
+//			if (vehiclesBoxMod.getSelectedIndex() == 0) {
+//				veh = vehicles[0];
+//				System.out.println("Fetching vehicle from vehicles[]: " + veh.getRegistration());
+//			}
+//		}
+//		//
+//		if (vehicles[0] != null & tabbedPane.getSelectedIndex() == 0) {
+//			veh = vehicles[0];
+//		}
 		// code for setting permit data
 		switch (type) {
 		case 0:
