@@ -1085,8 +1085,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				displayAlert("Visit date cannot be in the past.", 'w');
 			} else {
 				// cancel old permit and remove old vehicle
+				Permit p = lnkPermit_list.getPermit(tf_PermitNumberMod.getText());
 				lnkPermit_list.cancelPermit(tf_PermitNumberMod.getText());
-				Vehicle_info[] v = lnkVehicle_list.getVehicles(lnkPermit_list.getPermit(tf_PermitNumberMod.getText()));
+				Vehicle_info[] v = lnkVehicle_list.getVehicles(p);
 				for (int i = 0; i < v.length; i++) {
 					lnkVehicle_list.remove(v[i]);
 				}
@@ -1099,13 +1100,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				//
 				for (int i = 0; i < ammount; i++) {
 					veh = keys.get(i);
-					for (int j = 0; j < vehicles.length; j++) {
-						if (vehicles[j] != null) {
-							if (veh.getRegistration().equals(vehicles[j].getRegistration())) {
-								lnkVehicle_list.remove(vehicles[j]);
-								ammount--;
-							}
-						}
+					if (veh.getPermit().equals(p)) {
+						lnkVehicle_list.remove(vehicles[i]);
 					}
 				}
 				// add new permit depending on type
@@ -1309,35 +1305,30 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			//
 			populateVehicleComboBox();
 			//
-			// if (vehicle != null) {
-			if (true) {
-				// fill fields with data from the permit
-				tf_NameMode.setText(aPermit.getPermitHolder());
-				//
-				if (aPermit instanceof Day_visitor_permit) {
-					dropdown = 0;
-				} else if (aPermit instanceof Regular_visitor_permit) {
-					dropdown = 1;
-				} else if (aPermit instanceof Permanent_visitor_permit) {
-					dropdown = 2;
-				} else {
-					dropdown = 3;
-				}
-				comboBoxMod.setSelectedIndex(dropdown);
-				//
-				if (dropdown < 2) {
-					tf_VisitDateMod.setText(Integer.toString(aPermit.getIssueDate().getDayNumber()));
-					if (dropdown == 0) {
-						tf_HostNameMod.setText(((Day_visitor_permit) aPermit).getHostName());
-					} else {
-						tf_HostNameMod.setText(((Regular_visitor_permit) aPermit).getHostName());
-					}
-				}
-				//
-				lblCarNumberMod.setText("Vehicles permitted: " + numberOfVehicles);
+			// fill fields with data from the permit
+			tf_NameMode.setText(aPermit.getPermitHolder());
+			//
+			if (aPermit instanceof Day_visitor_permit) {
+				dropdown = 0;
+			} else if (aPermit instanceof Regular_visitor_permit) {
+				dropdown = 1;
+			} else if (aPermit instanceof Permanent_visitor_permit) {
+				dropdown = 2;
 			} else {
-				displayAlert("There was an issue while fetching the vehicle information!", 'w');
+				dropdown = 3;
 			}
+			comboBoxMod.setSelectedIndex(dropdown);
+			//
+			if (dropdown < 2) {
+				tf_VisitDateMod.setText(Integer.toString(aPermit.getIssueDate().getDayNumber()));
+				if (dropdown == 0) {
+					tf_HostNameMod.setText(((Day_visitor_permit) aPermit).getHostName());
+				} else {
+					tf_HostNameMod.setText(((Regular_visitor_permit) aPermit).getHostName());
+				}
+			}
+			//
+			lblCarNumberMod.setText("Vehicles permitted: " + numberOfVehicles);
 		}
 	}
 
@@ -1436,17 +1427,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				break;
 			}
 		}
-//		//
-//		if (tabbedPane.getSelectedIndex() != 0 & vehicles[0] != null) {
-//			if (vehiclesBoxMod.getSelectedIndex() == 0) {
-//				veh = vehicles[0];
-//				System.out.println("Fetching vehicle from vehicles[]: " + veh.getRegistration());
-//			}
-//		}
-//		//
-//		if (vehicles[0] != null & tabbedPane.getSelectedIndex() == 0) {
-//			veh = vehicles[0];
-//		}
 		// code for setting permit data
 		switch (type) {
 		case 0:
