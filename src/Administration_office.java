@@ -137,7 +137,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	private int date;
 
 	private JButton btnSubmitPermitCanc;
-	/*List to store vehicles*/
+	/* List to store vehicles */
 	private Vehicle_info[] vehicles;
 
 	private JTextField tf_numberOfWarnings;
@@ -152,8 +152,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	/**
 	 * Administrator consturctor
-	 * @param status the system status
-	 * @param veh the vehicle list
+	 * 
+	 * @param status   the system status
+	 * @param veh      the vehicle list
 	 * @param permitsv the list of permits
 	 */
 	public Administration_office(System_status status, Vehicle_list veh, Permit_list permits) {
@@ -164,14 +165,14 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		final Color BUTTON_BGKD = new Color(112, 128, 144);
 		final Color BUTTON_FGND = new Color(255, 255, 255);
 
-		//getting the date into a int
+		// getting the date into a int
 		today = status.getToday();
 		date = today.getDayNumber();
 
 		vehicles = new Vehicle_info[5]; // setting a vehicle limit at 5 per permit
 
-		//setting the GUI 
-		
+		// setting the GUI
+
 		setTitle("Administration Office \t [Date: " + date + "]");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -773,10 +774,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 		setVisible(true);
 	}
-   /**
-    * Action Performed methods
-    * use to set action when a button is clicked
-    */
+
+	/**
+	 * Action Performed methods use to set action when a button is clicked
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submitBtn) {
 			checkInputs();
@@ -837,9 +838,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			changeVehicleNum(-1);
 		}
 	}
-   
+
 	/**
 	 * Change the vehicles quantity into the permit , to add and delete
+	 * 
 	 * @param change the number of vehicles deleted or added
 	 */
 	private void changeVehicleNum(int change) {
@@ -936,7 +938,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			tf_CarColorMod.setText(vehicles[selectedVehicle - 1].getColour());
 		}
 	}
-    
+
 	/**
 	 * Clear the vehicle
 	 */
@@ -1024,6 +1026,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	/**
 	 * Get a vehicle from the list
+	 * 
 	 * @param p Permit used to find needed vehicle
 	 * @return the vehicle info
 	 */
@@ -1094,7 +1097,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				//
 				List<Vehicle_info> keys = new ArrayList<Vehicle_info>(lnkVehicle_list.getVehicleList().keySet());
 				List<Permit> values = new ArrayList<Permit>(lnkVehicle_list.getVehicleList().values());
-				
+
 				Vehicle_info veh;
 				int ammount = lnkVehicle_list.getVehicleList().size();
 				//
@@ -1163,7 +1166,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 	}
 
 	/**
-	 * Cancel N number of warnings to the Permit 
+	 * Cancel N number of warnings to the Permit
 	 */
 	private void cancelWarning() {
 
@@ -1264,13 +1267,12 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 					hostName = "N/A";
 					expireDate = "N/A";
 				}
-				tp_Enquiry.setText(" Permit found! \n Permit Name: " + aPermit.getPermitHolder() + "\n Permit Number: "
-						+ aPermit.getUniqueID() + "\n Permit Type: " + permitType + "\n Host name: " + hostName
-						+ "\n Issue Date: " + issueDate + "\n Expiring Date: " + expireDate + "\n Warnings: "
-						+ aPermit.getWarnings() + "\n Suspended: " + aPermit.isSuspended() + "\n Number of Cars: "
-						+ permittedVehicles + "\n Registration Number: " + regNums + "\n Car maker: " + carMakes
-						+ "\n Car model: " + carModels + "\n Car color: " + carColors + "\n Number of Entries: "
-						+ aPermit.getEntries());
+				tp_Enquiry.setText(" Permit found! \n Permit Name: " + aPermit.getPermitHolder() + "\n Permit Type: "
+						+ permitType + "\n Host name: " + hostName + "\n Issue Date: " + issueDate
+						+ "\n Expiring Date: " + expireDate + "\n Warnings: " + aPermit.getWarnings() + "\n Suspended: "
+						+ aPermit.isSuspended() + "\n Number of Cars: " + permittedVehicles + "\n Registration Number: "
+						+ regNums + "\n Car maker: " + carMakes + "\n Car model: " + carModels + "\n Car color: "
+						+ carColors + "\n Number of Entries: " + aPermit.getEntries());
 
 			} else {
 				tp_Enquiry.setText("Permit not found");
@@ -1332,7 +1334,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 	}
 
-	//Populate the vehicle combobox
+	// Populate the vehicle combobox
 	private void populateVehicleComboBox() {
 		//
 		String vehicleInfo = "";
@@ -1401,14 +1403,15 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	/**
 	 * Create a Permit into the list
-	 * @param type the type of permit (use the combobox)
-	 * @param name the name of the permit holder
-	 * @param regNum the registration number of vehicle/s
-	 * @param carMake the car make of vehicle/s
-	 * @param carModel the car model of vehicle/s
-	 * @param carColor the car color of vehicle/s
+	 * 
+	 * @param type      the type of permit (use the combobox)
+	 * @param name      the name of the permit holder
+	 * @param regNum    the registration number of vehicle/s
+	 * @param carMake   the car make of vehicle/s
+	 * @param carModel  the car model of vehicle/s
+	 * @param carColor  the car color of vehicle/s
 	 * @param visitDate the date of when the permit is realease
-	 * @param hostName the name of the host, if relevant
+	 * @param hostName  the name of the host, if relevant
 	 */
 	public void createPermit(int type, String name, String regNum, String carMake, String carModel, String carColor,
 			String visitDate, String hostName) {
