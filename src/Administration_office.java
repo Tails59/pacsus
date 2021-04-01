@@ -285,52 +285,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 		addPermit.add(tf_CarColorAdd, gbc_CarColorAdd);
 		tf_CarColorAdd.setColumns(10);
-				
-				addVehicleBtn = new JButton("Add New Vehicle");
-				addVehicleBtn.addActionListener(this);
-				addVehicleBtn.setForeground(Color.WHITE);
-				addVehicleBtn.setFocusPainted(false);
-				addVehicleBtn.setBackground(new Color(112, 128, 144));
-				GridBagConstraints gbc_addVehBtn = new GridBagConstraints();
-				gbc_addVehBtn.insets = new Insets(0, 0, 5, 5);
-				gbc_addVehBtn.gridx = 1;
-				gbc_addVehBtn.gridy = 5;
-				addPermit.add(addVehicleBtn, gbc_addVehBtn);
-				
-				addVehicleClrBtn = new JButton("Clear Added Vehicles");
-				addVehicleClrBtn.addActionListener(this);
-				addVehicleClrBtn.setForeground(Color.WHITE);
-				addVehicleClrBtn.setFocusPainted(false);
-				addVehicleClrBtn.setBackground(new Color(112, 128, 144));
-				GridBagConstraints gbc_addVehicleClrBtn = new GridBagConstraints();
-				gbc_addVehicleClrBtn.anchor = GridBagConstraints.WEST;
-				gbc_addVehicleClrBtn.insets = new Insets(0, 0, 5, 0);
-				gbc_addVehicleClrBtn.gridx = 6;
-				gbc_addVehicleClrBtn.gridy = 5;
-				addPermit.add(addVehicleClrBtn, gbc_addVehicleClrBtn);
-		
-				JLabel lblEnterPermitTypeAdd = new JLabel("Enter Permit Type:");
-				GridBagConstraints gbc_lblEnterPermitTypeAdd = new GridBagConstraints();
-				gbc_lblEnterPermitTypeAdd.insets = new Insets(0, 0, 5, 5);
-				gbc_lblEnterPermitTypeAdd.anchor = GridBagConstraints.WEST;
-				gbc_lblEnterPermitTypeAdd.gridx = 1;
-				gbc_lblEnterPermitTypeAdd.gridy = 6;
-				addPermit.add(lblEnterPermitTypeAdd, gbc_lblEnterPermitTypeAdd);
-		
-				cb_PermitTypeAdd = new JComboBox<String>();
-				cb_PermitTypeAdd.addItem("Day Visitor");
-				cb_PermitTypeAdd.addItem("Regular Visitor");
-				cb_PermitTypeAdd.addItem("Permanent Visitor");
-				cb_PermitTypeAdd.addItem("University Member");
-				cb_PermitTypeAdd.addActionListener(this);
-				GridBagConstraints gbc_cbPermitTypeAdd = new GridBagConstraints();
-				gbc_cbPermitTypeAdd.insets = new Insets(0, 0, 5, 0);
-				gbc_cbPermitTypeAdd.fill = GridBagConstraints.HORIZONTAL;
-				gbc_cbPermitTypeAdd.gridx = 6;
-				gbc_cbPermitTypeAdd.gridy = 6;
-				addPermit.add(cb_PermitTypeAdd, gbc_cbPermitTypeAdd);
 
-/*
 		addVehicleBtn = new JButton("Add New Vehicle");
 		addVehicleBtn.addActionListener(this);
 		addVehicleBtn.setForeground(Color.WHITE);
@@ -342,13 +297,17 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_addVehBtn.gridy = 5;
 		addPermit.add(addVehicleBtn, gbc_addVehBtn);
 
-		lblCarNumber = new JLabel("Vehicles permitted: 0");
-		GridBagConstraints gbc_lblCarNumber = new GridBagConstraints();
-		gbc_lblCarNumber.anchor = GridBagConstraints.WEST;
-		gbc_lblCarNumber.insets = new Insets(0, 0, 5, 0);
-		gbc_lblCarNumber.gridx = 6;
-		gbc_lblCarNumber.gridy = 5;
-		addPermit.add(lblCarNumber, gbc_lblCarNumber);
+		addVehicleClrBtn = new JButton("Clear Added Vehicles");
+		addVehicleClrBtn.addActionListener(this);
+		addVehicleClrBtn.setForeground(Color.WHITE);
+		addVehicleClrBtn.setFocusPainted(false);
+		addVehicleClrBtn.setBackground(new Color(112, 128, 144));
+		GridBagConstraints gbc_addVehicleClrBtn = new GridBagConstraints();
+		gbc_addVehicleClrBtn.anchor = GridBagConstraints.WEST;
+		gbc_addVehicleClrBtn.insets = new Insets(0, 0, 5, 0);
+		gbc_addVehicleClrBtn.gridx = 6;
+		gbc_addVehicleClrBtn.gridy = 5;
+		addPermit.add(addVehicleClrBtn, gbc_addVehicleClrBtn);
 
 		JLabel lblEnterPermitTypeAdd = new JLabel("Enter Permit Type:");
 		GridBagConstraints gbc_lblEnterPermitTypeAdd = new GridBagConstraints();
@@ -370,7 +329,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_cbPermitTypeAdd.gridx = 6;
 		gbc_cbPermitTypeAdd.gridy = 6;
 		addPermit.add(cb_PermitTypeAdd, gbc_cbPermitTypeAdd);
-*/
 
 		tf_VisitDateAdd = new JTextField();
 		GridBagConstraints gbc_VisitDateAdd = new GridBagConstraints();
@@ -417,7 +375,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_submitBtn.gridx = 1;
 		gbc_submitBtn.gridy = 9;
 		addPermit.add(submitBtn, gbc_submitBtn);
-		
+
 		lblCarNumber = new JLabel("Vehicles permitted: 0");
 		GridBagConstraints gbc_lblCarNumber = new GridBagConstraints();
 		gbc_lblCarNumber.gridx = 6;
@@ -600,145 +558,145 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_NameMode.gridy = 1;
 		modifyPermit.add(tf_NameMode, gbc_NameMode);
 		tf_NameMode.setColumns(10);
-				
-						comboBoxMod = new JComboBox<String>();
-						comboBoxMod.addItem("Day Visitor");
-						comboBoxMod.addItem("Regular Visitor");
-						comboBoxMod.addItem("Permanent Visitor");
-						comboBoxMod.addItem("University Member");
-						comboBoxMod.addActionListener(this);
-																
-																lblVehiclesMod = new JLabel("Vehicles:");
-																GridBagConstraints gbc_lblVehiclesMod = new GridBagConstraints();
-																gbc_lblVehiclesMod.anchor = GridBagConstraints.WEST;
-																gbc_lblVehiclesMod.insets = new Insets(0, 0, 5, 5);
-																gbc_lblVehiclesMod.gridx = 1;
-																gbc_lblVehiclesMod.gridy = 2;
-																modifyPermit.add(lblVehiclesMod, gbc_lblVehiclesMod);
-																
-																btnAddVehicleMod = new JButton("+");
-																btnAddVehicleMod.addActionListener(this);
-																btnAddVehicleMod.setForeground(Color.WHITE);
-																btnAddVehicleMod.setFocusPainted(false);
-																btnAddVehicleMod.setBackground(new Color(112, 128, 144));
-																GridBagConstraints gbc_btnAddVehicleMod = new GridBagConstraints();
-																gbc_btnAddVehicleMod.fill = GridBagConstraints.HORIZONTAL;
-																gbc_btnAddVehicleMod.insets = new Insets(0, 0, 5, 5);
-																gbc_btnAddVehicleMod.gridx = 3;
-																gbc_btnAddVehicleMod.gridy = 2;
-																modifyPermit.add(btnAddVehicleMod, gbc_btnAddVehicleMod);
-																
-																btnRemoveVehicleMod = new JButton("-");
-																btnRemoveVehicleMod.addActionListener(this);
-																btnRemoveVehicleMod.setForeground(Color.WHITE);
-																btnRemoveVehicleMod.setFocusPainted(false);
-																btnRemoveVehicleMod.setBackground(new Color(112, 128, 144));
-																GridBagConstraints gbc_btnRemoveVehicleMod = new GridBagConstraints();
-																gbc_btnRemoveVehicleMod.insets = new Insets(0, 0, 5, 5);
-																gbc_btnRemoveVehicleMod.gridx = 4;
-																gbc_btnRemoveVehicleMod.gridy = 2;
-																modifyPermit.add(btnRemoveVehicleMod, gbc_btnRemoveVehicleMod);
-																
-																vehiclesBoxMod = new JComboBox<String>();
-																vehiclesBoxMod.addItem("< No vehicles to show >");
-																vehiclesBoxMod.addActionListener(this);
-																GridBagConstraints gbc_vehiclesBoxMod = new GridBagConstraints();
-																gbc_vehiclesBoxMod.insets = new Insets(0, 0, 5, 0);
-																gbc_vehiclesBoxMod.fill = GridBagConstraints.HORIZONTAL;
-																gbc_vehiclesBoxMod.gridx = 6;
-																gbc_vehiclesBoxMod.gridy = 2;
-																modifyPermit.add(vehiclesBoxMod, gbc_vehiclesBoxMod);
-														
-																JLabel lblRegistrationNumberMod = new JLabel("Registration Number:");
-																GridBagConstraints gbc_lblRegistrationNumberMod = new GridBagConstraints();
-																gbc_lblRegistrationNumberMod.insets = new Insets(0, 0, 5, 5);
-																gbc_lblRegistrationNumberMod.gridx = 1;
-																gbc_lblRegistrationNumberMod.gridy = 3;
-																modifyPermit.add(lblRegistrationNumberMod, gbc_lblRegistrationNumberMod);
-														
-																tf_RegNumberMod = new JTextField();
-																GridBagConstraints gbc_RegNumberMod = new GridBagConstraints();
-																gbc_RegNumberMod.insets = new Insets(0, 0, 5, 0);
-																gbc_RegNumberMod.fill = GridBagConstraints.HORIZONTAL;
-																gbc_RegNumberMod.gridx = 6;
-																gbc_RegNumberMod.gridy = 3;
-																
-																		modifyPermit.add(tf_RegNumberMod, gbc_RegNumberMod);
-																		tf_RegNumberMod.setColumns(10);
-												
-														JLabel lblCarMakeMod = new JLabel("Car make:");
-														GridBagConstraints gbc_lblCarMakeMod = new GridBagConstraints();
-														gbc_lblCarMakeMod.insets = new Insets(0, 0, 5, 5);
-														gbc_lblCarMakeMod.anchor = GridBagConstraints.WEST;
-														gbc_lblCarMakeMod.gridx = 1;
-														gbc_lblCarMakeMod.gridy = 4;
-														modifyPermit.add(lblCarMakeMod, gbc_lblCarMakeMod);
-												
-														tf_CarMakeMod = new JTextField();
-														GridBagConstraints gbc_CarMakeMod = new GridBagConstraints();
-														
-																gbc_CarMakeMod.insets = new Insets(0, 0, 5, 0);
-																gbc_CarMakeMod.fill = GridBagConstraints.HORIZONTAL;
-																gbc_CarMakeMod.gridx = 6;
-																gbc_CarMakeMod.gridy = 4;
-																modifyPermit.add(tf_CarMakeMod, gbc_CarMakeMod);
-																tf_CarMakeMod.setColumns(10);
-										
-												JLabel lblCarModelMod = new JLabel("Car model:");
-												GridBagConstraints gbc_lblCarModelMod = new GridBagConstraints();
-												gbc_lblCarModelMod.insets = new Insets(0, 0, 5, 5);
-												gbc_lblCarModelMod.anchor = GridBagConstraints.WEST;
-												gbc_lblCarModelMod.gridx = 1;
-												gbc_lblCarModelMod.gridy = 5;
-												modifyPermit.add(lblCarModelMod, gbc_lblCarModelMod);
-										
-												tf_CarModelMod = new JTextField();
-												GridBagConstraints gbc_CarModelMod = new GridBagConstraints();
-												gbc_CarModelMod.insets = new Insets(0, 0, 5, 0);
-												gbc_CarModelMod.fill = GridBagConstraints.HORIZONTAL;
-												gbc_CarModelMod.gridx = 6;
-												gbc_CarModelMod.gridy = 5;
-												modifyPermit.add(tf_CarModelMod, gbc_CarModelMod);
-												tf_CarModelMod.setColumns(10);
-								
-										JLabel lblCarColorMod = new JLabel("Car color:");
-										GridBagConstraints gbc_lblCarColorMod = new GridBagConstraints();
-										gbc_lblCarColorMod.insets = new Insets(0, 0, 5, 5);
-										gbc_lblCarColorMod.anchor = GridBagConstraints.WEST;
-										gbc_lblCarColorMod.gridx = 1;
-										gbc_lblCarColorMod.gridy = 6;
-										modifyPermit.add(lblCarColorMod, gbc_lblCarColorMod);
-								
-										tf_CarColorMod = new JTextField();
-										GridBagConstraints gbc_CarColorMod = new GridBagConstraints();
-										gbc_CarColorMod.insets = new Insets(0, 0, 5, 0);
-										gbc_CarColorMod.fill = GridBagConstraints.HORIZONTAL;
-										gbc_CarColorMod.gridx = 6;
-										gbc_CarColorMod.gridy = 6;
-										modifyPermit.add(tf_CarColorMod, gbc_CarColorMod);
-										tf_CarColorMod.setColumns(10);
-						
-								JLabel lblEnterPermitTypeMod = new JLabel("Enter Permit Type:");
-								GridBagConstraints gbc_lblEnterPermitTypeMod = new GridBagConstraints();
-								gbc_lblEnterPermitTypeMod.insets = new Insets(0, 0, 5, 5);
-								gbc_lblEnterPermitTypeMod.anchor = GridBagConstraints.WEST;
-								gbc_lblEnterPermitTypeMod.gridx = 1;
-								gbc_lblEnterPermitTypeMod.gridy = 7;
-								modifyPermit.add(lblEnterPermitTypeMod, gbc_lblEnterPermitTypeMod);
-						GridBagConstraints gbc_comboBoxMod = new GridBagConstraints();
-						gbc_comboBoxMod.insets = new Insets(0, 0, 5, 0);
-						gbc_comboBoxMod.fill = GridBagConstraints.HORIZONTAL;
-						gbc_comboBoxMod.gridx = 6;
-						gbc_comboBoxMod.gridy = 7;
-						modifyPermit.add(comboBoxMod, gbc_comboBoxMod);
-		
-				JLabel lblVisitDateMod = new JLabel("Visit Date:");
-				GridBagConstraints gbc_lblVisitDateMod = new GridBagConstraints();
-				gbc_lblVisitDateMod.insets = new Insets(0, 0, 5, 5);
-				gbc_lblVisitDateMod.anchor = GridBagConstraints.WEST;
-				gbc_lblVisitDateMod.gridx = 1;
-				gbc_lblVisitDateMod.gridy = 8;
-				modifyPermit.add(lblVisitDateMod, gbc_lblVisitDateMod);
+
+		comboBoxMod = new JComboBox<String>();
+		comboBoxMod.addItem("Day Visitor");
+		comboBoxMod.addItem("Regular Visitor");
+		comboBoxMod.addItem("Permanent Visitor");
+		comboBoxMod.addItem("University Member");
+		comboBoxMod.addActionListener(this);
+
+		lblVehiclesMod = new JLabel("Vehicles:");
+		GridBagConstraints gbc_lblVehiclesMod = new GridBagConstraints();
+		gbc_lblVehiclesMod.anchor = GridBagConstraints.WEST;
+		gbc_lblVehiclesMod.insets = new Insets(0, 0, 5, 5);
+		gbc_lblVehiclesMod.gridx = 1;
+		gbc_lblVehiclesMod.gridy = 2;
+		modifyPermit.add(lblVehiclesMod, gbc_lblVehiclesMod);
+
+		btnAddVehicleMod = new JButton("+");
+		btnAddVehicleMod.addActionListener(this);
+		btnAddVehicleMod.setForeground(Color.WHITE);
+		btnAddVehicleMod.setFocusPainted(false);
+		btnAddVehicleMod.setBackground(new Color(112, 128, 144));
+		GridBagConstraints gbc_btnAddVehicleMod = new GridBagConstraints();
+		gbc_btnAddVehicleMod.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnAddVehicleMod.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAddVehicleMod.gridx = 3;
+		gbc_btnAddVehicleMod.gridy = 2;
+		modifyPermit.add(btnAddVehicleMod, gbc_btnAddVehicleMod);
+
+		btnRemoveVehicleMod = new JButton("-");
+		btnRemoveVehicleMod.addActionListener(this);
+		btnRemoveVehicleMod.setForeground(Color.WHITE);
+		btnRemoveVehicleMod.setFocusPainted(false);
+		btnRemoveVehicleMod.setBackground(new Color(112, 128, 144));
+		GridBagConstraints gbc_btnRemoveVehicleMod = new GridBagConstraints();
+		gbc_btnRemoveVehicleMod.insets = new Insets(0, 0, 5, 5);
+		gbc_btnRemoveVehicleMod.gridx = 4;
+		gbc_btnRemoveVehicleMod.gridy = 2;
+		modifyPermit.add(btnRemoveVehicleMod, gbc_btnRemoveVehicleMod);
+
+		vehiclesBoxMod = new JComboBox<String>();
+		vehiclesBoxMod.addItem("< No vehicles to show >");
+		vehiclesBoxMod.addActionListener(this);
+		GridBagConstraints gbc_vehiclesBoxMod = new GridBagConstraints();
+		gbc_vehiclesBoxMod.insets = new Insets(0, 0, 5, 0);
+		gbc_vehiclesBoxMod.fill = GridBagConstraints.HORIZONTAL;
+		gbc_vehiclesBoxMod.gridx = 6;
+		gbc_vehiclesBoxMod.gridy = 2;
+		modifyPermit.add(vehiclesBoxMod, gbc_vehiclesBoxMod);
+
+		JLabel lblRegistrationNumberMod = new JLabel("Registration Number:");
+		GridBagConstraints gbc_lblRegistrationNumberMod = new GridBagConstraints();
+		gbc_lblRegistrationNumberMod.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRegistrationNumberMod.gridx = 1;
+		gbc_lblRegistrationNumberMod.gridy = 3;
+		modifyPermit.add(lblRegistrationNumberMod, gbc_lblRegistrationNumberMod);
+
+		tf_RegNumberMod = new JTextField();
+		GridBagConstraints gbc_RegNumberMod = new GridBagConstraints();
+		gbc_RegNumberMod.insets = new Insets(0, 0, 5, 0);
+		gbc_RegNumberMod.fill = GridBagConstraints.HORIZONTAL;
+		gbc_RegNumberMod.gridx = 6;
+		gbc_RegNumberMod.gridy = 3;
+
+		modifyPermit.add(tf_RegNumberMod, gbc_RegNumberMod);
+		tf_RegNumberMod.setColumns(10);
+
+		JLabel lblCarMakeMod = new JLabel("Car make:");
+		GridBagConstraints gbc_lblCarMakeMod = new GridBagConstraints();
+		gbc_lblCarMakeMod.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCarMakeMod.anchor = GridBagConstraints.WEST;
+		gbc_lblCarMakeMod.gridx = 1;
+		gbc_lblCarMakeMod.gridy = 4;
+		modifyPermit.add(lblCarMakeMod, gbc_lblCarMakeMod);
+
+		tf_CarMakeMod = new JTextField();
+		GridBagConstraints gbc_CarMakeMod = new GridBagConstraints();
+
+		gbc_CarMakeMod.insets = new Insets(0, 0, 5, 0);
+		gbc_CarMakeMod.fill = GridBagConstraints.HORIZONTAL;
+		gbc_CarMakeMod.gridx = 6;
+		gbc_CarMakeMod.gridy = 4;
+		modifyPermit.add(tf_CarMakeMod, gbc_CarMakeMod);
+		tf_CarMakeMod.setColumns(10);
+
+		JLabel lblCarModelMod = new JLabel("Car model:");
+		GridBagConstraints gbc_lblCarModelMod = new GridBagConstraints();
+		gbc_lblCarModelMod.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCarModelMod.anchor = GridBagConstraints.WEST;
+		gbc_lblCarModelMod.gridx = 1;
+		gbc_lblCarModelMod.gridy = 5;
+		modifyPermit.add(lblCarModelMod, gbc_lblCarModelMod);
+
+		tf_CarModelMod = new JTextField();
+		GridBagConstraints gbc_CarModelMod = new GridBagConstraints();
+		gbc_CarModelMod.insets = new Insets(0, 0, 5, 0);
+		gbc_CarModelMod.fill = GridBagConstraints.HORIZONTAL;
+		gbc_CarModelMod.gridx = 6;
+		gbc_CarModelMod.gridy = 5;
+		modifyPermit.add(tf_CarModelMod, gbc_CarModelMod);
+		tf_CarModelMod.setColumns(10);
+
+		JLabel lblCarColorMod = new JLabel("Car color:");
+		GridBagConstraints gbc_lblCarColorMod = new GridBagConstraints();
+		gbc_lblCarColorMod.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCarColorMod.anchor = GridBagConstraints.WEST;
+		gbc_lblCarColorMod.gridx = 1;
+		gbc_lblCarColorMod.gridy = 6;
+		modifyPermit.add(lblCarColorMod, gbc_lblCarColorMod);
+
+		tf_CarColorMod = new JTextField();
+		GridBagConstraints gbc_CarColorMod = new GridBagConstraints();
+		gbc_CarColorMod.insets = new Insets(0, 0, 5, 0);
+		gbc_CarColorMod.fill = GridBagConstraints.HORIZONTAL;
+		gbc_CarColorMod.gridx = 6;
+		gbc_CarColorMod.gridy = 6;
+		modifyPermit.add(tf_CarColorMod, gbc_CarColorMod);
+		tf_CarColorMod.setColumns(10);
+
+		JLabel lblEnterPermitTypeMod = new JLabel("Enter Permit Type:");
+		GridBagConstraints gbc_lblEnterPermitTypeMod = new GridBagConstraints();
+		gbc_lblEnterPermitTypeMod.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEnterPermitTypeMod.anchor = GridBagConstraints.WEST;
+		gbc_lblEnterPermitTypeMod.gridx = 1;
+		gbc_lblEnterPermitTypeMod.gridy = 7;
+		modifyPermit.add(lblEnterPermitTypeMod, gbc_lblEnterPermitTypeMod);
+		GridBagConstraints gbc_comboBoxMod = new GridBagConstraints();
+		gbc_comboBoxMod.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxMod.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxMod.gridx = 6;
+		gbc_comboBoxMod.gridy = 7;
+		modifyPermit.add(comboBoxMod, gbc_comboBoxMod);
+
+		JLabel lblVisitDateMod = new JLabel("Visit Date:");
+		GridBagConstraints gbc_lblVisitDateMod = new GridBagConstraints();
+		gbc_lblVisitDateMod.insets = new Insets(0, 0, 5, 5);
+		gbc_lblVisitDateMod.anchor = GridBagConstraints.WEST;
+		gbc_lblVisitDateMod.gridx = 1;
+		gbc_lblVisitDateMod.gridy = 8;
+		modifyPermit.add(lblVisitDateMod, gbc_lblVisitDateMod);
 
 		tf_VisitDateMod = new JTextField();
 		GridBagConstraints gbc_VisitDateMod = new GridBagConstraints();
@@ -784,7 +742,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		submitBtnMod.setForeground(BUTTON_FGND);
 		submitBtnMod.setFocusPainted(false);
 		submitBtnMod.addActionListener(this);
-		
+
 		lblCarNumberMod = new JLabel("Vehicles permitted: 0");
 		GridBagConstraints gbc_lblCarNumberMod = new GridBagConstraints();
 		gbc_lblCarNumberMod.insets = new Insets(0, 0, 5, 0);
@@ -877,16 +835,16 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		//
 		if (change < 0) {
 			if (selectedVehicle > 0) {
-				vehicles[selectedVehicle-1] = null;
+				vehicles[selectedVehicle - 1] = null;
 				System.out.println("Vehicles removed!");
 				//
-				lblCarNumberMod.setText("Vehicles permitted: " + (numberOfVehicles-1));
+				lblCarNumberMod.setText("Vehicles permitted: " + (numberOfVehicles - 1));
 			} else {
 				System.out.println("No vehicle selected!");
 			}
 		} else {
 			//
-			if (vehicles[vehicles.length-1] == null) {
+			if (vehicles[vehicles.length - 1] == null) {
 				String regNum = tf_RegNumberMod.getText();
 				String carMake = tf_CarMakeMod.getText();
 				String carModel = tf_CarModelMod.getText();
@@ -903,7 +861,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 					displayAlert("Wrong car color entered!", 'w');
 				} else if (lnkVehicle_list.checkPermit(regNum)) {
 					displayAlert("Vehicle is already permitted!", 'w');
-				} else if (vehicles[vehicles.length-1] != null) {
+				} else if (vehicles[vehicles.length - 1] != null) {
 					displayAlert("Maximum number of vehicles are already permitted!", 'w');
 				} else {
 					// able to add
@@ -918,7 +876,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 					//
 					System.out.println("Vehicle succesfully added!");
 					//
-					lblCarNumberMod.setText("Vehicles permitted: " + (numberOfVehicles+1));
+					lblCarNumberMod.setText("Vehicles permitted: " + (numberOfVehicles + 1));
 				}
 			} else {
 				System.out.println("Maximum number of vehicles are added to the permit!");
@@ -933,10 +891,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		int selectedVehicle = vehiclesBoxMod.getSelectedIndex();
 		//
 		if (vehiclesBoxMod.getSelectedIndex() > 0) {
-			tf_RegNumberMod.setText(vehicles[selectedVehicle-1].getRegistration());
-			tf_CarMakeMod.setText(vehicles[selectedVehicle-1].getMake());
-			tf_CarModelMod.setText(vehicles[selectedVehicle-1].getModel());
-			tf_CarColorMod.setText(vehicles[selectedVehicle-1].getColour());
+			tf_RegNumberMod.setText(vehicles[selectedVehicle - 1].getRegistration());
+			tf_CarMakeMod.setText(vehicles[selectedVehicle - 1].getMake());
+			tf_CarModelMod.setText(vehicles[selectedVehicle - 1].getModel());
+			tf_CarColorMod.setText(vehicles[selectedVehicle - 1].getColour());
 		}
 	}
 
@@ -989,7 +947,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		}
 		if (valid) {
 			Vehicle_info veh = new Vehicle_info(regNum, carColor, carMake, carModel);
-      
+
 			// need to pull car related info, store it to array and use that info to create
 			// permit and add new vehicles to it
 			if (vehicles[vehicles.length - 1] == null) {
@@ -1075,9 +1033,10 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			} else {
 				// cancel old permit and remove old vehicle
 				lnkPermit_list.cancelPermit(tf_PermitNumberMod.getText());
-				// code below needs to be change to cancel multiple vehicles
-				Vehicle_info v = getVehicle(lnkPermit_list.getPermit(tf_PermitNumberMod.getText()));
-				lnkVehicle_list.remove(v);
+				Vehicle_info[] v = lnkVehicle_list.getVehicles(lnkPermit_list.getPermit(tf_PermitNumberMod.getText()));
+				for (int i = 0; i < v.length; i++) {
+					lnkVehicle_list.remove(v[i]);
+				}
 				// add new permit depending on type
 				createPermit(permitType, name, regNum, carMake, carModel, carColor, visitDate, hostName);
 			}
@@ -1174,80 +1133,72 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		} else {
 			if (lnkPermit_list.checkPermit(nameStatus)) {
 				Permit aPermit = lnkPermit_list.getPermit(nameStatus);
-				    int permittedVehicles=0;
-				    Vehicle_info [] vehicles_permit=lnkVehicle_list.getVehicles(aPermit);
-					StringBuilder regNums=new StringBuilder();
-					StringBuilder carMakes=new StringBuilder();
-					StringBuilder carModels=new StringBuilder();
-					StringBuilder carColors=new StringBuilder();
-				
-						for (Vehicle_info veh:vehicles_permit) {
-							if (veh != null) {
-						
-						       if(permittedVehicles==0)
-						       {
-							    regNums.append(veh.getRegistration());
-							    carMakes.append(veh.getMake());
-							    carModels.append(veh.getModel());
-							    carColors.append(veh.getColour());
-							    permittedVehicles++;
-							   
-						       }
-						       else
-						       {
-						    	   regNums.append(" , ").append(veh.getRegistration());
-						    	   carMakes.append(" , ").append(veh.getMake());
-						    	   carModels.append(" , ").append(veh.getModel());
-						    	   carColors.append(" , ").append(veh.getColour());
-						    	   permittedVehicles++;
-						    	   
-						       }
-							    
-							
-							}
+				int permittedVehicles = 0;
+				Vehicle_info[] vehicles_permit = lnkVehicle_list.getVehicles(aPermit);
+				StringBuilder regNums = new StringBuilder();
+				StringBuilder carMakes = new StringBuilder();
+				StringBuilder carModels = new StringBuilder();
+				StringBuilder carColors = new StringBuilder();
+
+				for (Vehicle_info veh : vehicles_permit) {
+					if (veh != null) {
+
+						if (permittedVehicles == 0) {
+							regNums.append(veh.getRegistration());
+							carMakes.append(veh.getMake());
+							carModels.append(veh.getModel());
+							carColors.append(veh.getColour());
+							permittedVehicles++;
+
+						} else {
+							regNums.append(" , ").append(veh.getRegistration());
+							carMakes.append(" , ").append(veh.getMake());
+							carModels.append(" , ").append(veh.getModel());
+							carColors.append(" , ").append(veh.getColour());
+							permittedVehicles++;
+
 						}
-					String permitType = null;
-					String hostName = null;
-					String issueDate = null;
-					String expireDate=null;
-					//
-					issueDate = Integer.toString(aPermit.getIssueDate().getDayNumber());
 
-					if (aPermit instanceof Day_visitor_permit) {
-						permitType = "Day Visitor Permit";
-						hostName = ((Day_visitor_permit) aPermit).getHostName();
-						expireDate=Integer.toString(((Day_visitor_permit) aPermit).getActiveDate().getDayNumber());
-					} else if (aPermit instanceof Regular_visitor_permit) {
-						permitType = "Regular Visitor Permit";
-						hostName = ((Regular_visitor_permit) aPermit).getHostName();
-						expireDate=Integer.toString(((Regular_visitor_permit) aPermit).getExpiryDate().getDayNumber());
-					} else if (aPermit instanceof Permanent_visitor_permit) {
-						permitType = "Permanent Visitor Permit";
-						hostName = "N/A";
-						expireDate="N/A";
-					} else {
-						permitType = "University Member Permit";
-						hostName = "N/A";
-						expireDate="N/A";
 					}
-					tp_Enquiry.setText(" Permit found! \n Permit Name: " + aPermit.getPermitHolder()
-							+ "\n Permit Number: " + aPermit.getUniqueID() + "\n Permit Type: " + permitType
-							+ "\n Host name: " + hostName + "\n Issue Date: " + issueDate+"\n Expiring Date: "+expireDate + "\n Warnings: "
-							+ aPermit.getWarnings() + "\n Suspended: " + aPermit.isSuspended() + "\n Number of Cars: "+permittedVehicles
-							+ "\n Registration Number: " + regNums + "\n Car maker: "
-							+ carMakes + "\n Car model: " + carModels + "\n Car color: "
-							+ carColors + "\n Number of Entries: " + aPermit.getEntries());
+				}
+				String permitType = null;
+				String hostName = null;
+				String issueDate = null;
+				String expireDate = null;
+				//
+				issueDate = Integer.toString(aPermit.getIssueDate().getDayNumber());
 
-				
-			
-			}
-			else {
+				if (aPermit instanceof Day_visitor_permit) {
+					permitType = "Day Visitor Permit";
+					hostName = ((Day_visitor_permit) aPermit).getHostName();
+					expireDate = Integer.toString(((Day_visitor_permit) aPermit).getActiveDate().getDayNumber());
+				} else if (aPermit instanceof Regular_visitor_permit) {
+					permitType = "Regular Visitor Permit";
+					hostName = ((Regular_visitor_permit) aPermit).getHostName();
+					expireDate = Integer.toString(((Regular_visitor_permit) aPermit).getExpiryDate().getDayNumber());
+				} else if (aPermit instanceof Permanent_visitor_permit) {
+					permitType = "Permanent Visitor Permit";
+					hostName = "N/A";
+					expireDate = "N/A";
+				} else {
+					permitType = "University Member Permit";
+					hostName = "N/A";
+					expireDate = "N/A";
+				}
+				tp_Enquiry.setText(" Permit found! \n Permit Name: " + aPermit.getPermitHolder() + "\n Permit Number: "
+						+ aPermit.getUniqueID() + "\n Permit Type: " + permitType + "\n Host name: " + hostName
+						+ "\n Issue Date: " + issueDate + "\n Expiring Date: " + expireDate + "\n Warnings: "
+						+ aPermit.getWarnings() + "\n Suspended: " + aPermit.isSuspended() + "\n Number of Cars: "
+						+ permittedVehicles + "\n Registration Number: " + regNums + "\n Car maker: " + carMakes
+						+ "\n Car model: " + carModels + "\n Car color: " + carColors + "\n Number of Entries: "
+						+ aPermit.getEntries());
+
+			} else {
 				tp_Enquiry.setText("Permit not found");
 
 			}
 
-		
-	}
+		}
 	}
 
 	private void findPermit() {
@@ -1272,7 +1223,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			//
 			populateVehicleComboBox();
 			//
-			//if (vehicle != null) {
+			// if (vehicle != null) {
 			if (true) {
 				// fill fields with data from the permit
 				tf_NameMode.setText(aPermit.getPermitHolder());
@@ -1313,7 +1264,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		//
 		for (int i = 0; i < vehicles.length; i++) {
 			if (vehicles[i] != null) {
-				vehicleInfo = "RegNum: " + vehicles[i].getRegistration() + ", Make: " + vehicles[i].getMake() + ", Model: " + vehicles[i].getModel() + ", Colour: " + vehicles[i].getColour();
+				vehicleInfo = "RegNum: " + vehicles[i].getRegistration() + ", Make: " + vehicles[i].getMake()
+						+ ", Model: " + vehicles[i].getModel() + ", Colour: " + vehicles[i].getColour();
 				vehiclesBoxMod.addItem(vehicleInfo);
 			}
 		}
