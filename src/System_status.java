@@ -53,7 +53,7 @@ public class System_status extends Observable {
 	 */
 	public void setToday(Date date) { // might need to be changed
 		today = date;
-		System.out.println("Date: " + today.getDayNumber());
+		//System.out.println("Date: " + today.getDayNumber());
 		setChanged();
 		notifyObservers();
 	}
