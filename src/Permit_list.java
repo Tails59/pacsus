@@ -47,25 +47,41 @@ public class Permit_list {
 		return permit.getPermitHolder();
 	}
 
+	/**
+	 * Check if a person has a permit
+	 * 
+	 * @param name [String] name to search for
+	 * @return hasPermit [boolean] true if the person owns a permit
+	 */
 	public boolean checkPermit(String name) {
 		return lnkPermit != null && lnkPermit.containsKey(name);
 	}
 
+	/**
+	 * Get a permit owned by a person
+	 * 
+	 * @param name [String] permit owner to search for
+	 * @return permit [Permit] The permit object owned by that person, or null if
+	 *         they dont have a permit
+	 */
 	public Permit getPermit(String name) {
-		if (lnkPermit == null || !lnkPermit.containsKey(name)) {
-			return null;
-		} else {
-			return lnkPermit.get(name);
-		}
+		return checkPermit(name) ? lnkPermit.get(name) : null;
 	}
 
+	/**
+	 * Cancel a permit owned by a person
+	 * 
+	 * @param name [String] permit owner to search for
+	 * @return true if the permit was cancelled, false if the permit doesnt exist or
+	 *         is already cancelled
+	 */
 	public boolean cancelPermit(String name) {
 		boolean permitFound = false;
 		if (lnkPermit != null && lnkPermit.containsKey(name)) {
-			//
+
 			Vehicle_list permittedVehicles = Main.getVehicleList();
 			permittedVehicles.remove(permittedVehicles.getVehicle(lnkPermit.get(name)));
-			//
+
 			lnkPermit.remove(name);
 			permitFound = true;
 		} else {
@@ -74,8 +90,11 @@ public class Permit_list {
 		return permitFound;
 	}
 
+	/**
+	 * Reset all permits at the start of the year
+	 * @param today
+	 */
 	public void resetPermits(Date today) {
-		//
 		List<String> keys = new ArrayList<String>(lnkPermit.keySet());
 
 		Permit aPermit = null;
@@ -92,7 +111,7 @@ public class Permit_list {
 			}
 			if (visit.getDayNumber() > 0) {
 				if (visit.getDayNumber() < today.getDayNumber()) {
-					//
+
 					cancelPermit(aPermit.permitHolder);
 					permits--;
 				}
@@ -100,8 +119,8 @@ public class Permit_list {
 			}
 			if (today.getDayNumber() == 1) {
 				aPermit.removeWarnings(aPermit.getWarnings());
-				aPermit.setNoOfEntries(0);
-				aPermit.setSuspended(false);
+				aPermit.resetEntries();
+				aPermit.unsuspend();
 
 			}
 		}

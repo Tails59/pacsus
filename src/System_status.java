@@ -30,6 +30,8 @@ public class System_status extends Observable {
 	 */
 
 	private String[] log = new String[20];
+	
+	private Campus_security security;
 
 	/**
 	 * This attribute is kept up to date by the Timer.
@@ -44,29 +46,50 @@ public class System_status extends Observable {
 
 	private int nextIndex;
 
+	/**
+	 * Set todays date
+	 * @param date [Date] current date
+	 */
 	public void setToday(Date date) { // might need to be changed
 		today = date;
 		System.out.println("Date: " + today.getDayNumber());
 		setChanged();
 		notifyObservers();
 	}
-
+	
+	/**
+	 * Get today's date
+	 * 
+	 * @return today [Date] current date
+	 */
 	public Date getToday() {
 		return today;
 	}
 
-	private Campus_security security;
-
+	/**
+	 * Set the current system status 
+	 * 
+	 * @param status [boolean] Status: true = on, false = off.
+	 */
 	public void setStatus(boolean status) {
 		systemActive = status;
 		setChanged();
 		notifyObservers();
 	}
 
+	/**
+	 * Get the current system status
+	 * @return status [boolean] true if the system is active
+	 */
 	public boolean getStatus() {
 		return systemActive;
 	}
 
+	/**
+	 * Record an entry through the barriers
+	 * @param regNo [String] vehicle's registration number
+	 * @param entered [boolean] True if the vehicle was permitted through, false otherwise (i.e. their permit was suspended)
+	 */
 	public void recordEntry(String regNo, boolean entered) {
 		if (nextIndex < 20) {
 			if (entered) {

@@ -95,14 +95,34 @@ public class Permit {
 	 */
 	private Vehicle_list permittedVehicles;
 
+	/**
+	 * Set the permit holder
+	 * 
+	 * @param permitHolder [String] Name of the person that owns this permit
+	 */
 	public void setPermitHolder(String permitHolder) {
 		this.permitHolder = permitHolder;
 	}
 
+	/**
+	 * Set the permit's issue date
+	 * 
+	 * @param issueDate [Date] date the permit was issued
+	 */
 	public void setIssueDate(Date issueDate) {
 		this.issueDate = issueDate;
 	}
 
+	/**
+	 * Create a new permit - called by concrete subclasses of the different permit
+	 * types
+	 * 
+	 * @param permitHolder [String] name of the person that owns this permit
+	 * @param firstVehicle [Vehicle_info] First vehicle associated with this permit,
+	 *                     guarantees at least 1 vehicle is assigned to permit
+	 * @param issueDate    [Date] date the perimt was issued, usually the current
+	 *                     date
+	 */
 	protected Permit(String permitHolder, Vehicle_info firstVehicle, Date issueDate) {
 		this.UNIQUE_ID = uniqueId + 1;
 		uniqueId++;
@@ -123,14 +143,30 @@ public class Permit {
 		// Main.getPermitList().addPermit(this);
 	}
 
+	/**
+	 * Add a vehicle to this permit
+	 * 
+	 * @param veh [Vehicle_info] Vehicle to be added
+	 * @throws Exception if the vehicle cannnot be added
+	 */
 	public void addVehicle(Vehicle_info veh) throws Exception {
 		permittedVehicles.addNew(veh, this);
 	}
 
+	/**
+	 * Remove a vehicle from this permit
+	 * 
+	 * @param veh [Vehicle_info] Vehicle to be removed
+	 */
 	public void removeVehicle(Vehicle_info veh) {
 		permittedVehicles.remove(veh);
 	}
 
+	/**
+	 * Add a warning to this permit for any reason
+	 * 
+	 * If this is the third warning, the permit will be automatically suspended
+	 */
 	public void addWarning() {
 		if (warnings == MAX_WARNINGS - 1) {
 			suspend();
@@ -139,26 +175,30 @@ public class Permit {
 		this.warnings += 1;
 	}
 
-	public int getNoOfEntries() {
-		return noOfEntries;
-	}
-
-	public void setNoOfEntries(int noOfEntries) {
-		this.noOfEntries = noOfEntries;
-	}
-
+	/**
+	 * Whether this permit is suspended
+	 * 
+	 * @return suspended [boolean] True if the permit is suspended and cannot access
+	 *         the barriers
+	 */
 	public boolean isSuspended() {
 		return suspended;
 	}
 
-	public void setSuspended(boolean suspended) {
-		this.suspended = suspended;
-	}
-
+	/**
+	 * Get the number of warnings this permit has
+	 * 
+	 * @return warnings [int] the number of warnings
+	 */
 	public int getWarnings() {
 		return this.warnings;
 	}
 
+	/**
+	 * Remove one or more warnings from this permit
+	 * 
+	 * @param amount [int] number of warnings to remove
+	 */
 	public void removeWarnings(int amount) {
 		this.warnings -= amount;
 
@@ -167,43 +207,94 @@ public class Permit {
 		}
 	}
 
-	private void unsuspend() {
+	/**
+	 * Unsuspend this permit
+	 */
+	void unsuspend() {
 		this.suspended = false;
 	}
 
+	/**
+	 * Suspend this permit
+	 */
 	private void suspend() {
 		this.suspended = true;
 	}
 
+	/**
+	 * Add an entry to this permit
+	 */
 	public void addEntry() {
 		this.noOfEntries += 1;
-		this.enteredToday = true;
+		entered();
 	}
 
+	/**
+	 * Reset the number of entries, done at the start of each year
+	 */
 	public void resetEntry() {
 		this.enteredToday = false;
 	}
 
+	/**
+	 * Reset the number of times this vehicle has passed the barriers
+	 */
+	public void resetEntries() {
+		this.noOfEntries = 0;
+	}
+
+	/**
+	 * Get the number of entries
+	 * 
+	 * @return
+	 */
 	public int getEntries() {
 		return this.noOfEntries;
 	}
 
+	/**
+	 * Called when this vehicle enters the barriers, records that they have entered
+	 * today
+	 * 
+	 * @return
+	 */
 	public boolean entered() {
 		return this.enteredToday;
 	}
 
+	/**
+	 * Get this permits unique ID, used for searching
+	 * 
+	 * @return
+	 */
 	public int getUniqueID() {
 		return this.UNIQUE_ID;
 	}
 
+	/**
+	 * The date this permit was issued
+	 * 
+	 * @return
+	 */
 	public Date getIssueDate() {
 		return this.issueDate;
 	}
 
+	/**
+	 * The name of the person who owns this permit
+	 * 
+	 * @return
+	 */
 	public String getPermitHolder() {
 		return this.permitHolder;
 	}
 
+	/**
+	 * Set the vehicle that the permit holder used today
+	 * 
+	 * @param todaysVehicle
+	 * @throws Exception
+	 */
 	public void setTodaysVehicle(Vehicle_info todaysVehicle) throws Exception {
 		this.vehicleUsedToday = todaysVehicle;
 		this.addVehicle(todaysVehicle);
