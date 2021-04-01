@@ -82,7 +82,51 @@ public class Main {
 		return permitList;
 	}
 
+<<<<<<< Updated upstream
 	public static System_status getSystemStatus() {
 		return systemStatus;
 	}
+=======
+        adminOffice1 = new Administration_office(systemStatus, vehicleList, permitList);  // Frame, boundary class
+          // Repeat for as many admin office screens as required
+        
+        //testPermits();
+    } // main
+    
+    private static void testPermits() {
+    	Date now = new Date();
+    	now.setDayNumber(systemStatus.getToday().getDayNumber());
+    	Date later = new Date();
+    	later.setDayNumber(now.getDayNumber() + 5); //5 days in the future
+    	
+    	Vehicle_info veh1 = new Vehicle_info("MW13 TWO", "Red", "Audi", "TT");
+    	Permanent_visitor_permit pvp1 = new Permanent_visitor_permit("Taylor", now, veh1);
+    	veh1.setPermit(pvp1);
+    	permitList.addPermit(pvp1);
+    	Vehicle_info veh2 = new Vehicle_info("Y976 NEN", "Blue", "VW", "Golf");
+    	Day_visitor_permit dvp1 = new Day_visitor_permit("Davide", "Taylor", veh2, now, now);
+    	veh2.setPermit(dvp1);
+    	permitList.addPermit(dvp1);
+    	Vehicle_info veh3 = new Vehicle_info("KR11 PSE", "White", "Honda", "Civic");
+    	University_member_permit ump = new University_member_permit("Rory", now, veh3);
+    	veh3.setPermit(ump);
+    	permitList.addPermit(ump);
+    	Vehicle_info veh4 = new Vehicle_info("N17 LRN", "Black", "Mercedes", "CLK 320");
+    	Regular_visitor_permit rvp = new Regular_visitor_permit("Almantas", "Davide", now, later, veh4);
+    	veh4.setPermit(rvp);
+    	permitList.addPermit(rvp);
+    }
+    
+    public static Vehicle_list getVehicleList() {
+    	return vehicleList;
+    }
+    
+    public static Permit_list getPermitList() {
+    	return permitList;
+    }
+    
+    public static System_status getSystemStatus() {
+    	return systemStatus;
+    }
+>>>>>>> Stashed changes
 }

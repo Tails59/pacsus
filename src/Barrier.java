@@ -93,6 +93,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 	private boolean raised = true;
 	private boolean recorded = false;
 
+<<<<<<< Updated upstream
 	/**
 	 * Stores the date set by the timer.
 	 */
@@ -150,6 +151,60 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		lblBarrierHeader.setFont(HEADER_FONT);
 		lblBarrierHeader.setForeground(Color.WHITE);
 		header.add(lblBarrierHeader);
+=======
+    private JPanel contentPane;
+    private JPanel header;
+    private JPanel regNoInput;
+    private JPanel barrierControls;
+    private JPanel barrierStatus;
+    private JLabel lbl_BarrierHeader;
+    private JLabel lbl_BarrierPosition;
+    private JLabel lbl_Instruction;
+    protected JTextField tf_regNo;
+    protected JButton btn_submit;
+    protected JButton btn_vehicleClear;
+    private final Color GO_COLOUR = new Color(0,179,44);
+    private final Color STOP_COLOUR = new Color(220,61,42);
+    private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
+    private final Color BUTTON_BGKD = new Color(112,128,144);
+    private String windowTitle;
+    
+    public Barrier(System_status status, Vehicle_list veh, String wt, int xLocation, int yLocation) {
+    	
+    	// Record references to the system status and vehicle list
+    	this.lnkSystem_status = status;
+    	this.lnkVehicle_list = veh;
+    	
+    	// Window properties
+        final int PADDING = 20;
+        final int WIDTH = 400;
+        final int HEIGHT = 290; 
+        date = status.getToday().getDayNumber();
+        windowTitle = wt;
+        
+    	// Configure the window 	
+    	setTitle(windowTitle + "  [Date: " + date + "]");
+    	setLocation(xLocation,yLocation);
+    	setSize(WIDTH, HEIGHT);
+    	setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	setResizable(false);
+        Container window = getContentPane();
+        window.setLayout(new FlowLayout(FlowLayout.LEFT));
+        
+        // Add: Header
+        final int HEADER_HEIGHT = 374;
+        final int HEADER_WIDTH = 35;
+        final Color HEADER_BACKGROUND = new Color(0,105,56);
+        final Font  HEADER_FONT = new Font("Calibri", Font.BOLD, 25);
+        header = new JPanel();
+	    header.setBackground(HEADER_BACKGROUND);
+	    header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
+	    header.setLayout(new FlowLayout(FlowLayout.LEFT));
+        lbl_BarrierHeader = new JLabel("PACSUS - " + windowTitle);
+	    lbl_BarrierHeader.setFont(HEADER_FONT);
+	    lbl_BarrierHeader.setForeground(Color.WHITE);
+		header.add(lbl_BarrierHeader);
+>>>>>>> Stashed changes
 		window.add(header);
 
 		// Add: Registration number input
@@ -157,24 +212,24 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		regNoInput = new JPanel();
 		Border borderRegNoInput = BorderFactory.createTitledBorder("Enter registration number");
 		regNoInput.setBorder(borderRegNoInput);
-		regNo = new JTextField(REG_NO_INPUT_WIDTH);
-		regNoInput.add(regNo);
+		tf_regNo = new JTextField(REG_NO_INPUT_WIDTH);
+		regNoInput.add(tf_regNo);
 		window.add(regNoInput);
 
 		// Add: Barrier controls
 		barrierControls = new JPanel();
-		submit = new JButton("Submit");
-		submit.setBackground(BUTTON_BGKD);
-		submit.setForeground(Color.WHITE);
-		submit.setFocusPainted(false);
-		submit.addActionListener(this);
-		barrierControls.add(submit);
-		vehicleClear = new JButton("Vehicle Clear");
-		vehicleClear.setBackground(BUTTON_BGKD);
-		vehicleClear.setForeground(Color.WHITE);
-		vehicleClear.setFocusPainted(false);
-		vehicleClear.addActionListener(this);
-		barrierControls.add(vehicleClear);
+		btn_submit = new JButton("Submit");
+		btn_submit.setBackground(BUTTON_BGKD);
+		btn_submit.setForeground(Color.WHITE);
+		btn_submit.setFocusPainted(false);
+		btn_submit.addActionListener(this);
+		barrierControls.add(btn_submit);
+		btn_vehicleClear = new JButton("Vehicle Clear");
+		btn_vehicleClear.setBackground(BUTTON_BGKD);
+		btn_vehicleClear.setForeground(Color.WHITE);
+		btn_vehicleClear.setFocusPainted(false);
+		btn_vehicleClear.addActionListener(this);
+		barrierControls.add(btn_vehicleClear);
 		window.add(barrierControls);
 
 		// Add: Barrier status
@@ -186,11 +241,19 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 		barrierStatus.setBackground(BARRIER_STATUS_BGKD);
 		barrierStatus.setPreferredSize(new Dimension(BARRIER_STATUS_WIDTH, BARRIER_STATUS_HEIGHT));
 		barrierStatus.setLayout(new GridBagLayout());
+<<<<<<< Updated upstream
 		lblBarrierPosition = new JLabel("Barrier status undefined");
 		barrierStatus.add(lblBarrierPosition);
 		lblInstruction = new JLabel("");
 		lblInstruction.setFont(INSTRUCTION_FONT);
 		barrierStatus.add(lblInstruction);
+=======
+		lbl_BarrierPosition = new JLabel("Barrier status undefined");
+		barrierStatus.add(lbl_BarrierPosition);
+		lbl_Instruction = new JLabel("");
+		lbl_Instruction.setFont(INSTRUCTION_FONT);
+		barrierStatus.add(lbl_Instruction);	
+>>>>>>> Stashed changes
 		window.add(barrierStatus);
 
 		setVisible(true);
@@ -208,6 +271,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 
 		if (active == false) {
 			raised = true;
+<<<<<<< Updated upstream
 			submit.setEnabled(false);
 			submit.setBackground(DISABLE_BTN_COLOUR);
 			vehicleClear.setEnabled(false);
@@ -218,14 +282,28 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			lblInstruction.setText(" GO");
 			barrierStatus.setBackground(GO_COLOUR);
 		} else if (active == true && !recorded) {
+=======
+			btn_submit.setEnabled(false);
+			btn_submit.setBackground(DISABLE_BTN_COLOUR);
+			btn_vehicleClear.setEnabled(false);
+			btn_vehicleClear.setBackground(DISABLE_BTN_COLOUR);
+			tf_regNo.setText("");
+			tf_regNo.setEnabled(false);
+			lbl_BarrierPosition.setText("System inactive");
+			lbl_Instruction.setText(" GO");
+			barrierStatus.setBackground(GO_COLOUR);	
+		}
+		else if(active == true && !recorded)
+		{
+>>>>>>> Stashed changes
 			raised = false;
-			submit.setEnabled(true);
-			submit.setBackground(BUTTON_BGKD);
-			vehicleClear.setEnabled(true);
-			vehicleClear.setBackground(BUTTON_BGKD);
-			regNo.setEnabled(true);
-			lblBarrierPosition.setText("The barrier is lowered");
-			lblInstruction.setText(" STOP");
+			btn_submit.setEnabled(true);
+			btn_submit.setBackground(BUTTON_BGKD);
+			btn_vehicleClear.setEnabled(true);
+			btn_vehicleClear.setBackground(BUTTON_BGKD);
+			tf_regNo.setEnabled(true);
+			lbl_BarrierPosition.setText("The barrier is lowered");
+			lbl_Instruction.setText(" STOP");
 			barrierStatus.setBackground(STOP_COLOUR);
 		}
 		//
@@ -235,6 +313,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final int REG_NO_LENGTH = 8;
+<<<<<<< Updated upstream
 		if (e.getSource() == submit && active == true) // Check if the event source is the submit button and if the
 														// system is active.
 		{
@@ -251,23 +330,41 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 																				// number entered by the user.
 				if (toCheck != null) // If the permit has been successfully found, then check if the vehicle can pass
 										// the barrier.
+=======
+		if (e.getSource() == btn_submit && active == true) // Check if the event source is the btn_submit button and if the system is active.
+		{			
+			if (tf_regNo.getText().equals("")) // Check for user input.
+			{
+				displayAlert("Please enter a registration number.", 'w');
+			}
+			else if (!tf_regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || tf_regNo.getText().length() > REG_NO_LENGTH) // Validate input and warn user if invalid.
+			{
+				displayAlert("Please enter a valid registration number.", 'w');
+				tf_regNo.setText("");
+			}
+			else
+			{	
+				Permit toCheck = lnkVehicle_list.getAPermit(tf_regNo.getText()); // Get the permit using the registration number entered by the user.
+				if (toCheck != null) // If the permit has been successfully found, then check if the vehicle can pass the barrier.
+>>>>>>> Stashed changes
 				{
 					if (lnkVehicle_list.canPass(toCheck)) {
 						//
 						recordEntry(toCheck, true);
 						// Raise the barrier
 						raised = true;
-						regNo.setText("");
-						lblBarrierPosition.setText("The barrier is raised");
-						lblInstruction.setText(" GO");
+						tf_regNo.setText("");
+						lbl_BarrierPosition.setText("The barrier is raised");
+						lbl_Instruction.setText(" GO");
 						barrierStatus.setBackground(GO_COLOUR);
 					} else {
 						//
 						recordEntry(toCheck, false);
 						// Warn the user that access is denied for the vehicle.
 						raised = false;
-						regNo.setText("");
+						tf_regNo.setText("");
 						displayAlert("Access is denied for this vehicle.", 'w');
+<<<<<<< Updated upstream
 					}
 				} else {
 					displayAlert("No permit found for this vehicle.", 'w'); // Alert the user that no permit was found
@@ -277,12 +374,24 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 			}
 		} else if (e.getSource() == vehicleClear && active == true) // Check if the event source is vehicle clear and if
 																	// the system is active.
+=======
+					}	
+				}
+				else
+				{
+					displayAlert("No permit found for this vehicle.", 'w'); // Alert the user that no permit was found with the registration number entered.
+					tf_regNo.setText("");
+				}
+			}
+		}
+		else if (e.getSource() == btn_vehicleClear && active == true) // Check if the event source is vehicle clear and if the system is active.
+>>>>>>> Stashed changes
 		{
 			if (raised == true) // Check if the barrier is raised and lower if true.
 			{
 				raised = false;
-				lblBarrierPosition.setText("The barrier is lowered");
-				lblInstruction.setText(" STOP");
+				lbl_BarrierPosition.setText("The barrier is lowered");
+				lbl_Instruction.setText(" STOP");
 				barrierStatus.setBackground(STOP_COLOUR);
 			} else // Warn the user that the barrier is already lowered.
 			{
@@ -298,7 +407,7 @@ public class Barrier extends JFrame implements Observer, ActionListener {
 							// true
 		Vehicle_info[] vehicles = lnkVehicle_list.getVehicles(p);
 		for (int i = 0; i < vehicles.length; i++) {
-			if (vehicles[i].getRegistration().equals(regNo.getText())) {
+			if (vehicles[i].getRegistration().equals(tf_regNo.getText())) {
 				lnkSystem_status.addEntry(vehicles[i], state);
 			}
 		}

@@ -48,6 +48,14 @@ public class Vehicle_list {
 		return this.vehicleList;
 	}
 
+	/**
+     * Adds a new permit to the vehicle list
+     * 
+     * @param veh_info The vehicle
+     * @param permit The permit 
+     * @return boolean True if a permit was found for the vehicle, false if not
+     */
+	
 	public void addNew(Vehicle_info veh_info, Permit permit) throws Exception {
 		Permit old = vehicleList.put(veh_info, permit);
 
@@ -61,6 +69,13 @@ public class Vehicle_list {
 		vehicleList.remove(veh_info);
 	}
 
+	 /**
+     * Check if a permit exists
+     * 
+     * @param regNo The registration number of the vehicle to check
+     * @return boolean True if a permit was found for the vehicle, false if not
+     */
+	
 	public boolean checkPermit(String reg) {
 		Set<Vehicle_info> keySet = vehicleList.keySet();
 
@@ -93,6 +108,13 @@ public class Vehicle_list {
 		return null;
 	}
 
+	/**
+     * Fetches vehicle information
+     * 
+     * @param p The permit to fetch 
+     * @return VehicleInfo An array of all the vehicles assigned the permit
+     */
+	
 	public Vehicle_info[] getVehicles(Permit p) {
 		//
 		int permittedVehicles = 0;
@@ -120,7 +142,14 @@ public class Vehicle_list {
 		}
 		return vehicles;
 	}
-
+	
+	 /**
+     * Records a warning on a permit
+     * 
+     * @param regNo The registration number of the vehicle to warn
+     * @return boolean True if the warning was issues successfully, false if not
+     */
+	
 	public boolean issueWarning(String regNo) {
 		final int MAX_WARNINGS = 3;
 		if (getAPermit(regNo) != null) {
@@ -137,6 +166,13 @@ public class Vehicle_list {
 		}
 	}
 
+	/**
+     * Fetches a permit using the registration number.
+     * 
+     * @param  reg The registration number of the the vehicle
+     * @return aPermit The permit fetched using the registration number.
+     */
+	
 	public Permit getAPermit(String reg) {
 		//
 		Permit aPermit = null;
@@ -154,7 +190,14 @@ public class Vehicle_list {
 		}
 		return aPermit;
 	}
-
+	
+	/**
+     * Checks if a vehicle can pass the barrier.
+     * 
+     * @param  p  The permit to check
+     * @return boolean True if the vehicle can pass the barrier, false if not.
+     */
+	
 	public boolean canPass(Permit p) {
 		if (p.canPassBarrier()) {
 			p.addEntry();

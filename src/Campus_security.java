@@ -55,6 +55,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 	 */
 	private Vehicle_list lnkVehicle_list;
 
+<<<<<<< Updated upstream
 	/**
 	 * Each instance of Campus_security has a navigable association to the system
 	 * status so that it can both find out status information about the system, and
@@ -131,11 +132,89 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		lblCampusSecurity.setFont(HEADER_FONT);
 		lblCampusSecurity.setForeground(Color.WHITE);
 		header.add(lblCampusSecurity);
+=======
+    /**
+     * Each instance of Campus_security has a navigable association to the system status so that it
+     * can both find out status information about the system, and send controlling messages to the
+     * system status (to activate/deactivate the system).
+     * @clientCardinality 1..*
+     * @supplierCardinality 1
+     * @label Control/monitor
+     * @directed 
+     */
+    private System_status lnkSystem_status;
+    
+    
+    /**
+     * Stores the date set by the timer.
+     */
+    private int date;
+    
+    private JPanel contentPane;
+    private JPanel header;
+    private JPanel barrierControl;
+    private JPanel regNoInput;
+    private JPanel regNoPanel;
+    private JLabel lbl_CampusSecurity;
+    private JLabel lbl_BarrierStatus;
+    private JButton btn_activateBarrier;
+    private JButton btn_deactivateBarrier;
+    private JButton btn_issueWarning;
+    private JButton btn_checkLog;
+    private JTextField tf_regNo;
+    private JTextPane tp_regNoPane;
+    private JScrollPane sp_regNoScroll;
+    private final Color DISABLE_BTN_COLOUR = new Color(211,211,211);
+    private final Color ACTIVATE_BTN_BGKD = new Color(0,179,44);
+    private final Color DEACTIVATE_BTN_BGKD = new Color(220,61,42);
+    private final String WINDOW_TITLE;
+    
+    
+    public Campus_security(System_status status, Vehicle_list veh) {
+    	
+    	// Record references to the system status and vehicle list
+    	this.lnkSystem_status = status;
+    	this.lnkVehicle_list = veh;
+    	
+    	// Window properties
+    	WINDOW_TITLE = "Campus Security";
+    	date = status.getToday().getDayNumber();
+        final int PADDING = 20;
+        final int X_LOCATION = 100;
+        final int Y_LOCATION = 100;
+        final int WIDTH = 775;
+        final int HEIGHT = 435;
+        
+    	// Configure the window 	
+    	setTitle(WINDOW_TITLE + "  [Date: " + date + "]");
+    	setLocation(X_LOCATION,Y_LOCATION);
+    	setSize(WIDTH, HEIGHT);
+    	setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	setResizable(false);
+        Container window = getContentPane();
+        window.setLayout(new FlowLayout(FlowLayout.LEFT));  
+        
+        // Set up GUI elements   
+        // Add: Header
+        final int HEADER_HEIGHT = 749;
+        final int HEADER_WIDTH = 35;
+        final Color HEADER_BACKGROUND = new Color(0,105,56);
+        final Font  HEADER_FONT = new Font("Calibri", Font.BOLD, 25);
+        header = new JPanel();
+	    header.setBackground(HEADER_BACKGROUND);
+	    header.setPreferredSize(new Dimension(HEADER_HEIGHT, HEADER_WIDTH));
+	    header.setLayout(new FlowLayout(FlowLayout.LEFT));
+	    lbl_CampusSecurity = new JLabel("PACSUS - Campus Security");
+	    lbl_CampusSecurity.setFont(HEADER_FONT);
+	    lbl_CampusSecurity.setForeground(Color.WHITE);
+		header.add(lbl_CampusSecurity);
+>>>>>>> Stashed changes
 		window.add(header);
 
 		// Add: Barrier controls
 		barrierControl = new JPanel();
 		Border borderBarrierControl = BorderFactory.createTitledBorder("Barrier controls");
+<<<<<<< Updated upstream
 		barrierControl.setBorder(borderBarrierControl);
 
 		activateBarrier = new JButton("Activate Barrier");
@@ -151,6 +230,23 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		deactivateBarrier.setFocusPainted(false);
 		deactivateBarrier.addActionListener(this);
 		barrierControl.add(deactivateBarrier);
+=======
+		barrierControl.setBorder(borderBarrierControl);	
+		
+		btn_activateBarrier = new JButton("Activate Barrier");
+		btn_activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
+		btn_activateBarrier.setForeground(Color.WHITE);
+		btn_activateBarrier.setFocusPainted(false);
+		btn_activateBarrier.addActionListener(this);
+		barrierControl.add(btn_activateBarrier);
+		
+		btn_deactivateBarrier = new JButton("Deactivate Barrier");
+		btn_deactivateBarrier.setBackground(DEACTIVATE_BTN_BGKD);
+		btn_deactivateBarrier.setForeground(Color.WHITE);
+		btn_deactivateBarrier.setFocusPainted(false);
+		btn_deactivateBarrier.addActionListener(this);
+		barrierControl.add(btn_deactivateBarrier);	
+>>>>>>> Stashed changes
 		window.add(barrierControl);
 
 		// Add: Registration number input
@@ -160,6 +256,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		regNoInput = new JPanel();
 		Border borderRegNoInput = BorderFactory.createTitledBorder("Check registration number");
 		regNoInput.setBorder(borderRegNoInput);
+<<<<<<< Updated upstream
 		regNo = new JTextField(REG_NO_INPUT_WIDTH);
 		regNoInput.add(regNo);
 
@@ -176,6 +273,24 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		issueWarning.setFocusPainted(false);
 		issueWarning.addActionListener(this);
 		regNoInput.add(issueWarning);
+=======
+		tf_regNo = new JTextField(REG_NO_INPUT_WIDTH);
+		regNoInput.add(tf_regNo);
+		
+		btn_checkLog = new JButton("Check log");
+		btn_checkLog.setBackground(REG_NO_BTN_BGKD);
+		btn_checkLog.setForeground(Color.WHITE);
+		btn_checkLog.setFocusPainted(false);
+		btn_checkLog.addActionListener(this);
+		regNoInput.add(btn_checkLog);
+		
+		btn_issueWarning = new JButton("Issue warning");
+		btn_issueWarning.setBackground(REG_NO_BTN_BGKD);
+		btn_issueWarning.setForeground(Color.WHITE);
+		btn_issueWarning.setFocusPainted(false);
+		btn_issueWarning.addActionListener(this);
+		regNoInput.add(btn_issueWarning);
+>>>>>>> Stashed changes
 		window.add(regNoInput);
 
 		// Add: Registration number text pane
@@ -184,13 +299,13 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		regNoPanel = new JPanel();
 		Border BorderRegNoPanel = BorderFactory.createTitledBorder("System log");
 		regNoPanel.setBorder(BorderRegNoPanel);
-		regNoPane = new JTextPane();
-		regNoPane.setText("[INFO] Barrier system is inactive");
-		regNoPane.setEditable(false);
-		regNoScroll = new JScrollPane(regNoPane);
-		regNoScroll.setPreferredSize(new Dimension(REG_NO_SCROLL_WIDTH, REG_NO_SCROLL_HEIGHT));
-		regNoScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		regNoPanel.add(regNoScroll);
+		tp_regNoPane = new JTextPane();
+		tp_regNoPane.setText("[INFO] Barrier system is inactive");
+		tp_regNoPane.setEditable(false);
+		sp_regNoScroll = new JScrollPane(tp_regNoPane);
+		sp_regNoScroll.setPreferredSize(new Dimension(REG_NO_SCROLL_WIDTH, REG_NO_SCROLL_HEIGHT));
+		sp_regNoScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		regNoPanel.add(sp_regNoScroll);
 		window.add(regNoPanel);
 
 		// Display the frame
@@ -204,6 +319,7 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 		boolean sysStatus = lnkSystem_status.getStatus();
 		setTitle(WINDOW_TITLE + "  [Date: " + lnkSystem_status.getToday().getDayNumber() + "]");
 		date = lnkSystem_status.getToday().getDayNumber();
+<<<<<<< Updated upstream
 		regNoPane.setText("");
 
 		if (sysStatus) {
@@ -219,14 +335,39 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 			activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
 			deactivateBarrier.setEnabled(false);
 			deactivateBarrier.setBackground(DISABLE_BTN_COLOUR);
+=======
+		tp_regNoPane.setText("");
+	
+		if (sysStatus) 
+		{
+
+			displayLog();
+			btn_activateBarrier.setEnabled(false);
+			btn_activateBarrier.setBackground(DISABLE_BTN_COLOUR);
+			btn_deactivateBarrier.setEnabled(true);
+			btn_deactivateBarrier.setBackground(DEACTIVATE_BTN_BGKD);
+		} 
+		else 
+		{
+			tp_regNoPane.setText(tp_regNoPane.getText() + "[Date: " + date + "]" + " Barrier system deactivated");
+			btn_activateBarrier.setEnabled(true);
+			btn_activateBarrier.setBackground(ACTIVATE_BTN_BGKD);
+			btn_deactivateBarrier.setEnabled(false);
+			btn_deactivateBarrier.setBackground(DISABLE_BTN_COLOUR);
+>>>>>>> Stashed changes
 		}
 	} // update
 
 	private void displayLog() {
 		//
 		String[] log = lnkSystem_status.getLog();
+<<<<<<< Updated upstream
 		StringBuilder text = new StringBuilder();
 		text.append(regNoPane.getText() + "[Date: " + date + "]" + " Barrier system activated");
+=======
+		StringBuilder text = new StringBuilder();  
+		text.append(tp_regNoPane.getText() + "[Date: " + date + "]" +" Barrier system activated");		
+>>>>>>> Stashed changes
 		//
 		if (log[0] != null) {
 			text.append("\nEntries:\n");
@@ -237,14 +378,15 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 				}
 			}
 		}
-		regNoPane.setText(text.toString());
+		tp_regNoPane.setText(text.toString());
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		final int REG_NO_LENGTH = 8;
-		if (e.getSource() == activateBarrier) // Activate the barrier system if the activate button is clicked.
+		if (e.getSource() == btn_activateBarrier) // Activate the barrier system if the activate button is clicked.
 		{
 			lnkSystem_status.setStatus(true);
+<<<<<<< Updated upstream
 			// regNoPane.setText(regNoPane.getText() + "\n[INFO] Barrier system activated
 			// ");
 		} else if (e.getSource() == deactivateBarrier) // Deactivate the barrier system if the deactivate button is
@@ -274,9 +416,39 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 							+ "\nNo. of warnings: " + toCheck.getWarnings());
 				} else {
 					displayAlert("Could not find vehicle " + regNo.getText(), 'e');
-				}
-				regNo.setText("");
+=======
+		}
+		else if (e.getSource() == btn_deactivateBarrier) // Deactivate the barrier system if the deactivate button is clicked.
+		{
+			lnkSystem_status.setStatus(false);
+		}
+		else if (e.getSource() == btn_checkLog) // Check the log for the registration number entered by the user.
+		{			
+			if (tf_regNo.getText().equals("")) // Check for input in the text field and warn the user if nothing found.
+			{
+				displayAlert("Please enter a registration number.", 'w');
 			}
+			else if (!tf_regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || tf_regNo.getText().length() > REG_NO_LENGTH) // Validate the input and warn the user if invalid.
+			{
+				displayAlert("Please enter a valid registration number.", 'w');
+				tf_regNo.setText("");
+			}
+			else
+			{
+				Permit toCheck = lnkVehicle_list.getAPermit(tf_regNo.getText()); // Get the permit using the registration number entered by the user.
+				if (toCheck != null)  // If a permit is found, fetch the details.
+				{
+					tp_regNoPane.setText(tp_regNoPane.getText() + "\n----------------------" + "\nLOG FOR " + tf_regNo.getText() + "\n----------------------" 
+					+ "\nPermit holder: " + toCheck.getPermitHolder() + "\nEntered today: " + toCheck.entered() + "\nNo. of entries: " + toCheck.getEntries() + "\nNo. of warnings: " + toCheck.getWarnings());
+				}
+				else
+				{
+					displayAlert("Could not find vehicle " + tf_regNo.getText(), 'e');
+>>>>>>> Stashed changes
+				}
+				tf_regNo.setText("");
+			}
+<<<<<<< Updated upstream
 		} else if (e.getSource() == issueWarning) // Issue a warning to the specified vehicle using the registration
 													// number.
 		{
@@ -299,8 +471,32 @@ public class Campus_security extends JFrame implements Observer, ActionListener 
 					displayAlert("Unable to issue warning to " + regNo.getText()
 							+ "\nThe maximum number of warnings has been reached or the vehicle could not be found.",
 							'e');
+=======
+		}
+		else if (e.getSource() == btn_issueWarning) // Issue a warning to the specified vehicle using the registration number.
+		{
+			if (tf_regNo.getText().equals(""))
+			{
+				displayAlert("Please enter a registration number.", 'w'); 
+			}
+			else if (!tf_regNo.getText().matches("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*$") || tf_regNo.getText().length() > REG_NO_LENGTH)
+			{
+				displayAlert("Please enter a valid registration number.", 'w');
+				tf_regNo.setText("");
+			}
+			else
+			{
+				boolean warningIssued = lnkVehicle_list.issueWarning(tf_regNo.getText()); // Issue a warning through the vehicle list with the registration number.
+				if (warningIssued == true) // If the warning was successfully issued, advise the user. If not, warn the user the vehicle could not be found or the maximum number of warnings has been reached.
+				{
+					displayAlert("Warning issued for vehicle " + tf_regNo.getText(), 'i');
 				}
-				regNo.setText("");
+				else
+				{
+					displayAlert("Unable to issue warning to " + tf_regNo.getText() + "\nThe maximum number of warnings has been reached or the vehicle could not be found." , 'e');
+>>>>>>> Stashed changes
+				}
+				tf_regNo.setText("");
 			}
 		}
 	} // actionPerformed
