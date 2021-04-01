@@ -1089,24 +1089,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			} else {
 				// cancel old permit and remove old vehicle
 				Permit p = lnkPermit_list.getPermit(tf_PermitNumberMod.getText());
-				lnkPermit_list.cancelPermit(tf_PermitNumberMod.getText());
-				Vehicle_info[] v = lnkVehicle_list.getVehicles(p);
-				for (int i = 0; i < v.length; i++) {
-					lnkVehicle_list.remove(v[i]);
-				}
-				//
-				List<Vehicle_info> keys = new ArrayList<Vehicle_info>(lnkVehicle_list.getVehicleList().keySet());
-				List<Permit> values = new ArrayList<Permit>(lnkVehicle_list.getVehicleList().values());
-
-				Vehicle_info veh;
-				int ammount = lnkVehicle_list.getVehicleList().size();
-				//
-				for (int i = 0; i < ammount; i++) {
-					veh = keys.get(i);
-					if (veh.getPermit().equals(p)) {
-						lnkVehicle_list.remove(vehicles[i]);
-					}
-				}
+				lnkPermit_list.cancelPermit(tf_PermitNumberMod.getText(), vehicles);
 				// add new permit depending on type
 				createPermit(permitType, name, regNum, carMake, carModel, carColor, visitDate, hostName);
 			}
@@ -1127,7 +1110,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			int option = JOptionPane.showOptionDialog(null, "Press OK to confirm cancel of Permit: " + name, "Warning",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 			if (option == 0) {
-				if (lnkPermit_list.cancelPermit(name)) {
+				if (lnkPermit_list.cancelPermit(name, null)) {
 					textPanePermitCanc.setText("Pemit Found and Deleted");
 					tf_NameCanc.setText("");
 				}

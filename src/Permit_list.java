@@ -75,12 +75,34 @@ public class Permit_list {
 	 * @return true if the permit was cancelled, false if the permit doesnt exist or
 	 *         is already cancelled
 	 */
-	public boolean cancelPermit(String name) {
+	public boolean cancelPermit(String name, Vehicle_info[] vehicles) {
 		boolean permitFound = false;
 		if (lnkPermit != null && lnkPermit.containsKey(name)) {
 
 			Vehicle_list permittedVehicles = Main.getVehicleList();
-			permittedVehicles.remove(permittedVehicles.getVehicle(lnkPermit.get(name)));
+			//permittedVehicles.remove(permittedVehicles.getVehicle(lnkPermit.get(name)));
+			//
+
+			// cancel old permit and remove old vehicle
+			Permit p = getPermit(name);
+			Vehicle_info[] v = permittedVehicles.getVehicles(p);
+			for (int i = 0; i < v.length; i++) {
+				permittedVehicles.remove(v[i]);
+			}
+			//
+			if (vehicles != null) {
+				List<Vehicle_info> keys = new ArrayList<Vehicle_info>(permittedVehicles.getVehicleList().keySet());
+
+				Vehicle_info veh;
+				int ammount = permittedVehicles.getVehicleList().size();
+				//
+				for (int i = 0; i < ammount; i++) {
+					veh = keys.get(i);
+					if (veh.getPermit().equals(p)) {
+						permittedVehicles.remove(vehicles[i]);
+					}
+				}
+			}
 
 			lnkPermit.remove(name);
 			permitFound = true;
@@ -113,7 +135,7 @@ public class Permit_list {
 			if (visit.getDayNumber() > 0) {
 				if (visit.getDayNumber() < today.getDayNumber()) {
 
-					cancelPermit(aPermit.permitHolder);
+					cancelPermit(aPermit.permitHolder, null);
 					permits--;
 				}
 
