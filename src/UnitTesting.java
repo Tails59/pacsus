@@ -48,14 +48,14 @@ class UnitTesting {
 	}
 
 	/**
-	 * Convinience method to open a barrier with a reg
+	 * Convenience method to open a barrier with a reg
 	 * 
 	 * @param reg [String] reg to check
 	 * @return true if the barrier has opened
 	 */
 	static boolean openBarrier(String reg) {
-		Main.barrier1.regNo.setText(reg);
-		Main.barrier1.submit.doClick();
+		Main.barrier1.tf_regNo.setText(reg);
+		Main.barrier1.btn_submit.doClick();
 
 		return Main.barrier1.isRaised();
 	}
@@ -66,7 +66,7 @@ class UnitTesting {
 	 * @return true if the barrier is now closed
 	 */
 	static boolean vehicleClear() {
-		Main.barrier1.vehicleClear.doClick();
+		Main.barrier1.btn_vehicleClear.doClick();
 
 		return !Main.barrier1.isRaised();
 	}
