@@ -79,7 +79,8 @@ public class Vehicle_list {
 		return vehicleList.get(veh);
 	}
 
-	public Vehicle_info getVehicle(Permit p) { // might be not usable anymore because we have several vehicles per permit, method below getVehicles() replaces this
+	public Vehicle_info getVehicle(Permit p) { // might be not usable anymore because we have several vehicles per
+												// permit, method below getVehicles() replaces this
 		//
 		List<Vehicle_info> keys = new ArrayList<Vehicle_info>(vehicleList.keySet());
 		List<Permit> values = new ArrayList<Permit>(vehicleList.values());

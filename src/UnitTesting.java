@@ -10,10 +10,11 @@ import org.junit.jupiter.api.*;
  * cases (http://www.cs.stir.ac.uk/~sma/PACSUS/index.html#R6) as well as a few
  * other components of the software that are necessary for this to be done.
  * 
- * The Main method is called before any testing is run, to instantiate core parts
- * of the program (SystemStatus, Barriers, Campus Security etc.). The testing is 
- * done partly through simulating user input in the UI where appropriate. This helps
- * take over the role of user testing, speeding up the development process.
+ * The Main method is called before any testing is run, to instantiate core
+ * parts of the program (SystemStatus, Barriers, Campus Security etc.). The
+ * testing is done partly through simulating user input in the UI where
+ * appropriate. This helps take over the role of user testing, speeding up the
+ * development process.
  * 
  * After these tests are run successfully and the program is useable, further
  * black box testing would be done by the end users on their own system.

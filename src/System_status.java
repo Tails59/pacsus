@@ -45,7 +45,6 @@ public class System_status extends Observable {
 	private int nextIndex;
 
 	public void setToday(Date date) { // might need to be changed
-		//
 		today = date;
 		System.out.println("Date: " + today.getDayNumber());
 		setChanged();
@@ -53,22 +52,18 @@ public class System_status extends Observable {
 	}
 
 	public Date getToday() {
-		//
 		return today;
 	}
 
-
 	private Campus_security security;
-    
-    public void setStatus(boolean status) {
-    	systemActive = status;
-    	setChanged();
-    	notifyObservers();
-    }
 
+	public void setStatus(boolean status) {
+		systemActive = status;
+		setChanged();
+		notifyObservers();
+	}
 
 	public boolean getStatus() {
-		//
 		return systemActive;
 	}
 
@@ -80,7 +75,7 @@ public class System_status extends Observable {
 				nextIndex++;
 
 			} else {
-				log[nextIndex]= "\n[DAY " + today.getDayNumber() + "] Unsuccessful entry for " + regNo;
+				log[nextIndex] = "\n[DAY " + today.getDayNumber() + "] Unsuccessful entry for " + regNo;
 				nextIndex++;
 			}
 		} else {
@@ -91,45 +86,43 @@ public class System_status extends Observable {
 			if (entered) {
 
 				log[nextIndex] = "\n[DAY " + today.getDayNumber() + "] Successful entry for " + regNo;
-				
 
 			} else {
 				log[nextIndex] = "\n[DAY " + today.getDayNumber() + "] Unsuccessful entry for " + regNo;
-				
+
 			}
 		}
-		//setChanged();
-		
+		// setChanged();
 	}
-	
+
 	public void addEntry(Vehicle_info veh, boolean entryAllowed) {
 		String entryState = "";
-		if (entryAllowed) entryState = "allowed";
-		else entryState = "denied";
-		String entryInfo = "Day " + today.getDayNumber() + ". Registration: " + veh.getRegistration() + ", entry " + entryState + ".";
+		if (entryAllowed)
+			entryState = "allowed";
+		else
+			entryState = "denied";
+		String entryInfo = "Day " + today.getDayNumber() + ". Registration: " + veh.getRegistration() + ", entry "
+				+ entryState + ".";
 		int entries = 0;
-		
+
 		for (int i = 0; i < log.length; i++) {
 			if (log[i] != null) {
 				entries++;
 			}
 		}
-		//
+
 		if (entries < log.length) {
 			log[entries] = entryInfo;
 		} else {
-			for (int i = 0; i < log.length-1; i++) {
-				log[i] = log[i+1];
+			for (int i = 0; i < log.length - 1; i++) {
+				log[i] = log[i + 1];
 			}
-			log[log.length-1] = entryInfo;
+			log[log.length - 1] = entryInfo;
 		}
 	}
 
 	public String[] getLog() {
 		return log;
 	}
-
-	
-	
 
 }

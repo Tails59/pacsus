@@ -150,7 +150,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 		today = status.getToday();
 		date = today.getDayNumber();
-		
+
 		vehicles = new Vehicle_info[5]; // setting a vehicle limit at 5 per permit
 
 		setTitle("Administration Office \t [Date: " + date + "]");
@@ -279,46 +279,46 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 		addPermit.add(tf_CarColorAdd, gbc_CarColorAdd);
 		tf_CarColorAdd.setColumns(10);
-				
-				addVehicleBtn = new JButton("Add New Vehicle");
-				addVehicleBtn.addActionListener(this);
-				addVehicleBtn.setForeground(Color.WHITE);
-				addVehicleBtn.setFocusPainted(false);
-				addVehicleBtn.setBackground(new Color(112, 128, 144));
-				GridBagConstraints gbc_addVehBtn = new GridBagConstraints();
-				gbc_addVehBtn.insets = new Insets(0, 0, 5, 5);
-				gbc_addVehBtn.gridx = 1;
-				gbc_addVehBtn.gridy = 5;
-				addPermit.add(addVehicleBtn, gbc_addVehBtn);
-				
-				lblCarNumber = new JLabel("Vehicles permitted: 0");
-				GridBagConstraints gbc_lblCarNumber = new GridBagConstraints();
-				gbc_lblCarNumber.anchor = GridBagConstraints.WEST;
-				gbc_lblCarNumber.insets = new Insets(0, 0, 5, 0);
-				gbc_lblCarNumber.gridx = 6;
-				gbc_lblCarNumber.gridy = 5;
-				addPermit.add(lblCarNumber, gbc_lblCarNumber);
-		
-				JLabel lblEnterPermitTypeAdd = new JLabel("Enter Permit Type:");
-				GridBagConstraints gbc_lblEnterPermitTypeAdd = new GridBagConstraints();
-				gbc_lblEnterPermitTypeAdd.insets = new Insets(0, 0, 5, 5);
-				gbc_lblEnterPermitTypeAdd.anchor = GridBagConstraints.WEST;
-				gbc_lblEnterPermitTypeAdd.gridx = 1;
-				gbc_lblEnterPermitTypeAdd.gridy = 6;
-				addPermit.add(lblEnterPermitTypeAdd, gbc_lblEnterPermitTypeAdd);
-		
-				cb_PermitTypeAdd = new JComboBox<String>();
-				cb_PermitTypeAdd.addItem("Day Visitor");
-				cb_PermitTypeAdd.addItem("Regular Visitor");
-				cb_PermitTypeAdd.addItem("Permanent Visitor");
-				cb_PermitTypeAdd.addItem("University Member");
-				cb_PermitTypeAdd.addActionListener(this);
-				GridBagConstraints gbc_cbPermitTypeAdd = new GridBagConstraints();
-				gbc_cbPermitTypeAdd.insets = new Insets(0, 0, 5, 0);
-				gbc_cbPermitTypeAdd.fill = GridBagConstraints.HORIZONTAL;
-				gbc_cbPermitTypeAdd.gridx = 6;
-				gbc_cbPermitTypeAdd.gridy = 6;
-				addPermit.add(cb_PermitTypeAdd, gbc_cbPermitTypeAdd);
+
+		addVehicleBtn = new JButton("Add New Vehicle");
+		addVehicleBtn.addActionListener(this);
+		addVehicleBtn.setForeground(Color.WHITE);
+		addVehicleBtn.setFocusPainted(false);
+		addVehicleBtn.setBackground(new Color(112, 128, 144));
+		GridBagConstraints gbc_addVehBtn = new GridBagConstraints();
+		gbc_addVehBtn.insets = new Insets(0, 0, 5, 5);
+		gbc_addVehBtn.gridx = 1;
+		gbc_addVehBtn.gridy = 5;
+		addPermit.add(addVehicleBtn, gbc_addVehBtn);
+
+		lblCarNumber = new JLabel("Vehicles permitted: 0");
+		GridBagConstraints gbc_lblCarNumber = new GridBagConstraints();
+		gbc_lblCarNumber.anchor = GridBagConstraints.WEST;
+		gbc_lblCarNumber.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCarNumber.gridx = 6;
+		gbc_lblCarNumber.gridy = 5;
+		addPermit.add(lblCarNumber, gbc_lblCarNumber);
+
+		JLabel lblEnterPermitTypeAdd = new JLabel("Enter Permit Type:");
+		GridBagConstraints gbc_lblEnterPermitTypeAdd = new GridBagConstraints();
+		gbc_lblEnterPermitTypeAdd.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEnterPermitTypeAdd.anchor = GridBagConstraints.WEST;
+		gbc_lblEnterPermitTypeAdd.gridx = 1;
+		gbc_lblEnterPermitTypeAdd.gridy = 6;
+		addPermit.add(lblEnterPermitTypeAdd, gbc_lblEnterPermitTypeAdd);
+
+		cb_PermitTypeAdd = new JComboBox<String>();
+		cb_PermitTypeAdd.addItem("Day Visitor");
+		cb_PermitTypeAdd.addItem("Regular Visitor");
+		cb_PermitTypeAdd.addItem("Permanent Visitor");
+		cb_PermitTypeAdd.addItem("University Member");
+		cb_PermitTypeAdd.addActionListener(this);
+		GridBagConstraints gbc_cbPermitTypeAdd = new GridBagConstraints();
+		gbc_cbPermitTypeAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_cbPermitTypeAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbPermitTypeAdd.gridx = 6;
+		gbc_cbPermitTypeAdd.gridy = 6;
+		addPermit.add(cb_PermitTypeAdd, gbc_cbPermitTypeAdd);
 
 		tf_VisitDateAdd = new JTextField();
 		GridBagConstraints gbc_VisitDateAdd = new GridBagConstraints();
@@ -328,14 +328,14 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		gbc_VisitDateAdd.gridy = 7;
 		addPermit.add(tf_VisitDateAdd, gbc_VisitDateAdd);
 		tf_VisitDateAdd.setColumns(10);
-		
-				JLabel lblVisitDateAdd = new JLabel("Visit Date:");
-				GridBagConstraints gbc_lblVisitDateAdd = new GridBagConstraints();
-				gbc_lblVisitDateAdd.insets = new Insets(0, 0, 5, 5);
-				gbc_lblVisitDateAdd.anchor = GridBagConstraints.WEST;
-				gbc_lblVisitDateAdd.gridx = 1;
-				gbc_lblVisitDateAdd.gridy = 7;
-				addPermit.add(lblVisitDateAdd, gbc_lblVisitDateAdd);
+
+		JLabel lblVisitDateAdd = new JLabel("Visit Date:");
+		GridBagConstraints gbc_lblVisitDateAdd = new GridBagConstraints();
+		gbc_lblVisitDateAdd.insets = new Insets(0, 0, 5, 5);
+		gbc_lblVisitDateAdd.anchor = GridBagConstraints.WEST;
+		gbc_lblVisitDateAdd.gridx = 1;
+		gbc_lblVisitDateAdd.gridy = 7;
+		addPermit.add(lblVisitDateAdd, gbc_lblVisitDateAdd);
 
 		JLabel lblHostNameAdd = new JLabel("Host Name:");
 		GridBagConstraints gbc_lblHostNameAdd = new GridBagConstraints();
@@ -768,7 +768,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			if (lnkVehicle_list.checkPermit(regNum)) {
 				displayAlert("Vehicle is already permitted!", 'w');
 			} else if (vehicles[0] != null) {
-				// check for existing vehicles and if there are any existing vehicles in the first place in the vehicles[]
+				// check for existing vehicles and if there are any existing vehicles in the
+				// first place in the vehicles[]
 				valid = true;
 				//
 				for (int i = 0; i < vehicles.length; i++) {
@@ -776,7 +777,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 						if (vehicles[i].getRegistration().equals(regNum)) {
 							valid = false;
 						}
-						permittedVehicles = i+1;
+						permittedVehicles = i + 1;
 					}
 				}
 			} else {
@@ -785,31 +786,33 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 			}
 		}
 		if (valid) {
-			//
 			Vehicle_info veh = new Vehicle_info(regNum, carColor, carMake, carModel);
-			// need to pull cart related info, store it to array and use that info to create permit and add new vehicles to it
-			if (vehicles[vehicles.length-1] == null) {
+
+			// need to pull car related info, store it to array and use that info to create
+			// permit and add new vehicles to it
+			if (vehicles[vehicles.length - 1] == null) {
 				for (int i = 0; i < vehicles.length; i++) {
 					if (vehicles[i] == null) {
 						vehicles[i] = veh;
 						break;
 					}
 				}
+
 				// display success message
-				System.out.println("Vehicle added to vehicles[]: " + veh.getRegistration());
-				//
-				lblCarNumber.setText("Vehicles permitted: " + (permittedVehicles+1));
-				//
+				displayAlert("Vehicle \"" + veh.getRegistration() + "\" added to permit", 'i');
+
+				lblCarNumber.setText("Vehicles permitted: " + (permittedVehicles + 1));
+
 				tf_regNumberAdd.setText("");
 				tf_CarMakeAdd.setText("");
 				tf_CarModelAdd.setText("");
 				tf_CarColorAdd.setText("");
 			} else {
 				// display error that 5 vehicles are already associated with the permit
-				System.out.println("Vehicle list full (vehicles[] has 5 vehicles)");
+				displayAlert("Vehicle \"" + veh.getRegistration() + "\" has the maximum number of cars assigned", 'w');
 			}
 		} else {
-			System.out.println("Vehicle is already in the permit!");
+			displayAlert("Vehicle is already assigned to this permit", 'w');
 		}
 	}
 
@@ -941,9 +944,7 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 						aPermit.removeWarnings(numberOfWarnings);
 						textPaneWarningCanc.setText(" Permit found! \n Number of Warnings: " + aPermit.getWarnings());
 						tf_CancelWarningNumber.setText("");
-					}
-					else
-					{
+					} else {
 						displayAlert("You tried to delete more warning that the one on the Permit!", 'w');
 					}
 				}
@@ -1114,22 +1115,22 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		case 0:
 			// Day visitor permit
 			Day_visitor_permit dvp = new Day_visitor_permit(name, hostName, veh, theDay, today);
-			setPermitInfo(veh,dvp);
+			setPermitInfo(veh, dvp);
 			break;
 		case 1:
 			// Regular visitor permit
 			Regular_visitor_permit rvp = new Regular_visitor_permit(name, hostName, theDay, later, veh);
-			setPermitInfo(veh,rvp);
+			setPermitInfo(veh, rvp);
 			break;
 		case 2:
 			// Permanent visitor permit
 			Permanent_visitor_permit pvp = new Permanent_visitor_permit(name, theDay, veh);
-			setPermitInfo(veh,pvp);
+			setPermitInfo(veh, pvp);
 			break;
 		case 3:
 			// University member permit
 			University_member_permit ump = new University_member_permit(name, theDay, veh);
-			setPermitInfo(veh,ump);
+			setPermitInfo(veh, ump);
 			break;
 		}
 		// success message
@@ -1141,10 +1142,16 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 		//
 		vehicles = new Vehicle_info[5];
 	}
-	
+
+	/**
+	 * Set a permit info
+	 * 
+	 * @param veh
+	 * @param p
+	 */
 	public void setPermitInfo(Vehicle_info veh, Permit p) {
 		veh.setPermit(p);
-		//
+
 		for (int i = 0; i < vehicles.length; i++) {
 			if (vehicles[i] != null & i > 0) {
 				try {
@@ -1152,18 +1159,23 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 					p.addVehicle(veh);
 					veh.setPermit(p);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					System.out.println("Issue while adding additional vehicles to the permit!");
+					displayAlert("Issue while adding a new vehicle to the permit!", 'e');
 					e.printStackTrace();
 				}
 			}
 		}
-		//
+
 		lnkPermit_list.addPermit(p);
 	}
 
+	/**
+	 * Used to display JOptionPane messages to the user
+	 * 
+	 * @param text [String] text to be shown in the message box
+	 * @param type [char] 'i' for an infomessage, 'w' for a warning, 'e' for an
+	 *             error.
+	 */
 	public void displayAlert(String text, char type) {
-		//
 		switch (type) {
 		case 'i':
 			JOptionPane.showMessageDialog(contentPane, text, "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -1183,7 +1195,6 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 
 	@Override
 	public void update(Observable o, Object arg) {
-		//
 		setTitle("Administration Office \t [Date: " + today.getDayNumber() + "]");
 	}
 }
