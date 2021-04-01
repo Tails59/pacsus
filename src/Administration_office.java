@@ -1050,8 +1050,9 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				displayAlert("Visit date cannot be in the past.", 'w');
 			} else {
 				// cancel old permit and remove old vehicle
+				Permit p = lnkPermit_list.getPermit(tf_PermitNumberMod.getText());
 				lnkPermit_list.cancelPermit(tf_PermitNumberMod.getText());
-				Vehicle_info[] v = lnkVehicle_list.getVehicles(lnkPermit_list.getPermit(tf_PermitNumberMod.getText()));
+				Vehicle_info[] v = lnkVehicle_list.getVehicles(p);
 				for (int i = 0; i < v.length; i++) {
 					lnkVehicle_list.remove(v[i]);
 				}
@@ -1064,13 +1065,8 @@ public class Administration_office extends JFrame implements Observer, ActionLis
 				//
 				for (int i = 0; i < ammount; i++) {
 					veh = keys.get(i);
-					for (int j = 0; j < vehicles.length; j++) {
-						if (vehicles[j] != null) {
-							if (veh.getRegistration().equals(vehicles[j].getRegistration())) {
-								lnkVehicle_list.remove(vehicles[j]);
-								ammount--;
-							}
-						}
+					if (veh.getPermit().equals(p)) {
+						lnkVehicle_list.remove(vehicles[i]);
 					}
 				}
 				// add new permit depending on type
